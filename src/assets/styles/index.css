@@ -2,6 +2,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'bulma/css/bulma.css';
+
 
 body {
     width: 100vw;

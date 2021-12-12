@@ -14,8 +14,9 @@ function App() {
     <div style={{height: '100%'}}>
       <AuthContextComponent>
         <Routes>
-          <Route path="/" element={<ProtectedRoute component={Home} />} />
-          <Route path="/signup" element={<Signup />} />
+          {/* <Route path="/" element={<ProtectedRoute component={Home} />} /> */}
+          <Route path="/signup/:type" element={<Signup />} />
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       <Navbar />

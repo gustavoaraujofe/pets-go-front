@@ -1,95 +1,335 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../apis/api";
+import toast, { Toaster } from "react-hot-toast";
+import { useParams } from "react-router-dom";
+import "./Signup.css";
 
-function Signup(props) {
-  const [state, setState] = useState({ name: "", password: "", email: "" });
-  const [errors, setErrors] = useState({
-    name: null,
-    email: null,
-    password: null,
-  });
+function Signup() {
+  const [loading, setLoading] = useState(false);
+  const params = useParams();
+  
 
   const navigate = useNavigate();
 
-  function handleChange(event) {
-    setState({
-      ...state,
-      [event.currentTarget.name]: event.currentTarget.value,
-    });
-  }
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-
+  // Upload de arquivos
+  async function handleAvatarUpload(file) {
     try {
-      const response = await api.post("/signup", state);
-      setErrors({ name: "", password: "", email: "" });
-      navigate("/login");
-    } catch (err) {
-      if (err.response) {
-        console.error(err.response);
-        return setErrors({ ...err.response.data.errors });
+
+      const uploadData = new FormData();
+
+      uploadData.append("picture", file);
+        
+      let response = "";
+
+      // Condição para o envio dos arquivos
+      if (params.type === "vet") {
+        response = await api.post("/vet/upload", uploadData);
+      } else {
+        response = await api.post("/user/upload", uploadData);
       }
 
+      return response.data.url;
+    } catch (err) {
       console.error(err);
     }
   }
 
+  // Valores iniciais padrão para o usuário USER
+  const initialValues = {
+    name: "",
+    email: "",
+    address: "",
+    password: "",
+    confirmPassword: "",
+    avatarUrl: "",
+    picture: new File([], "")
+  };
+
+
+   // Validação para o usuário USER
+  const validation = {
+    name: Yup.string().required("Os campos são obrigatórios."),
+    email: Yup.string()
+      .email("E-mail inválido.")
+      .required("Os campos são obrigatórios."),
+    address: Yup.string().required("Os campos são obrigatórios."),
+    password: Yup.string()
+      .matches(
+        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
+        "A senha é obrigatória e deve ter pelo menos 8 caracteres, letras maiúsculas e minúsculas, números e caracteres especiais."
+      )
+      .required("Os campos são obrigatórios."),
+  };
+
+  // Condição que modifica os valores iniciais e a validação quando o usuário for do tipo VET
+  if (params.type === "vet") {
+    initialValues.crmv = "";
+    initialValues.specialties = "";
+    validation.crmv = Yup.string().required("Os campos são obrigatórios.");
+  }
+
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: Yup.object(validation),
+    onSubmit: (values) => {
+      async function signup() {
+
+        if (formik.values.password !== formik.values.confirmPassword) {
+          toast.error("Senha e confirmação diferentes");
+          return;
+        }
+
+        values.avatarUrl = await handleAvatarUpload(values.picture);
+
+       
+        try {
+          setLoading(true);
+          let response = "";
+
+          console.log(values);
+
+          // Condição para a criação dos usuários
+          if (params.type === "vet") {
+            response = await api.post("/vet/signup", values);
+          } else {
+            response = await api.post("/user/signup", values);
+          }
+
+          console.log(response.data);
+
+          setLoading(false);
+          navigate("/login");
+        } catch (e) {
+          console.error(e.response);
+          setLoading(false);
+        }
+      }
+      signup();
+    },
+  });
+
   return (
-    <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-md w-full space-y-8">
-    <div>
-      <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow" />
-      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-        Sign in to your account
-      </h2>
-      <p class="mt-2 text-center text-sm text-gray-600">
-        Or
-        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-          start your 14-day free trial
-        </a>
-      </p>
-    </div>
-    <form class="mt-8 space-y-6" action="#" method="POST">
-      <input type="hidden" name="remember" value="true" />
-      <div class="rounded-md shadow-sm -space-y-px">
+    <div className="min-h-full flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full">
         <div>
-          <label for="email-address" class="sr-only">Email address</label>
-          <input id="email-address" name="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address" />
+          <img
+            className="mx-auto h-12 w-auto"
+            src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+            alt="Workflow"
+          />
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Faça o seu cadastro
+          </h2>
         </div>
-        <div>
-          <label for="password" class="sr-only">Password</label>
-          <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password" />
-        </div>
-      </div>
-      <div class="flex items-center justify-between">
-        <div class="flex items-center">
-          <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
-          <label for="remember-me" class="ml-2 block text-sm text-gray-900">
-            Remember me
+        <form onSubmit={formik.handleSubmit} className="forms">
+          <div className="mt-5 relative rounded-md shadow-sm">
+            <label htmlFor="name" className="pl-1 label">
+              Nome
+            </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md ${
+                formik.errors.name && formik.touched.name
+                  ? "border-red-300"
+                  : null
+              }`}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.name}
+              required
+            />
+          </div>
+
+          <div className="mt-3 relative rounded-md shadow-sm">
+            <label htmlFor="email" className="pl-1 label">
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md ${
+                formik.errors.email && formik.touched.email
+                  ? "border-red-300"
+                  : null
+              }`}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
+              required
+            />
+          </div>
+
+          {formik.touched.email && formik.errors.email ? (
+            <div className="mt-1 text-sm">{formik.errors.email}</div>
+          ) : null}
+
+          <div className="mt-4 relative rounded-md shadow-sm">
+            <label htmlFor="address" className="pl-1 label">
+              Endereço
+            </label>
+            <input
+              type="text"
+              name="address"
+              id="address"
+              className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md ${
+                formik.errors.address && formik.touched.address
+                  ? "border-red-300"
+                  : null
+              }`}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.address}
+            />
+          </div>
+
+          {params.type === "vet" ? (
+            <>
+              <div className="mt-4 relative rounded-md shadow-sm">
+                <label htmlFor="crmv" className="pl-1 label">
+                  CRMV
+                </label>
+                <input
+                  type="text"
+                  name="crmv"
+                  id="crmv"
+                  className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-4 sm:text-sm border-gray-300 rounded-md ${
+                    formik.errors.crmv && formik.touched.crmv
+                      ? "border-red-300"
+                      : null
+                  }`}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.crmv}
+                  required
+                />
+              </div>
+
+              <div className="mt-4 relative rounded-md shadow-sm">
+                <label htmlFor="specialties" className="pl-1 label">
+                  Especialidade
+                </label>
+                <select
+                  required
+                  htmlFor="specialties"
+                  id="specialties"
+                  value={formik.values.specialties}
+                  type="text"
+                  onChange={formik.handleChange}
+                  name="specialties"
+                  className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md`}
+                >
+                  <option value="ClinicoGeral">Clínico Geral</option>
+                  <option value="Oftalmologia">Oftalmologia</option>
+                  <option value="Cardiologia">Cardiologia</option>
+                  <option value="Dermatologia">Dermatologia</option>
+                  <option value="Silvestres">Silvestres</option>
+                </select>
+              </div>
+            </>
+          ) : null}
+
+          <div className="mt-4 relative rounded-md shadow-sm">
+            <label htmlFor="password" className="pl-1 label">
+              Senha
+            </label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md ${
+                formik.errors.password && formik.touched.password
+                  ? "border-red-300"
+                  : null
+              }`}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
+              required
+            />
+          </div>
+
+          <div className="mt-4 relative rounded-md shadow-sm">
+            <label htmlFor="confirmPassword" className="pl-1 label">
+              Confirme a senha
+            </label>
+            <input
+              type="password"
+              name="confirmPassword"
+              id="confirmPassword"
+              className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md ${
+                formik.errors.password && formik.touched.password
+                  ? "border-red-300"
+                  : null
+              }`}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.confirmPassword}
+              required
+            />
+          </div>
+
+          {formik.touched.password && formik.errors.password ? (
+            <div className="mt-1 text-sm">{formik.errors.password}</div>
+          ) : null}
+
+          <label htmlFor="avatarUrl" className="pl-1 label">
+            Foto do perfil
           </label>
-        </div>
-        <div class="text-sm">
-          <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-            Forgot your password?
-          </a>
-        </div>
+
+          <div className="file mb-4 ">
+            <label className="file-label">
+              <input
+                className="file-input"
+                type="file"
+                name="avatarUrl"
+                id="avatarUrl"
+                onChange={(e) => formik.setFieldValue('picture', e.target.files[0])}
+              />
+              <span className="file-cta">
+                <span className="file-icon">
+                  <i className="fas fa-upload"></i>
+                </span>
+                <span className="file-label">Choose a file…</span>
+              </span>
+            </label>
+          </div>
+          <div className="max-w-md w-full is-flex is-justify-content-center">
+            <button disabled={loading} type="submit" className="button is-info">
+              Cadastrar
+            </button>
+          </div>
+        </form>
       </div>
-      <div>
-        <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-          <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-         
-            <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
-            </svg>
-          </span>
-          Sign in
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          className: "",
+          duration: 5000,
+          style: {
+            background: "#fff",
+            color: "#000",
+          },
+
+          success: {
+            duration: 3000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      />
+    </div>
   );
 }
 
