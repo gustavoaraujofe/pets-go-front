@@ -1,11 +1,18 @@
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../../../apis/api";
-import axios from "axios"
+import { useContext, useState } from "react";
 import "./login.css";
 import * as Yup from "yup";
 
+import { AuthContext } from "../../../contexts/authContext";
+
 function Login() {
+  const { setLoggedInUser } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -20,20 +27,35 @@ function Login() {
     onSubmit: (values) => {
       async function login() {
         try {
+          setLoading(true);
+          const response = await api.post("/vet/login", values);
+          console.log(response.data);
 
-          const response = await axios.post("http://localhost:4000/api/v1/vet/login", values)
-          console.log(response)
+          setLoggedInUser({
+            token: response.data.token,
+            user: response.data.user,
+          });
 
+          localStorage.setItem(
+            "loggedInUser",
+            JSON.stringify({
+              token: response.data.token,
+              user: response.data.user,
+            })
+          );
+          setLoading(false);
+          navigate("/");
         } catch (e) {
+          setLoading(false);
           console.error(e);
         }
       }
-      login()
+      login();
     },
   });
 
   return (
-    <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-full flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
           <img
@@ -45,7 +67,10 @@ function Login() {
             Entrar em sua conta
           </h2>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form
+          onSubmit={formik.handleSubmit}
+          className="mt-8 space-y-6"
+        >
           <input type="hidden" name="remember" value="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
@@ -123,7 +148,10 @@ function Login() {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              disabled={loading ? true : false}
+              className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
+                loading ? "bg-slate-300" : null
+              }`}
             >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <svg

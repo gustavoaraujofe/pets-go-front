@@ -5,8 +5,8 @@ import { AuthContext } from "../../contexts/authContext";
 
 function ProtectedRoute({ component: Component }) {
   const { loggedInUser } = useContext(AuthContext);
-
-  if (loggedInUser.user._id) {
+  console.log(loggedInUser);
+  if (loggedInUser.user.id) {
     return <Component />;
   } else {
     return <Navigate to="/login" />;
