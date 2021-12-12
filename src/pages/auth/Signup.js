@@ -21,7 +21,7 @@ function Signup() {
       const uploadData = new FormData();
 
       uploadData.append("picture", file);
-        
+
       let response = "";
 
       // Condição para o envio dos arquivos
@@ -68,7 +68,7 @@ function Signup() {
   if (params.type === "vet") {
     initialValues.crmv = "";
     initialValues.specialties = "";
-    validation.crmv = Yup.string().required("Os campos são obrigatórios.");
+    validation.crmv = Yup.number().typeError("Não é um número").required("Os campos são obrigatórios.");
   }
 
   const formik = useFormik({
@@ -83,13 +83,9 @@ function Signup() {
         }
 
         values.avatarUrl = await handleAvatarUpload(values.picture);
-
-       
         try {
           setLoading(true);
           let response = "";
-
-          console.log(values);
 
           // Condição para a criação dos usuários
           if (params.type === "vet") {
@@ -97,8 +93,6 @@ function Signup() {
           } else {
             response = await api.post("/user/signup", values);
           }
-
-          console.log(response.data);
 
           setLoading(false);
           navigate("/login");
@@ -207,8 +201,13 @@ function Signup() {
                   onBlur={formik.handleBlur}
                   value={formik.values.crmv}
                   required
+                  maxLength="4"
                 />
               </div>
+
+              {formik.touched.crmv && formik.errors.crmv ? (
+            <div className="mt-1 text-sm">{formik.errors.crmv}</div>
+          ) : null}
 
               <div className="mt-4 relative rounded-md shadow-sm">
                 <label htmlFor="specialties" className="pl-1 label">
@@ -224,11 +223,13 @@ function Signup() {
                   name="specialties"
                   className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md`}
                 >
-                  <option value="ClinicoGeral">Clínico Geral</option>
-                  <option value="Oftalmologia">Oftalmologia</option>
-                  <option value="Cardiologia">Cardiologia</option>
-                  <option value="Dermatologia">Dermatologia</option>
-                  <option value="Silvestres">Silvestres</option>
+                  <option value="" disabled defaultValue hidden>
+              Especialidade</option>
+                  <option value="clinico geral">Clínico Geral</option>
+                  <option value="oftalmologia">Oftalmologia</option>
+                  <option value="cardiologia">Cardiologia</option>
+                  <option value="dermatologia">Dermatologia</option>
+                  <option value="silvestres">Silvestres</option>
                 </select>
               </div>
             </>
