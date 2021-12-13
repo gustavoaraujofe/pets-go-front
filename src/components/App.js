@@ -8,6 +8,8 @@ import ProtectedRoute from "../pages/auth/ProtectedRoute";
 import Topbar from "../components/topbar/Topbar";
 
 import Navbar from "./navbar/Navbar"
+import ForgotPassword from "../pages/auth/recoveryPassword/ForgotPassword"
+import NewPassword from "../pages/auth/recoveryPassword/NewPassword"
 import AnimalCreate from '../pages/animal/AnimalCreate'
 
 
@@ -25,6 +27,8 @@ function App() {
           <Route path="/signup/:type" element={<Signup />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/new-password/:token" element={<NewPassword />} /> 
           <Route path="/animal-create" element={<AnimalCreate/>}/>
         </Routes>
       <Navbar />

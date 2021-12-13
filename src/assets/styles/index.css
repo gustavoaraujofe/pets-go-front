@@ -23,10 +23,16 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #0D0D5E;
 }
 
 .lightgreen-btn {
     background-color: #C1E7DF;
+    color: #0D0D5E;
+}
+
+.beige-btn {
+    background-color: #F5DEC6;    ;
     color: #0D0D5E;
 }
 
