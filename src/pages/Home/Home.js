@@ -6,8 +6,8 @@ import pawImg from "../../assets/pata.png";
 
 function Home() {
   return (
-
-    <div className="home-container min-h-full flex items-center justify-start mt-20 pt-0 pb-20 px-4 sm:px-6 lg:px-8 is-flex-direction-column">
+    <>
+    <div className="flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8 is-flex-direction-column" style={{height: "80%"}}>
       <div className="paw-container-right">
         <img alt="pata" className="paw-medium" src={pawImg}/>
       </div>
@@ -28,11 +28,12 @@ function Home() {
       <Link to="/login">
         <button type="button" className="mt-2 enter-btn btn">Entrar</button>
       </Link>
+    
       <div className="flex items-center justify-center">
         <img alt="imagem inferior" className="img-bottom pt-0 pb-20 sm:px-6 lg:px-8" src={telaRosaAzul} />
       </div>
     </div>
-
+    </>
   );
 }
 
