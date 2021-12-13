@@ -6,7 +6,6 @@ import api from "../../../apis/api";
 import { useState } from "react";
 import "../login/login.css";
 import * as Yup from "yup";
-import Topbar from "../../../components/topbar/Topbar";
 import telaRosaAzul from "../../../assets/tela-rosa-azul.png";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -55,7 +54,6 @@ function NewPassword() {
 
   return (
     <>
-      <Topbar />
       <div
         className="flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8"
         style={{ height: "80%" }}

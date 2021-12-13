@@ -1,5 +1,6 @@
 .topbar-container {
     top: 0px;
+    position: relative;
     height: 80px;
     width: 100%;
     border-bottom: 1px rgb(203, 203, 203) solid;

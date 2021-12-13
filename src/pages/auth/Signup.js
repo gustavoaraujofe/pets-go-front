@@ -6,7 +6,6 @@ import api from "../../apis/api";
 import toast, { Toaster } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import "./Signup.css";
-import Topbar from "../../components/topbar/Topbar";
 
 function Signup() {
   const [loading, setLoading] = useState(false);
@@ -105,8 +104,7 @@ function Signup() {
   });
 
   return (
-    <>
-      <Topbar />
+
       <div className="min-h-full flex items-center justify-center mt-12 pt-0 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
@@ -335,7 +333,6 @@ function Signup() {
           }}
         />
       </div>
-    </>
   );
 }
 

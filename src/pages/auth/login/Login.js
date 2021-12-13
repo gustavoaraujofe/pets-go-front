@@ -4,7 +4,6 @@ import api from "../../../apis/api";
 import { useContext, useState } from "react";
 import "./login.css";
 import * as Yup from "yup";
-import Topbar from "../../../components/topbar/Topbar";
 import telaRosaAzul from "../../../assets/tela-rosa-azul.png";
 
 import { AuthContext } from "../../../contexts/authContext";
@@ -14,6 +13,7 @@ function Login() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+ 
 
   //Define os valores iniciais dos campos do formulário
   const formik = useFormik({
@@ -74,7 +74,6 @@ function Login() {
 
   return (
     <>
-      <Topbar />
       <div
         className="flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8"
         style={{ height: "80%" }}
