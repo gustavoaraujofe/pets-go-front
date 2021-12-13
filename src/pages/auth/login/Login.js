@@ -92,7 +92,7 @@ function Login() {
                   id="email"
                   name="email"
                   type="text"
-                  className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md ${
+                  className={`bg-white focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md ${
                     formik.errors.email && formik.touched.email
                       ? "border-red-300"
                       : null
@@ -109,7 +109,7 @@ function Login() {
                   id="password"
                   name="password"
                   type="password"
-                  className={`mt-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md ${
+                  className={`bg-white mt-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md ${
                     formik.errors.password && formik.touched.password
                       ? "border-red-300"
                       : null
@@ -161,7 +161,7 @@ function Login() {
               </div>
               <div className="text-sm">
                 <Link
-                  to="/"
+                  to="/forgot-password"
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
                   Esqueceu sua senha?
