@@ -4,6 +4,7 @@ import api from "../../../apis/api";
 import { useContext, useState } from "react";
 import "./login.css";
 import * as Yup from "yup";
+import Topbar from "../../../components/topbar/Topbar";
 
 import { AuthContext } from "../../../contexts/authContext";
 
@@ -13,29 +14,45 @@ function Login() {
 
   const navigate = useNavigate();
  
+
+  //Define os valores iniciais dos campos do formulário
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
+      type: "",
     },
+    //Define as regras de validação em tempo real
     validationSchema: Yup.object({
       email: Yup.string()
         .email("E-mail inválido.")
         .required("Os campos são obrigatórios."),
       password: Yup.string().required("Os campos são obrigatórios."),
+      type: Yup.string().required("Os campos são obrigatórios"),
     }),
     onSubmit: (values) => {
+
+      //Envio de informações para o back
       async function login() {
         try {
+          let response;
           setLoading(true);
-          const response = await api.post("/vet/login", values);
-          console.log(response.data);
 
+          //Verifica se é vet ou tutor pra logar na rota certa
+          if(values.type === "vet"){
+            response = await api.post("/vet/login", values);
+          }
+          if(values.type === "tutor"){
+            response = await api.post("/user/login", values);
+          }
+
+          //Guarda as informções do usuário no context
           setLoggedInUser({
             token: response.data.token,
             user: response.data.user,
           });
 
+          //Salva as informações de token e user no localStorage
           localStorage.setItem(
             "loggedInUser",
             JSON.stringify({
@@ -44,7 +61,9 @@ function Login() {
             })
           );
           setLoading(false);
-          navigate("/");
+          
+          //Direciona o usuário para o dashboard
+          navigate("/dashboard");
         } catch (e) {
           setLoading(false);
           console.error(e);
@@ -55,22 +74,16 @@ function Login() {
   });
 
   return (
+    <>
+    <Topbar/>
     <div className="min-h-full flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <img
-            className="mx-auto h-12 w-auto"
-            src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-            alt="Workflow"
-          />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Entrar em sua conta
           </h2>
         </div>
-        <form
-          onSubmit={formik.handleSubmit}
-          className="mt-8 space-y-6"
-        >
+        <form onSubmit={formik.handleSubmit} className="mt-8 space-y-6">
           <input type="hidden" name="remember" value="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
@@ -111,8 +124,26 @@ function Login() {
                 value={formik.values.password}
                 placeholder="Digite sua senha"
               />
+              <div className="mt-5">
+                <select
+                  className="relative w-full bg-white border border-gray-300 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.type}
+                  name="type"
+                  required
+                  
+                >
+                  <option value="">
+                    Selecione o tipo de conta
+                  </option>
+                  <option value="tutor">Tutor</option>
+                  <option value="vet">Veterinário</option>
+                </select>
+              </div>
               {(formik.touched.email && formik.errors.email) ||
-              (formik.errors.password && formik.touched.password) ? (
+              (formik.errors.password && formik.touched.password) ||
+              (formik.touched.type && formik.errors.type) ? (
                 <div className="text-sm">
                   {formik.errors.email
                     ? formik.errors.email
@@ -174,6 +205,7 @@ function Login() {
         </form>
       </div>
     </div>
+    </>
   );
 }
 
