@@ -7,14 +7,11 @@ import Login from "../pages/auth/login/Login";
 import ProtectedRoute from "../pages/auth/ProtectedRoute";
 import Topbar from "../components/topbar/Topbar";
 
-import Navbar from "./navbar/Navbar";
 import AnimalCreate from '../pages/animal/AnimalCreate';
 import VetsList from '../pages/vets/VetsList';
 
 import ForgotPassword from "../pages/auth/recoveryPassword/ForgotPassword"
 import NewPassword from "../pages/auth/recoveryPassword/NewPassword"
-
-
 
 import { AuthContextComponent } from "../contexts/authContext";
 import Dashboard from "../pages/dashboard/Dashboard";
@@ -35,7 +32,6 @@ function App() {
           <Route path="/animal-create" element={<AnimalCreate/>}/>
           <Route path="/vets-list" element={<VetsList/>}/>
         </Routes>
-      <Navbar />
       </AuthContextComponent>
     </div>
   );

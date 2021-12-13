@@ -10,7 +10,7 @@ function VetsList() {
   useEffect(() => {
     async function fetchUser() {
       try {
-        const response = await api.get(`/vet/profile`);
+        const response = await api.get(`/vet/list`);
 
         setUserData([ ...response.data ]);
       } catch (err) {
