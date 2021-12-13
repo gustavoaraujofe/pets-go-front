@@ -29,7 +29,7 @@ function ForgotPassword() {
         try {
           setLoading(true);
 
-          const response = await api.post("/password/forgot-password", values);
+          await api.post("/password/forgot-password", values);
           toast.success("E-mail enviado com sucesso!");
 
           //Direciona o usuário para o dashboard
@@ -77,9 +77,7 @@ function ForgotPassword() {
                 />
               </div>
               {formik.touched.email && formik.errors.email ? (
-                <div className="text-sm">
-                  {formik.errors.email}
-                </div>
+                <div className="text-sm">{formik.errors.email}</div>
               ) : null}
             </div>
 

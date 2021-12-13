@@ -46,13 +46,12 @@ function Dashboard() {
     fetchAnimal();
   }, []);
 
-
   return (
     <div>
       <section className="mt-4 flex items-center justify-between mr-8 ml-8">
         <h1>Olá, {userData.name}</h1>
         <div className="flex-shrink-0">
-          <img className="h-20 w-20 rounded-full" src={userData.avatarUrl} />
+          <img className="h-20 w-20 rounded-full" src={userData.avatarUrl} alt="Avatar usuario"/>
         </div>
       </section>
 
@@ -66,6 +65,7 @@ function Dashboard() {
                 <img
                   className="h-20 w-20 rounded-full"
                   src={animalData.avatarUrl}
+                  alt="avatar pet"
                 />
               </div>
             </div>
@@ -84,7 +84,7 @@ function Dashboard() {
             <div class="media">
               <div class="media-left">
                 <div className="img-radio">
-                  <img src={addIcon} />
+                  <img src={addIcon} alt="Adicionar pet"/>
                 </div>
               </div>
               <div class="media-content">
