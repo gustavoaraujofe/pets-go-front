@@ -42,6 +42,12 @@ body {
     width: 150px;
 }
 
+.salmon-btn {
+    background-color: #F6ACA7;
+    color: #0D0D5E;
+    font-size: 1.2rem;
+}
+
 .paw-medium {
     width: 30px;
 }
@@ -62,6 +68,7 @@ body {
     bottom: 0;
     width: 1024px;
     padding: 0;
+    z-index: -1;
 }
 
 .paw-container-left {
