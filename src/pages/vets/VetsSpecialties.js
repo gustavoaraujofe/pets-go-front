@@ -69,7 +69,7 @@ function VetsSpecialties() {
           <img alt="pata" className="paw-medium" src={pawImg} />
         </div>
         <div className="mt-10 max-w-md w-full is-flex is-justify-content-center">
-          <Link to="/schedule">
+          <Link to="/vets-list">
             <button className="btn blue-btn">Escolher</button>
           </Link>
         </div>
