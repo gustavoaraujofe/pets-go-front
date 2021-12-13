@@ -7,7 +7,7 @@ import medicalRecordIcon from "../../assets/prontuario.png";
 function Navbar() {
   return (
     <div className="navbar-container flex items-center justify-around navbar-color">
-      <Link to="user/dashboard">
+      <Link to="/dashboard">
         <div
           className="icon-nav flex is-flex-direction-column
  direction-column items-center justify-center"

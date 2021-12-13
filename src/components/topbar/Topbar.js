@@ -22,7 +22,10 @@ function Topbar() {
     <>
       <nav className="navbar topbar-container" aria-label="main navigation">
         <div className="navbar-brand">
-          <div className="container-logo flex items-center justify-center m-auto ">
+          <div
+            className="container-logo flex items-center justify-center m-auto"
+            style={{ position: !login ? "absolute" : null }}
+          >
             <img className="logo-img" src={logo} alt="logo" />
           </div>
 
@@ -40,7 +43,9 @@ function Topbar() {
           id="navbarBasicExample"
           className={`${toggle ? null : "navbar-menu"}`}
         >
-          <div className="navbar-start bg-white">
+          <div
+            className={`navbar-start bg-white ${!login ? "is-hidden" : null}`}
+          >
             <Link to="/" className="navbar-item">
               <strong>Home</strong>
             </Link>
@@ -63,7 +68,9 @@ function Topbar() {
                     setLogin(false);
                     setToggle(false);
                   }}
-                  className="button salmon-btn is-size-7"
+                  className={`button salmon-btn is-size-7 ${
+                    !login ? "is-hidden" : null
+                  }`}
                 >
                   Sair
                 </Link>
