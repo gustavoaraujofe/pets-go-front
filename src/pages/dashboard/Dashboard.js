@@ -103,7 +103,7 @@ function Dashboard() {
           </div>
 
           <div className="max-w-md w-full is-flex is-justify-content-center">
-            <Link to="/">
+            <Link to="/vets-specialties">
               <button className="btn salmon-btn">Agendar</button>
             </Link>
           </div>

@@ -9,6 +9,7 @@ import Topbar from "../components/topbar/Topbar";
 
 import AnimalCreate from '../pages/animal/AnimalCreate';
 import VetsList from '../pages/vets/VetsList';
+import VetsSpecialties from '../pages/vets/VetsSpecialties';
 
 import ForgotPassword from "../pages/auth/recoveryPassword/ForgotPassword"
 import NewPassword from "../pages/auth/recoveryPassword/NewPassword"
@@ -31,6 +32,7 @@ function App() {
           <Route path="/new-password/:token" element={<NewPassword />} /> 
           <Route path="/animal-create" element={<AnimalCreate/>}/>
           <Route path="/vets-list" element={<VetsList/>}/>
+          <Route path="/vets-specialties" element={<VetsSpecialties/>}/>
         </Routes>
       </AuthContextComponent>
     </div>
