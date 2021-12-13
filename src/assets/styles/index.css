@@ -8,6 +8,7 @@
 body {
     max-width: 1024px;
     height: 100vh;
+    margin: auto
 }
 
 #root {
@@ -39,4 +40,32 @@ body {
     background-color: white;
     color: #0D0D5E;
     width: 150px;
+}
+
+.paw-medium {
+    width: 30px;
+}
+
+.paw-small {
+    width: 25px;
+}
+
+.paw-container-right {
+    display: flex;
+    justify-content: flex-end;
+    width: 300px;
+    margin-right: 30px;
+}
+
+.img-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 1024px;
+    padding: 0;
+}
+
+.paw-container-left {
+    display: flex;
+    justify-content: flex-start;
+    width: 300px;
 }
