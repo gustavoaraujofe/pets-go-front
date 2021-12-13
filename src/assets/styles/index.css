@@ -25,6 +25,16 @@ body {
     align-items: center;
 }
 
+.small-btn {
+    border: none;
+    width: 120px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+}
+
 .lightgreen-btn {
     background-color: #C1E7DF;
     color: #0D0D5E;
@@ -32,6 +42,11 @@ body {
 
 .purple-btn {
     background-color: #DDCFE8;
+    color: #0D0D5E;
+}
+
+.blue-btn {
+    background-color: #9ABDF6;
     color: #0D0D5E;
 }
 

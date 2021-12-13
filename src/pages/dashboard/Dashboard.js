@@ -13,12 +13,12 @@ function Dashboard() {
     avatarUrl: "",
   });
 
-  const [animalData, setAnimalData] = useState({
-    name: "",
-    age: 0,
-    weight: 0,
-    avatarUrl: "",
-  });
+//   const [animalData, setAnimalData] = useState({
+//     name: "",
+//     age: 0,
+//     weight: 0,
+//     avatarUrl: "",
+//   });
 
   useEffect(() => {
     async function fetchUser() {
@@ -33,18 +33,18 @@ function Dashboard() {
     fetchUser();
   }, []);
 
-  useEffect(() => {
-    async function fetchAnimal() {
-      try {
-        const response = await api.get(`/animal/create`);
+//   useEffect(() => {
+//     async function fetchAnimal() {
+//       try {
+//         const response = await api.get(`/animal/create`);
 
-        setAnimalData({ ...response.data });
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    fetchAnimal();
-  }, []);
+//         setAnimalData({ ...response.data });
+//       } catch (err) {
+//         console.error(err);
+//       }
+//     }
+//     fetchAnimal();
+//   }, []);
 
 
   return (
@@ -65,7 +65,7 @@ function Dashboard() {
               <div className="flex-shrink-0">
                 <img
                   className="h-20 w-20 rounded-full"
-                  src={animalData.avatarUrl}
+                  src=""
                 />
               </div>
             </div>
@@ -80,15 +80,15 @@ function Dashboard() {
 
       <Link to="/animal-create">
         <div className="card-container">
-          <div class="card-content">
-            <div class="media">
-              <div class="media-left">
+          <div className="card-content">
+            <div className="media">
+              <div className="media-left">
                 <div className="img-radio">
                   <img src={addIcon} />
                 </div>
               </div>
-              <div class="media-content">
-                <p class="title is-4">Adicionar Pet</p>
+              <div className="media-content">
+                <p className="title is-4">Adicionar Pet</p>
               </div>
             </div>
           </div>
