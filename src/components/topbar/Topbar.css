@@ -1,0 +1,11 @@
+.topbar-container {
+    position: absolute;
+    top: 0px;
+    height: 80px;
+    width: 100%;
+    border-bottom: 1px rgb(203, 203, 203) solid;
+}
+
+.logo-img {
+    max-width: 120px;
+}
