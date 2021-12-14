@@ -65,9 +65,9 @@ function Dashboard() {
           </div>
 
           <div className="card-container mb-4">
-            <div class="card-content">
-              <div class="media">
-                <div class="media-left">
+            <div className="card-content">
+              <div className="media">
+                <div className="media-left">
                   <div className="flex-shrink-0">
                     <img className="h-20 w-20 rounded-full" src="" />
                   </div>
