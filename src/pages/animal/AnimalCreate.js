@@ -1,7 +1,3 @@
-/** @format */
-
-//  @format
-
 import api from "../../apis/api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
