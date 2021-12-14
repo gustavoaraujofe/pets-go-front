@@ -1,4 +1,4 @@
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo1.png";
 import { useState, useContext, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
@@ -12,7 +12,6 @@ function Topbar() {
   const params = useLocation();
 
   useEffect(() => {
-    console.log(loggedInUser);
     if (loggedInUser.user.id) {
       setLogin(true);
     }

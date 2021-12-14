@@ -3,25 +3,36 @@ import pawImg from "../../assets/pata.png";
 import telaVerdeRosa from "../../assets/tela-verde-rosa.png";
 import api from "../../apis/api";
 import { useEffect, useState } from "react";
+import Navbar from "../../components/navbar/Navbar";
+import { useParams } from "react-router-dom";
 
 function VetsList() {
   const [userData, setUserData] = useState([]);
+
+  const params = useParams();
 
   useEffect(() => {
     async function fetchUser() {
       try {
         const response = await api.get(`/vet/list`);
+ 
+        const userDataFilter = response.data.filter((currentVet) => {
+          return currentVet.specialties.includes(params.specialties);
+        })
 
-        setUserData([ ...response.data ]);
+        setUserData([ ...userDataFilter ]);
+        
       } catch (err) {
         console.error(err);
       }
     }
     fetchUser();
-  }, []);
+  }, [params.specialties]);
+
+
 
   return (
-    <div>
+    <div className="pb-20">
       <section className="mt-4 flex items-center justify-between mr-8 ml-8">
         <h1>Veterinários</h1>
       </section>
@@ -32,7 +43,7 @@ function VetsList() {
 
       {userData.map((currentVet) => {
         return (
-          <div className="has-background-white card-container mb-4">
+          <div key={currentVet._id} className="has-background-white card-container mb-4">
             <div className="card-content">
               <div className="media">
                 <div className="media-left">
@@ -71,6 +82,7 @@ function VetsList() {
           src={telaVerdeRosa}
         />
       </div>
+      <Navbar/>
     </div>
   );
 }

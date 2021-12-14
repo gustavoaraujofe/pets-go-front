@@ -62,7 +62,7 @@ function Signup() {
   };
 
   // Condição que modifica os valores iniciais e a validação quando o usuário for do tipo VET
-  if (params.type === "vet") {
+  if (params.type === "vet") { 
     initialValues.crmv = "";
     initialValues.specialties = "";
     validation.crmv = Yup.number()
@@ -220,7 +220,7 @@ function Signup() {
                     <option value="" disabled defaultValue hidden>
                       Especialidade
                     </option>
-                    <option value="clinico geral">Clínico Geral</option>
+                    <option value="clinico">Clínico Geral</option>
                     <option value="oftalmologia">Oftalmologia</option>
                     <option value="cardiologia">Cardiologia</option>
                     <option value="dermatologia">Dermatologia</option>
