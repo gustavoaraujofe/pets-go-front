@@ -20,7 +20,7 @@ function Signup() {
 
       uploadData.append("picture", file);
 
-      let response = "";
+      let response = ""; 
 
       // Condição para o envio dos arquivos
       if (params.type === "vet") {
