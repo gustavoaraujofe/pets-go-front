@@ -15,6 +15,8 @@ function Topbar() {
    
     if (loggedInUser.user.id) {
       setLogin(true);
+    }else{
+      setLogin(false);
     }
     setToggle(false)
   }, [loggedInUser, params]);
@@ -27,7 +29,9 @@ function Topbar() {
             className="container-logo flex items-center justify-center m-auto"
             style={{ position: !login ? "absolute" : null }}
           >
+            <Link to={login ? "/dashboard" : "/"}>
             <img className="logo-img" src={logo} alt="logo" />
+            </Link>
           </div>
 
           <button

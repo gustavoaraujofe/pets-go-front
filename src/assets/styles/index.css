@@ -56,6 +56,13 @@ body {
     color: #0D0D5E;
 }
 
+.gray-btn {
+    border: #F5DEC6 solid;
+    background-color: white;
+    color: #0D0D5E;
+    font-size: 1.2rem;
+}
+
 .enter-btn {
     border: #F5DEC6 solid;
     background-color: white;
