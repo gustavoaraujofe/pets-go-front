@@ -1,8 +1,11 @@
 import api from "../../apis/api";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/authContext";
 
 function AnimalCreate() {
+  const { loggedInUser } = useContext(AuthContext);
+
   const [animalData, setAnimalData] = useState({
     name: "",
     age: "",
@@ -34,7 +37,7 @@ function AnimalCreate() {
 
       //const imageUrl = await handleFileUpload(animalData.imageUrl);
 
-      const response = await api.post("/animal/create", animalData);
+      const response = await api.post("/animal/create", {...animalData, userId: loggedInUser.user.id});
       navigate("/dashboard");
       console.log(response);
       setLoading(false);
@@ -147,6 +150,9 @@ function AnimalCreate() {
               name="gender"
               className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md`}
             >
+              <option value="" disabled defaultValue hidden>
+                Gênero
+              </option>
               <option value="male">Macho</option>
               <option value="female">Fêmea</option>
             </select>
