@@ -1,5 +1,3 @@
-/** @format */
-
 import { Link } from "react-router-dom";
 import api from "../../apis/api";
 import { useEffect, useState } from "react";
@@ -8,8 +6,10 @@ import addIcon from "../../assets/add-icon.png";
 import telaBegeAzul from "../../assets/tela-bege-azul.png";
 import pawImg from "../../assets/pata.png";
 import Navbar from "../../components/navbar/Navbar";
+import Loading from "../../components/Loading";
 
 function Dashboard() {
+  const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState({
     name: "",
     role: "",
@@ -29,6 +29,7 @@ function Dashboard() {
         const response = await api.get(`/user/profile`);
 
         setUserData({ ...response.data });
+        setTimeout(() => setLoading(false), 1000)
       } catch (err) {
         console.error(err);
       }
@@ -50,7 +51,8 @@ function Dashboard() {
   // }, []);
 
   return (
-    <div>
+    <>
+    {loading ? <Loading/> : <div>
       <section className="mt-4 flex items-center justify-between mr-8 ml-8">
         <h1>Olá, {userData.name}</h1>
         <div className="flex-shrink-0">
@@ -122,7 +124,9 @@ function Dashboard() {
         />
       </div>
       <Navbar/>
-    </div>
+    </div>}
+    
+    </>
   );
 }
 
