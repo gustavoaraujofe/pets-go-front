@@ -1,3 +1,5 @@
+/** @format */
+
 import { Link } from "react-router-dom";
 import api from "../../apis/api";
 import { useEffect, useState } from "react";
@@ -34,18 +36,18 @@ function Dashboard() {
     fetchUser();
   }, []);
 
-  //   useEffect(() => {
-  //     async function fetchAnimal() {
-  //       try {
-  //         const response = await api.get(`/animal/create`);
+  // useEffect(() => {
+  //   async function fetchAnimal() {
+  //     try {
+  //       const response = await api.get(`/animal/create`);
 
-  //         setAnimalData({ ...response.data });
-  //       } catch (err) {
-  //         console.error(err);
-  //       }
+  //       setAnimalData({ ...response.data });
+  //     } catch (err) {
+  //       console.error(err);
   //     }
-  //     fetchAnimal();
-  //   }, []);
+  //   }
+  //   fetchAnimal();
+  // }, []);
 
   return (
     <div>
