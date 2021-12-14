@@ -59,7 +59,7 @@ function AnimalCreate() {
         <form className="forms">
         <div className="mt-4 relative rounded-md shadow-sm">
             <label htmlFor="type" className="pl-1 label">
-              Sexo
+              Tipo
             </label>
             <select
               required
