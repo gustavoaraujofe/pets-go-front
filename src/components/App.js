@@ -7,14 +7,12 @@ import Login from "../pages/auth/login/Login";
 import ProtectedRoute from "../pages/auth/ProtectedRoute";
 import Topbar from "../components/topbar/Topbar";
 
-import Navbar from "./navbar/Navbar";
 import ForgotPassword from "../pages/auth/recoveryPassword/ForgotPassword";
 import NewPassword from "../pages/auth/recoveryPassword/NewPassword";
 import AnimalCreate from "../pages/animal/AnimalCreate";
 import VetsList from '../pages/vets/VetsList';
 import VetsSpecialties from '../pages/vets/VetsSpecialties';
 import EditAccount from "../pages/auth/EditAccount"
-
 
 import { AuthContextComponent } from "../contexts/authContext";
 import Dashboard from "../pages/dashboard/Dashboard";
@@ -36,7 +34,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/new-password/:token" element={<NewPassword />} /> 
           <Route path="/animal-create" element={<AnimalCreate/>}/>
-          <Route path="/vets-list" element={<VetsList/>}/>
+          <Route path="/vets-list/:specialties" element={<VetsList/>}/>
           <Route path="/vets-specialties" element={<VetsSpecialties/>}/>
         </Routes>
       </AuthContextComponent>

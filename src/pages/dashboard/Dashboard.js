@@ -6,8 +6,10 @@ import addIcon from "../../assets/add-icon.png";
 import telaBegeAzul from "../../assets/tela-bege-azul.png";
 import pawImg from "../../assets/pata.png";
 import Navbar from "../../components/navbar/Navbar";
+import Loading from "../../components/Loading";
 
 function Dashboard() {
+  const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState({
     name: "",
     role: "",
@@ -27,6 +29,7 @@ function Dashboard() {
         const response = await api.get(`/user/profile`);
 
         setUserData({ ...response.data });
+        setTimeout(() => setLoading(false), 1000)
       } catch (err) {
         console.error(err);
       }
@@ -34,21 +37,22 @@ function Dashboard() {
     fetchUser();
   }, []);
 
-  //   useEffect(() => {
-  //     async function fetchAnimal() {
-  //       try {
-  //         const response = await api.get(`/animal/create`);
+  // useEffect(() => {
+  //   async function fetchAnimal() {
+  //     try {
+  //       const response = await api.get(`/animal/create`);
 
-  //         setAnimalData({ ...response.data });
-  //       } catch (err) {
-  //         console.error(err);
-  //       }
+  //       setAnimalData({ ...response.data });
+  //     } catch (err) {
+  //       console.error(err);
   //     }
-  //     fetchAnimal();
-  //   }, []);
+  //   }
+  //   fetchAnimal();
+  // }, []);
 
   return (
-    <div>
+    <>
+    {loading ? <Loading/> : <div>
       <section className="mt-4 flex items-center justify-between mr-8 ml-8">
         <h1>Olá, {userData.name}</h1>
         <div className="flex-shrink-0">
@@ -69,9 +73,9 @@ function Dashboard() {
           </div>
 
           <div className="card-container mb-4">
-            <div class="card-content">
-              <div class="media">
-                <div class="media-left">
+            <div className="card-content">
+              <div className="media">
+                <div className="media-left">
                   <div className="flex-shrink-0">
                     <img className="h-20 w-20 rounded-full" src="" />
                   </div>
@@ -123,8 +127,10 @@ function Dashboard() {
           src={telaBegeAzul}
         />
       </div>
-      <Navbar />
-    </div>
+      <Navbar/>
+    </div>}
+    
+    </>
   );
 }
 
