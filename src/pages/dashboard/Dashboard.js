@@ -56,7 +56,11 @@ function Dashboard() {
       <section className="mt-4 flex items-center justify-between mr-8 ml-8">
         <h1>Olá, {userData.name}</h1>
         <div className="flex-shrink-0">
-          <img className="h-20 w-20 rounded-full" src={userData.avatarUrl} alt="Avatar usuario"/>
+          <img
+            className="h-20 w-20 rounded-full"
+            src={userData.avatarUrl}
+            alt="Avatar usuario"
+          />
         </div>
       </section>
 

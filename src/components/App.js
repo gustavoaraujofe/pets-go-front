@@ -12,6 +12,7 @@ import NewPassword from "../pages/auth/recoveryPassword/NewPassword";
 import AnimalCreate from "../pages/animal/AnimalCreate";
 import VetsList from '../pages/vets/VetsList';
 import VetsSpecialties from '../pages/vets/VetsSpecialties';
+import EditAccount from "../pages/auth/EditAccount"
 
 import { AuthContextComponent } from "../contexts/authContext";
 import Dashboard from "../pages/dashboard/Dashboard";
@@ -27,6 +28,7 @@ function App() {
             element={<ProtectedRoute component={Dashboard} />}
           />
           <Route path="/signup/:type" element={<Signup />} />
+          <Route path="/edit-account/:type" element={<EditAccount />} />
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />

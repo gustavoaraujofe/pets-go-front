@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../../apis/api";
 import { useContext, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import "./login.css";
 import * as Yup from "yup";
 import telaRosaAzul from "../../../assets/tela-rosa-azul.png";
@@ -13,7 +14,6 @@ function Login() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
- 
 
   //Define os valores iniciais dos campos do formulário
   const formik = useFormik({
@@ -65,7 +65,7 @@ function Login() {
           navigate("/dashboard");
         } catch (e) {
           setLoading(false);
-          console.error(e);
+          toast.error("Usuário ou senha incorreto");
         }
       }
       login();
@@ -186,6 +186,29 @@ function Login() {
           src={telaRosaAzul}
         />
       </div>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          className: "",
+          duration: 5000,
+          style: {
+            background: "#fff",
+            color: "#000",
+          },
+
+          success: {
+            duration: 3000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      />
     </>
   );
 }
