@@ -1,10 +1,26 @@
 .topbar-container {
+    top: 0px;
     position: relative;
-    height: 80px;
+    height: 55px;
     width: 100%;
     border-bottom: 1px rgb(203, 203, 203) solid;
 }
 
 .logo-img {
-    max-width: 120px;
+    max-height: 40px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.container-logo{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+@media(min-width: 1024px) {
+    .container-logo {
+        position: relative;
+        text-align: start;
+    }
 }

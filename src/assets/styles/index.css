@@ -23,6 +23,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #0D0D5E;
+}
+
+.small-btn {
+    border: none;
+    width: 120px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
 }
 
 .lightgreen-btn {
@@ -30,8 +41,18 @@ body {
     color: #0D0D5E;
 }
 
+.beige-btn {
+    background-color: #F5DEC6;    ;
+    color: #0D0D5E;
+}
+
 .purple-btn {
     background-color: #DDCFE8;
+    color: #0D0D5E;
+}
+
+.blue-btn {
+    background-color: #9ABDF6;
     color: #0D0D5E;
 }
 

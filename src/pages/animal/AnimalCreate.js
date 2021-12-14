@@ -132,7 +132,7 @@ function AnimalCreate() {
               <option value="female">Fêmea</option>
             </select>
           </div>
-          <label htmlFor="avatarUrl" className="pl-1 label">
+          <label htmlFor="imageUrl" className="pl-1 label">
             Foto do pet
           </label>
 
@@ -141,8 +141,8 @@ function AnimalCreate() {
               <input
                 className="file-input"
                 type="file"
-                name="avatarUrl"
-                id="avatarUrl"
+                name="imageUrl"
+                id="imageUrl"
                 onChange={handleChange}
               />
               <span className="file-cta">
