@@ -14,7 +14,6 @@ function AnimalCreate() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-
   function handleChange(e) {
     if (e.target.files) {
       return setAnimalData({
@@ -129,7 +128,7 @@ function AnimalCreate() {
               <option value="female">Fêmea</option>
             </select>
           </div>
-          {/* <label htmlFor="imageUrl" className="pl-1 label">
+          <label htmlFor="imageUrl" className="pl-1 label">
             Foto do pet
           </label>
 
@@ -140,7 +139,7 @@ function AnimalCreate() {
                 type="file"
                 name="imageUrl"
                 id="imageUrl"
-                
+                onChange={handleChange}
               />
               <span className="file-cta">
                 <span className="file-icon">
@@ -149,7 +148,7 @@ function AnimalCreate() {
                 <span className="file-label">Choose a file…</span>
               </span>
             </label>
-          </div> */}
+          </div>
           <div className="max-w-md w-full is-flex is-justify-content-center">
             <button
               disabled={loading}
