@@ -9,6 +9,7 @@ import Navbar from "../../components/navbar/Navbar";
 import Loading from "../../components/Loading";
 import AnimalCard from "../animal/AnimalCard";
 
+
 function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState({

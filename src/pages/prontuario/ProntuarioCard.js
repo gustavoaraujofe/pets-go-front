@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function AnimalCard(props) {
+function ProntuarioCard(props) {
   return (
     <div className="card-container mb-4">
       <div className="pr-5 pt-1 flex justify-end">
@@ -18,9 +18,9 @@ function AnimalCard(props) {
             </div>
           </div>
           <div className="media-content">
-            <p className="title is-4">{props.name}</p>
-            <p className="subtitle is-6 mb-2">Idade: {props.age} anos</p>
-            <p className="subtitle is-6">Peso: {props.weight}kg</p>
+            <p className="title is-4">Nome do Pet</p>
+            <p className="subtitle is-6 mb-2">Vacina</p>
+            <p className="subtitle is-6">Peso</p>
           </div>
         </div>
       </div>
@@ -28,4 +28,4 @@ function AnimalCard(props) {
   );
 }
 
-export default AnimalCard;
+export default ProntuarioCard;

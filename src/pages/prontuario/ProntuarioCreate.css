@@ -1,0 +1,17 @@
+textarea {
+  border: 2px solid rgb(181, 181, 182);
+  border-radius: 8px;
+  padding: 7px 20px;
+  margin: 8px 0;
+  color: #757575;
+  resize: none;
+}
+
+.pront-input {
+  border: 2px solid rgb(181, 181, 182);
+  border-radius: 8px;
+  padding: 7px 20px;
+  margin: 8px 0;
+  color: #757575;
+  resize: none;
+}

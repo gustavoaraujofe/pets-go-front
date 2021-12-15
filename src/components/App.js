@@ -14,6 +14,8 @@ import VetsList from '../pages/vets/VetsList';
 import VetsSpecialties from '../pages/vets/VetsSpecialties';
 import EditAccount from "../pages/auth/EditAccount"
 import AnimalEdit from "../pages/animal/AnimalEdit"
+import ProntuarioList from "../pages/prontuario/ProntuarioList"
+import ProntuarioCreate from "../pages/prontuario/ProntuarioCreate"
 
 import { AuthContextComponent } from "../contexts/authContext";
 import Dashboard from "../pages/dashboard/Dashboard";
@@ -37,7 +39,9 @@ function App() {
           <Route path="/animal-create" element={<AnimalCreate/>}/>
           <Route path="/vets-list/:specialties" element={<VetsList/>}/>
           <Route path="/vets-specialties" element={<VetsSpecialties/>}/>
-          <Route path="/animal-edit/:id" element={<AnimalEdit/>}/>
+          <Route path="/animal-edit" element={<AnimalEdit/>}/>
+          <Route path="/prontuario/new-record" element={<ProntuarioCreate/>}/>
+          <Route path="/prontuario" element={<ProntuarioList/>}/>
         </Routes>
       </AuthContextComponent>
     </div>
