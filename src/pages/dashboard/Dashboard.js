@@ -151,7 +151,7 @@ function Dashboard() {
                 />
                 {listaFiltrada.map((currentAnimal) => {
                   return (
-                    <AnimalCard key={currentAnimal.id} {...currentAnimal} />
+                    <AnimalCard key={`filtered-${currentAnimal.id}`} {...currentAnimal} />
                   );
                 })}
               </div>
