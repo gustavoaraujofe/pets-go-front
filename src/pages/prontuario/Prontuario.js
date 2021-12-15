@@ -6,7 +6,7 @@ import ProntuarioCard from "./ProntuarioCard";
 import addIcon from "../../assets/add-icon.png";
 
 
-function ProntuarioList() {
+function Prontuario() {
   return (
     <>
       <h1 className="mt-10 pl-5">Prontuário</h1>
@@ -46,4 +46,4 @@ function ProntuarioList() {
   );
 }
 
-export default ProntuarioList;
+export default Prontuario;
