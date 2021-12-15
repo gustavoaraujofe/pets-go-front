@@ -15,6 +15,7 @@ import VetsSpecialties from "../pages/vets/VetsSpecialties";
 import EditAccount from "../pages/auth/EditAccount";
 import Schedule from "../pages/schedule/Schedule";
 import ScheduleVets from "../pages/schedule/ScheduleVets"
+import AnimalEdit from "../pages/animal/AnimalEdit"
 
 import { AuthContextComponent } from "../contexts/authContext";
 import Dashboard from "../pages/dashboard/Dashboard";
@@ -40,6 +41,7 @@ function App() {
           <Route path="/vets-specialties" element={<VetsSpecialties />} />
           <Route path="/user/schedule/" element={<Schedule />} />
           <Route path="/vet/schedule-edit" element={<ScheduleVets />} />
+          <Route path="/animal-edit/:id" element={<AnimalEdit/>}/>
         </Routes>
       </AuthContextComponent>
     </div>

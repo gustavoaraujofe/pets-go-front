@@ -1,8 +1,11 @@
 import api from "../../apis/api";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/authContext";
 
 function AnimalCreate() {
+  const { loggedInUser } = useContext(AuthContext);
+
   const [animalData, setAnimalData] = useState({
     name: "",
     age: "",
@@ -10,10 +13,10 @@ function AnimalCreate() {
     weight: "",
     gender: "",
     imageUrl: "",
+    type: "",
   });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
 
   function handleChange(e) {
     if (e.target.files) {
@@ -34,7 +37,7 @@ function AnimalCreate() {
 
       //const imageUrl = await handleFileUpload(animalData.imageUrl);
 
-      const response = await api.post("/animal/create", animalData);
+      const response = await api.post("/animal/create", {...animalData, userId: loggedInUser.user.id});
       navigate("/dashboard");
       console.log(response);
       setLoading(false);
@@ -54,6 +57,28 @@ function AnimalCreate() {
         </div>
 
         <form className="forms">
+        <div className="mt-4 relative rounded-md shadow-sm">
+            <label htmlFor="type" className="pl-1 label">
+              Tipo
+            </label>
+            <select
+              required
+              htmlFor="type"
+              id="type"
+              value={animalData.type}
+              type="text"
+              onChange={handleChange}
+              name="type"
+              className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md`}
+            >
+              <option value="dog">Cachorro</option>
+              <option value="cat">Gato</option>
+              <option value="rabbit">Coelho</option>
+              <option value="bird">Ave</option>
+              <option value="wild">Silvestres</option>
+              <option value="others">Outros</option>
+            </select>
+          </div>
           <div className="mt-5 relative rounded-md shadow-sm">
             <label htmlFor="name" className="pl-1 label">
               Nome do PET
@@ -125,6 +150,9 @@ function AnimalCreate() {
               name="gender"
               className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md`}
             >
+              <option value="" disabled defaultValue hidden>
+                Gênero
+              </option>
               <option value="male">Macho</option>
               <option value="female">Fêmea</option>
             </select>
@@ -140,7 +168,7 @@ function AnimalCreate() {
                 type="file"
                 name="imageUrl"
                 id="imageUrl"
-                
+                onChange={handleChange}
               />
               <span className="file-cta">
                 <span className="file-icon">
