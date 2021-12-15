@@ -6,8 +6,6 @@ import ProntuarioCard from "./ProntuarioCard";
 import addIcon from "../../assets/add-icon.png";
 
 
-
-
 function ProntuarioList() {
   return (
     <>

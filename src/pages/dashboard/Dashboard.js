@@ -8,17 +8,34 @@ import pawImg from "../../assets/pata.png";
 import Navbar from "../../components/navbar/Navbar";
 import Loading from "../../components/Loading";
 import AnimalCard from "../animal/AnimalCard";
-
+import AppointmentCard from "../appointment/AppointmentCard";
 
 function Dashboard() {
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [animalData, setAnimalData] = useState([]);
+
   const [userData, setUserData] = useState({
     name: "",
     role: "",
     avatarUrl: "",
   });
 
-  const [animalData, setAnimalData] = useState([]);
+  function handleChange(animal) {
+    setSearch(animal);
+  }
+
+  let listaFiltrada = [];
+  if (search) {
+    const re = new RegExp(`${search}`, "gi");
+    animalData.forEach((currentAnimal) => {
+      if (currentAnimal.name.common.match(re) !== null) {
+        listaFiltrada.push(currentAnimal);
+      }
+    });
+  } else {
+    listaFiltrada = animalData;
+  }
 
   useEffect(() => {
     async function fetchUser() {
@@ -38,8 +55,9 @@ function Dashboard() {
     async function fetchAnimal() {
       try {
         const response = await api.get(`/animal/list`);
+
         const animalFilter = await response.data.filter((currentAnimal) => {
-          return currentAnimal.userId == userData._id;
+          return currentAnimal.userId === userData._id;
         });
 
         setAnimalData(animalFilter);
@@ -107,7 +125,35 @@ function Dashboard() {
               </div>
             </>
           ) : (
-            <h2 className="mt-8 ml-8">Meus Agendamentos</h2>
+            <>
+              <h2 className="mt-8 ml-8">Meus Agendamentos</h2>
+
+              <AppointmentCard/>
+              {/* {animalData.map((currentAnimal) => {
+                return <AnimalCard key={currentAnimal.id} {...currentAnimal} />;
+              })} */}
+
+              <h2 className="mt-8 ml-8">Meus Pacientes</h2>
+              <div className="mt-8 ml-8">
+                <input
+                className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md"
+                  onChange={(event) => {
+                    clearTimeout(timer);
+                    let timer = setTimeout(
+                      () => handleChange(event.target.value),
+                      700
+                    );
+                  }}
+                  type="text"
+                  placeholder="Buscar paciente"
+                />
+                {listaFiltrada.map((currentAnimal) => {
+                  return (
+                    <AnimalCard key={currentAnimal.id} {...currentAnimal} />
+                  );
+                })}
+              </div>
+            </>
           )}
 
           <div className="flex items-center justify-center">
