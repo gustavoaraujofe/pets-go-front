@@ -1,20 +1,45 @@
-import { Link } from "react-router-dom";
+import api from "../../apis/api";
+import { useNavigate, Link } from "react-router-dom";
+
 
 function AnimalCard(props) {
+  const navigate = useNavigate();
+  async function handleDelete(id) {
+    try {
+      await api.delete(`/animal/delete/${id}`);
+      navigate("/dashboard");
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div className="card-container mb-4">
-      <div className="pr-5 pt-1 flex justify-end">
-        <Link to="/animal-edit">
-          <p className="text-sm pr-2">Editar</p>
-
-          <p className="text-sm">Deletar</p>
-        </Link>
+      <div className="pr-5 pt-1 flex justify-end align-items-center">
+        <button
+          onClick={() => {
+            navigate(`/animal/edit/${props.id}`);
+          }}
+          type="button"
+          className="mb-2 mt-2 lightgreen-btn btn "
+        >
+          Editar
+        </button>
+        <button
+          onClick={() => {
+            handleDelete(props._id);
+          }}
+          type="button"
+          className="mb-8 purple-btn btn"
+        >
+          Deletar
+        </button>
       </div>
       <div className="pt-1 card-content">
         <div className="media">
           <div className="media-left">
             <div className="flex-shrink-0">
-              <img className="h-20 w-20 rounded-full" src="" />
+              <img className="h-20 w-20 rounded-full" src={props.imageUrl} />
             </div>
           </div>
           <div className="media-content">

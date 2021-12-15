@@ -49,13 +49,7 @@ function App() {
           <Route path="/vet/schedule-edit" element={<ScheduleVets />} />
           <Route path="/animal-edit/:id" element={<AnimalEdit/>}/>
 
-//           <Route path="/new-password/:token" element={<NewPassword />} />
-//           <Route path="/animal-create" element={<AnimalCreate />} />
-//           <Route path="/vets-list/:specialties" element={<VetsList />} />
-//           <Route path="/vets-specialties" element={<VetsSpecialties />} />
-//           <Route path="/user/schedule/" element={<Schedule />} />
-//           <Route path="/vet/schedule-edit" element={<ScheduleVets />} />
-//           <Route path="/animal-edit/:id" element={<AnimalEdit/>}/>
+
 
         </Routes>
       </AuthContextComponent>
