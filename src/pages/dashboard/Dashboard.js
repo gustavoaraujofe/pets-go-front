@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import api from "../../apis/api";
 import { useEffect, useState } from "react";
 import "./Dashboard.css";
@@ -11,6 +11,7 @@ import AnimalCard from "../animal/AnimalCard";
 import AppointmentCard from "../appointment/AppointmentCard";
 
 function Dashboard() {
+  const params = useLocation();
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [animalData, setAnimalData] = useState([]);
@@ -52,6 +53,7 @@ function Dashboard() {
   }, []);
 
   useEffect(() => {
+    
     async function fetchAnimal() {
       try {
         const response = await api.get(`/animal/list`);
@@ -66,7 +68,7 @@ function Dashboard() {
       }
     }
     fetchAnimal();
-  }, [userData._id]);
+  }, [userData._id, params]);
 
   return (
     <>

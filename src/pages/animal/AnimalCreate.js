@@ -12,6 +12,7 @@ function AnimalCreate() {
     breed: "",
     weight: "",
     gender: "",
+    picture: new File([], ""),
     imageUrl: "",
     type: "",
   });
@@ -20,14 +21,29 @@ function AnimalCreate() {
   const navigate = useNavigate();
 
   function handleChange(e) {
-    if (e.target.files) {
-      return setAnimalData({
-        ...animalData,
-        [e.target.name]: e.target.files,
-      });
-    }
+    console.log(e.target.value)
 
     setAnimalData({ ...animalData, [e.target.name]: e.target.value });
+  }
+
+  async function handleFileUpload(file) {
+    try {
+      const uploadData = new FormData();
+
+      uploadData.append("picture", file);
+
+      const response = await api.post("/animal/upload", uploadData);
+
+      console.log(response);
+
+      return response.data.url;
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  function handleChangeFile(e) {
+    setAnimalData({ ...animalData, picture: e.target.files[0] });
   }
 
   async function handleSubmit(e) {
@@ -36,9 +52,9 @@ function AnimalCreate() {
     try {
       setLoading(true);
 
-      //const imageUrl = await handleFileUpload(animalData.imageUrl);
-
-      const response = await api.post("/animal/create", {...animalData, userId: loggedInUser.user.id});
+      const imageUrl = await handleFileUpload(animalData.picture);
+      console.log(animalData)
+      const response = await api.post("/animal/create", {...animalData, imageUrl: imageUrl , userId: loggedInUser.user.id});
       navigate("/dashboard");
       console.log(response);
       setLoading(false);
@@ -87,6 +103,7 @@ function AnimalCreate() {
               name="type"
               className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md`}
             >
+              <option value="select">Selecionar</option>
               <option value="dog">Cachorro</option>
               <option value="cat">Gato</option>
               <option value="rabbit">Coelho</option>
@@ -159,7 +176,8 @@ function AnimalCreate() {
               <option value="female">Fêmea</option>
             </select>
           </div>
-          {/* <label htmlFor="imageUrl" className="pl-1 label">
+
+          <label htmlFor="imageUrl" className="pl-1 label">
             Foto do pet
           </label>
 
@@ -168,9 +186,9 @@ function AnimalCreate() {
               <input
                 className="file-input"
                 type="file"
-                name="imageUrl"
+                name="picture"
                 id="imageUrl"
-                onChange={handleChange}
+                onChange={handleChangeFile}
               />
               <span className="file-cta">
                 <span className="file-icon">
@@ -179,7 +197,8 @@ function AnimalCreate() {
                 <span className="file-label">Choose a file…</span>
               </span>
             </label>
-          </div> */}
+          </div>
+
           <div className="max-w-md w-full is-flex is-justify-content-center">
             <button
               disabled={loading}

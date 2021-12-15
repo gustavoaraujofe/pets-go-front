@@ -49,10 +49,13 @@ function App() {
           <Route path="/prontuario" element={<Prontuario/>}/>
           <Route path="/user/schedule/" element={<Schedule />} />
           <Route path="/vet/schedule-edit" element={<ScheduleVets />} />
-          <Route path="/animal-edit/:id" element={<AnimalEdit/>}/>
+
           <Route path="/prontuario/record-detail/:id" element={<RecordDetail/>}/>
           <Route path="/prontuario/record-edit/:id" element={<RecordEdit/>}/>
           
+
+          <Route path="/animal/edit/:id" element={<AnimalEdit/>}/>
+
         </Routes>
       </AuthContextComponent>
     </div>
