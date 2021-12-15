@@ -37,7 +37,7 @@ function App() {
           <Route path="/animal-create" element={<AnimalCreate/>}/>
           <Route path="/vets-list/:specialties" element={<VetsList/>}/>
           <Route path="/vets-specialties" element={<VetsSpecialties/>}/>
-          <Route path="/animal-edit/:id" element={<AnimalEdit/>}/>
+          <Route path="/animal/edit/:id" element={<AnimalEdit/>}/>
         </Routes>
       </AuthContextComponent>
     </div>

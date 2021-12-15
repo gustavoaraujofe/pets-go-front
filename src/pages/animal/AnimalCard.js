@@ -6,7 +6,7 @@ function AnimalCard(props) {
   async function handleDelete(id) {
     try {
       await api.delete(`/animal/delete/${id}`);
-      window.location.reload();
+      navigate("/dashboard");
     } catch (err) {
       console.log(err);
     }
@@ -15,7 +15,13 @@ function AnimalCard(props) {
   return (
     <div className="card-container mb-4">
       <div className="pr-5 pt-1 flex justify-end align-items-center">
-      <button type="button" className="mb-2 mt-2 lightgreen-btn btn ">
+        <button
+          onClick={() => {
+            navigate(`/animal/edit/${props.id}`);
+          }}
+          type="button"
+          className="mb-2 mt-2 lightgreen-btn btn "
+        >
           Editar
         </button>
         <button
