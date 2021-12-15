@@ -1,5 +1,5 @@
 import api from "../../apis/api";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 function AnimalCard(props) {
@@ -18,7 +18,7 @@ function AnimalCard(props) {
       <div className="pr-5 pt-1 flex justify-end align-items-center">
         <button
           onClick={() => {
-            navigate(`/animal/edit/${props.id}`);
+            navigate(`/animal/edit/${props._id}`);
           }}
           type="button"
           className="mb-2 mt-2 lightgreen-btn btn "
@@ -39,7 +39,7 @@ function AnimalCard(props) {
         <div className="media">
           <div className="media-left">
             <div className="flex-shrink-0">
-              <img className="h-20 w-20 rounded-full" src={props.imageUrl} />
+              <img className="h-20 w-20 rounded-full" src={props.imageUrl} alt={props.name} />
             </div>
           </div>
           <div className="media-content">

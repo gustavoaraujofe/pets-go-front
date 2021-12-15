@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
-import Home from "../pages/home/Home";
+import Home from "../pages/Home/Home";
 import Signup from "../pages/auth/Signup";
 import Login from "../pages/auth/login/Login";
 
@@ -47,7 +47,7 @@ function App() {
           <Route path="/prontuario" element={<ProntuarioList/>}/>
           <Route path="/user/schedule/" element={<Schedule />} />
           <Route path="/vet/schedule-edit" element={<ScheduleVets />} />
-          <Route path="/animal-edit/:id" element={<AnimalEdit/>}/>
+          <Route path="/animal/edit/:id" element={<AnimalEdit/>}/>
 
 
 
