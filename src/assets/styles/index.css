@@ -104,3 +104,7 @@ body {
     justify-content: flex-start;
     width: 300px;
 }
+
+.icon-img {
+    max-width: 30px;
+}
