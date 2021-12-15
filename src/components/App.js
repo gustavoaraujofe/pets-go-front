@@ -13,11 +13,12 @@ import AnimalCreate from "../pages/animal/AnimalCreate";
 import VetsList from "../pages/vets/VetsList";
 import VetsSpecialties from "../pages/vets/VetsSpecialties";
 import EditAccount from "../pages/auth/EditAccount";
-import Schedule from "../pages/schedule/Schedule";
+import ScheduleUser from "../pages/schedule/ScheduleUser";
 import ScheduleVets from "../pages/schedule/ScheduleVets"
 import AnimalEdit from "../pages/animal/AnimalEdit"
 import ProntuarioList from "../pages/prontuario/ProntuarioList"
 import ProntuarioCreate from "../pages/prontuario/ProntuarioCreate"
+import ScheduleVetId from "../pages/schedule/ScheduleVetId"
 
 import { AuthContextComponent } from "../contexts/authContext";
 import Dashboard from "../pages/dashboard/Dashboard";
@@ -45,17 +46,11 @@ function App() {
           <Route path="/animal-edit" element={<AnimalEdit/>}/>
           <Route path="/prontuario/new-record" element={<ProntuarioCreate/>}/>
           <Route path="/prontuario" element={<ProntuarioList/>}/>
-          <Route path="/user/schedule/" element={<Schedule />} />
+          <Route path="/user/schedule/" element={<ScheduleUser />} />
           <Route path="/vet/schedule-edit" element={<ScheduleVets />} />
           <Route path="/animal-edit/:id" element={<AnimalEdit/>}/>
+          <Route path="/vet/schedule/:idVet" element={<ScheduleVetId />} />
 
-//           <Route path="/new-password/:token" element={<NewPassword />} />
-//           <Route path="/animal-create" element={<AnimalCreate />} />
-//           <Route path="/vets-list/:specialties" element={<VetsList />} />
-//           <Route path="/vets-specialties" element={<VetsSpecialties />} />
-//           <Route path="/user/schedule/" element={<Schedule />} />
-//           <Route path="/vet/schedule-edit" element={<ScheduleVets />} />
-//           <Route path="/animal-edit/:id" element={<AnimalEdit/>}/>
 
         </Routes>
       </AuthContextComponent>
