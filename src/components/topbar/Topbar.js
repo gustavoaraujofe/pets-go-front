@@ -12,13 +12,12 @@ function Topbar() {
   const params = useLocation();
 
   useEffect(() => {
-   
     if (loggedInUser.user.id) {
       setLogin(true);
-    }else{
+    } else {
       setLogin(false);
     }
-    setToggle(false)
+    setToggle(false);
   }, [loggedInUser, params]);
 
   return (
@@ -30,7 +29,7 @@ function Topbar() {
             style={{ position: !login ? "absolute" : null }}
           >
             <Link to={login ? "/dashboard" : "/"}>
-            <img className="logo-img" src={logo} alt="logo" />
+              <img className="logo-img" src={logo} alt="logo" />
             </Link>
           </div>
 
@@ -55,7 +54,10 @@ function Topbar() {
               <strong>Home</strong>
             </Link>
 
-            <Link to={`/edit-account/${loggedInUser.user.role}`}  className="navbar-item">
+            <Link
+              to={`/edit-account/${loggedInUser.user.role}`}
+              className="navbar-item"
+            >
               <strong>Editar cadastro</strong>
             </Link>
             <Link to="/" className="navbar-item">
