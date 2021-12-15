@@ -1,5 +1,6 @@
 import api from "../../apis/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
 
 function AnimalCard(props) {
   const navigate = useNavigate();

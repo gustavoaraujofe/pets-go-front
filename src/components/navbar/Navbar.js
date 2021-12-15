@@ -25,7 +25,7 @@ function Navbar() {
           <span>Agendamentos</span>
         </div>
       </Link>
-      <Link to="user/prontuario">
+      <Link to="/prontuario">
         <div
           className="icon-nav flex is-flex-direction-column
  direction-column items-center justify-center"
