@@ -36,8 +36,23 @@ body {
     font-size: 1rem;
 }
 
+.extra-small-btn {
+    border: none;
+    width: 70px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
 .lightgreen-btn {
     background-color: #C1E7DF;
+    color: #0D0D5E;
+}
+
+.red-btn {
+    background-color: #f38b8b;
     color: #0D0D5E;
 }
 
@@ -107,4 +122,29 @@ body {
 
 .icon-img {
     max-width: 30px;
+    margin: 0px;
 }
+
+.position-edit-img {
+    position: absolute;
+    right: 35px;
+    top: 6px;
+}
+.position-delete-img {
+    position: absolute;
+    right: 15px;
+    max-width: 23px;
+}
+.card-content {
+    position: relative;
+}
+/* .icons {
+    display: flex;
+    justify-content: flex-end;
+    margin: 15px 100px 0 0;
+}
+
+.icons img {
+    width: 30px;
+    margin: 0 7px;
+}  */

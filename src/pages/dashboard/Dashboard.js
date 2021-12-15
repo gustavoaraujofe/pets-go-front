@@ -95,13 +95,9 @@ function Dashboard() {
                 <img alt="pata" className="paw-medium" src={pawImg} />
               </div>
 
-              {animalData.map((currentAnimal) => {
-                return <AnimalCard key={currentAnimal.id} {...currentAnimal} />;
-              })}
-
               <Link to="/animal-create">
                 <div className="card-container">
-                  <div className="card-content">
+                  <div className="card-content flex items-center">
                     <div className="media">
                       <div className="media-left">
                         <div className="img-radio">
@@ -115,6 +111,10 @@ function Dashboard() {
                   </div>
                 </div>
               </Link>
+
+              {animalData.map((currentAnimal) => {
+                return <AnimalCard key={currentAnimal.id} {...currentAnimal} />;
+              })}
 
               <div className="ml-5 pt-1 paw-container-left">
                 <img alt="pata" className="paw-medium" src={pawImg} />
