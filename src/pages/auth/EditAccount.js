@@ -8,6 +8,7 @@ import "./Signup.css";
 
 function EditAccount() {
   const [spinner, setSpinner] = useState(false);
+  const [toggleDelete, setToggleDelete] = useState(false);
   const [dataUser, setDataUser] = useState({
     name: "",
     email: "",
@@ -61,11 +62,26 @@ function EditAccount() {
     }
   }
 
-  // Valores iniciais padrão para o usuário USER
+  async function deleteAccount() {
+    try {
 
-  // Validação para o usuário USER
+      if (params.type === "vet") {
+        await api.delete("/vet/delete");
+      } else {
+        await api.delete("/user/delete");
+      }
+      setToggleDelete(false)
+      toast.success("Cadastro excluído com sucesso!")
+      localStorage.removeItem("loggedInUser")
+      setTimeout(() =>{
+        navigate("/")
+      }, 3000)
+      
 
-  // Condição que modifica os valores iniciais e a validação quando o usuário for do tipo VET
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   function handleChange(e) {
     setDataUser({ ...dataUser, [e.target.name]: e.target.value });
@@ -110,7 +126,7 @@ function EditAccount() {
 
   return (
     <div
-      className="mt-10 pt-0 pb-20 px-4 sm:px-6 lg:px-8"
+      className="mt-10 pt-0 pb-20 px-4 sm:px-6 lg:px-8 is-flex is-justify-content-center"
       style={{ height: "80%" }}
     >
       <div className="max-w-md w-full space-y-8 pb-20">
@@ -248,7 +264,38 @@ function EditAccount() {
               )}
             </button>
           </div>
+          <div className="max-w-md w-full is-flex is-justify-content-center mt-3">
+            <button
+              onClick={() => setToggleDelete(true)}
+              type="button"
+              className="button salmon-btn mb-10 is-size-6 p-5"
+            >
+              Excluir conta
+            </button>
+          </div>
         </form>
+        <div className="container" id="app">
+          <div className={`modal ${toggleDelete ? "is-active" : null}`}>
+            <div className="modal-background "></div>
+            <div className="modal-content is-flex is-justify-content-center is-flex-direction-column">
+              <h3 className="has-text-centered has-text-white is-size-3">
+                Deseja excluir totalmente sua conta?
+              </h3>
+              <div className="is-flex is-align-items-center is-justify-content-center mt-4">
+                <button onClick={deleteAccount} className="button salmon-btn bg-slate-300 mr-5">
+                  Sim
+                </button>
+                <button
+                  onClick={() => setToggleDelete(false)}
+                  className="button gray-btn"
+                  id="showModal"
+                >
+                  Não
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <Toaster

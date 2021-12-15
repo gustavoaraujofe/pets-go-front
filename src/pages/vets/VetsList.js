@@ -71,7 +71,11 @@ function VetsList() {
                     </div>
                   </div>
                   <div className="max-w-md w-full is-flex is-justify-content-center">
-                    <Link to="/schedule">
+                    <Link
+                      to={`/vet/schedule/${
+                        currentVet.calendlyUrl.split("com/")[1]
+                      }`}
+                    >
                       <button className="mt-2 small-btn blue-btn">
                         Escolher
                       </button>
