@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
-import Home from "../pages/Home/Home";
+import Home from "../pages/home/Home";
 import Signup from "../pages/auth/Signup";
 import Login from "../pages/auth/login/Login";
 
@@ -13,9 +13,11 @@ import AnimalCreate from "../pages/animal/AnimalCreate";
 import VetsList from "../pages/vets/VetsList";
 import VetsSpecialties from "../pages/vets/VetsSpecialties";
 import EditAccount from "../pages/auth/EditAccount";
-import Schedule from "../pages/schedule/Schedule";
+import ScheduleUser from "../pages/schedule/ScheduleUser";
 import ScheduleVets from "../pages/schedule/ScheduleVets"
 import AnimalEdit from "../pages/animal/AnimalEdit"
+
+import ScheduleVetId from "../pages/schedule/ScheduleVetId"
 import Prontuario from "../pages/prontuario/Prontuario"
 import NewRecord from "../pages/prontuario/NewRecord"
 import RecordDetail from "../pages/prontuario/RecordDetail"
@@ -39,21 +41,17 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-
           <Route path="/new-password/:token" element={<NewPassword />} /> 
           <Route path="/animal-create" element={<AnimalCreate/>}/>
           <Route path="/vets-list/:specialties" element={<VetsList/>}/>
           <Route path="/vets-specialties" element={<VetsSpecialties/>}/>
-          <Route path="/animal-edit" element={<AnimalEdit/>}/>
+          <Route path="/user/schedule/" element={<ScheduleUser />} />
+          <Route path="/vet/schedule/:idVet" element={<ScheduleVetId />} />
           <Route path="/prontuario/new-record" element={<NewRecord/>}/>
           <Route path="/prontuario" element={<Prontuario/>}/>
-          <Route path="/user/schedule/" element={<Schedule />} />
           <Route path="/vet/schedule-edit" element={<ScheduleVets />} />
-
           <Route path="/prontuario/record-detail/:id" element={<RecordDetail/>}/>
           <Route path="/prontuario/record-edit/:id" element={<RecordEdit/>}/>
-          
-
           <Route path="/animal/edit/:id" element={<AnimalEdit/>}/>
 
         </Routes>
