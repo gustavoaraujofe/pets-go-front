@@ -31,6 +31,7 @@ function VetsList() {
     fetchUser();
   }, [params.specialties]);
 
+ 
   return (
     <>
       {loading ? (
@@ -71,11 +72,7 @@ function VetsList() {
                     </div>
                   </div>
                   <div className="max-w-md w-full is-flex is-justify-content-center">
-                    <Link
-                      to={`/vet/schedule/${
-                        currentVet.calendlyUrl.split("com/")[1]
-                      }`}
-                    >
+                    <Link to={`/vet/schedule/${currentVet._id}`}>
                       <button className="mt-2 small-btn blue-btn">
                         Escolher
                       </button>
