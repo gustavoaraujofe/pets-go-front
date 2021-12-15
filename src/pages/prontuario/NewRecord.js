@@ -2,20 +2,20 @@ import api from "../../apis/api";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
-import "./ProntuarioCreate.css";
+import "./NewRecord.css";
 import { Link } from "react-router-dom";
 
-function ProntuarioCreate() {
+function NewRecord() {
   const { loggedInUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const [prontuarioData, setProntuarioData] = useState({
-    clinicalSign: "",
-    exam: "",
-    disease: "",
-    prescription: "",
-    vaccine: "",
+    clinicalSign: [],
+    exam: [],
+    disease: [],
+    prescription: [],
+    vaccine: [],
   });
 
   function handleChange(e) {
@@ -35,10 +35,11 @@ function ProntuarioCreate() {
     try {
       setLoading(true);
 
-      const response = await api.post("/medical-record/create", {
+      const response = await api.post("/medical-appointment/create", {
         ...prontuarioData,
-        authorId: loggedInUser.user.id,
+        vetId: loggedInUser.user.id,
       });
+
       navigate("/prontuario");
       console.log(response);
       setLoading(false);
@@ -58,22 +59,6 @@ function ProntuarioCreate() {
         </div>
 
         <form className="forms">
-          <div className="mt-5 relative rounded-md shadow-sm">
-            <label htmlFor="date" className="pl-1 label">
-              Data
-            </label>
-
-            <input
-              required
-              id="date"
-              value={prontuarioData.date}
-              type="text"
-              onChange={handleChange}
-              name="date"
-              className={`pronto-input h-10 focus:ring-indigo-500 focus:border-indigo-500 block w-full pr-2 sm:text-sm border-gray-300 rounded-md `}
-            />
-          </div>
-
           <div className="mt-5 relative rounded-md shadow-sm">
             <label htmlFor="clinicalSign" className="pl-1 label">
               Sinais clínicos
@@ -169,4 +154,4 @@ function ProntuarioCreate() {
   );
 }
 
-export default ProntuarioCreate;
+export default NewRecord;
