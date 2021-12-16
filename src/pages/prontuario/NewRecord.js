@@ -10,9 +10,9 @@ import Navbar from "../../components/navbar/Navbar";
 function NewRecord() {
   const { animalId } = useParams();
   const { loggedInUser } = useContext(AuthContext);
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
+  const params = useParams();
+  const [spinner, setSpinner] = useState(false);
   const [prontuarioData, setProntuarioData] = useState({
     clinicalSign: "",
     exam: "",
@@ -34,9 +34,9 @@ function NewRecord() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
+    setSpinner(true);
     try {
-      setLoading(true);
+      
 
       await api.post("/medical-appointment/create", {
         ...prontuarioData,
@@ -47,11 +47,11 @@ function NewRecord() {
       toast.success("Registro adicionado com sucesso!");
       setTimeout(() => {
         navigate(`/vet/prontuario/${animalId}`);
-        setLoading(false);
+        setSpinner(false)
       }, 2500);
     } catch (err) {
       console.error(err);
-      setLoading(false);
+      setSpinner(false);
     }
   }
 
@@ -144,12 +144,22 @@ function NewRecord() {
           </div>
 
           <div className="max-w-md w-full is-flex is-justify-content-center">
-            <button
-              onClick={handleSubmit}
+          <button
+              disabled={spinner}
               type="submit"
-              className="mt-5 btn salmon-btn"
+              onClick={handleSubmit}
+              className={
+                params.type === "user" ? "btn purple-btn" : "btn lightgreen-btn"
+              }
             >
-              Adicionar
+              {spinner ? (
+                <>
+                  <span className="mr-3 animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900"></span>
+                  Carregando...
+                </>
+              ) : (
+                "Adicionar"
+              )}
             </button>
           </div>
         </form>

@@ -1,8 +1,9 @@
 function ScheduleLine(props) {
   return (
-    <tr>
+    
+    <tr className="max-w-md w-full">
       <td className="">
-        <div className="mr-3">
+        <div className="mt-1 flex items-center justify-center is-flex-direction-column">
           <input
             style={{ width: "20px" }}
             type="checkbox"
@@ -14,7 +15,7 @@ function ScheduleLine(props) {
         </div>
       </td>
       <td className="mr-4">
-        <div className="mr-3">
+        <div className="mt-1 flex items-center justify-center is-flex-direction-column">
           <input
             name="tuesday"
             style={{ width: "20px" }}
@@ -26,7 +27,7 @@ function ScheduleLine(props) {
         </div>
       </td>
       <td className="mr-4">
-        <div className="mr-3">
+        <div className="mt-1 flex items-center justify-center is-flex-direction-column">
           <input
             name="wednesday"
             style={{ width: "20px" }}
@@ -38,7 +39,7 @@ function ScheduleLine(props) {
         </div>
       </td>
       <td className="mr-4">
-        <div className="mr-3">
+        <div className="mt-1 flex items-center justify-center is-flex-direction-column">
           <input
             name="thursday"
             style={{ width: "20px" }}
@@ -50,7 +51,7 @@ function ScheduleLine(props) {
         </div>
       </td>
       <td className="mr-4">
-        <div className="mr-3">
+        <div className="mt-1 flex items-center justify-center is-flex-direction-column">
           <input
             name="friday"
             style={{ width: "20px" }}
@@ -61,7 +62,10 @@ function ScheduleLine(props) {
           {props.children}
         </div>
       </td>
-      <td className="mr-4" className="has-text-centered">
+      <td
+        className=""
+      >
+        <div className="mt-1 flex items-center justify-center is-flex-direction-column">
         {props.saturday ? (
           <>
             <input
@@ -76,6 +80,7 @@ function ScheduleLine(props) {
         ) : (
           "-"
         )}
+        </div>
       </td>
     </tr>
   );

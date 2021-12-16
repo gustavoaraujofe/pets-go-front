@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import pawImg from "../../assets/pata.png";
-import telaVerdeRosa from "../../assets/tela-verde-rosa.png";
 import api from "../../apis/api";
 import { useEffect, useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
+import BottomPink from "../../components/bottom/BottomPink";
 
 function VetsList() {
   const [userData, setUserData] = useState([]);
@@ -33,7 +33,7 @@ function VetsList() {
 
  
   return (
-    <>
+    <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8">
       {loading ? (
         <Loading />
       ) : (
@@ -56,7 +56,7 @@ function VetsList() {
                   <div className="media">
                     <div className="media-left">
                       <div className="flex-shrink-0">
-                        <img
+                        <img 
                           className="h-10 w-10 rounded-full"
                           src={currentVet.avatarUrl}
                           alt={currentVet.name}
@@ -87,17 +87,11 @@ function VetsList() {
             <img alt="pata" className="paw-medium" src={pawImg} />
           </div>
 
-          <div className="flex items-center justify-center">
-            <img
-              alt="imagem inferior"
-              className="img-bottom pt-0 pb-20 sm:px-6 lg:px-8"
-              src={telaVerdeRosa}
-            />
-          </div>
-          <Navbar />
+          <BottomPink/>
         </div>
       )}
-    </>
+      <Navbar />
+    </div>
   );
 }
 

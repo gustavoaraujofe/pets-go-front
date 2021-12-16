@@ -50,7 +50,7 @@ function Topbar() {
           <div
             className={`navbar-start bg-white ${!login ? "is-hidden" : null}`}
           >
-            <Link to="/" className="navbar-item">
+            <Link to="/dashboard" className="navbar-item">
               <p >Home</p>
             </Link>
 
@@ -59,9 +59,6 @@ function Topbar() {
               className="navbar-item"
             >
               <p>Editar cadastro</p>
-            </Link>
-            <Link to="/vet/prontuario/61ba42b2f488370ce41a43e3" className="navbar-item">
-              <p >Meus pets</p>
             </Link>
           </div>
 
@@ -75,7 +72,7 @@ function Topbar() {
                     setLogin(false);
                     setToggle(false);
                   }}
-                  className={`button noto-medium salmon-btn is-size-6 ${
+                  className={`button noto-medium salmon-btn hora-btn is-size-6 ${
                     !login ? "is-hidden" : null
                   }`}
                 >

@@ -7,6 +7,7 @@ import deleteIcon from "../../assets/delete-icon.png";
 import editIcon from "../../assets/edit-icon.png";
 
 function RecordDetail() {
+  const [toggleDelete, setToggleDelete] = useState(false);
   const navigate = useNavigate();
   const [recordData, setRecordData] = useState({});
 
@@ -33,6 +34,7 @@ function RecordDetail() {
     try {
       await api.delete(`/medical-appointment/delete/${id}`);
       navigate("/prontuario");
+      setToggleDelete(false);
     } catch (err) {
       console.error(err);
     }
@@ -50,15 +52,23 @@ function RecordDetail() {
         {recordData.date !== undefined ? (
           <>
             <div className="flex items-center justify-end">
+              <Link to={`/vet/prontuario/${recordData.animalId}`}>
+                <i className="fas fa-arrow-left fa-2x mr-3 icon"></i>
+              </Link>
               <Link to={`/prontuario/record-edit/${recordData._id}`}>
-                <img src={editIcon} type="button" className="mr-3 icon" />
+                <img
+                  src={editIcon}
+                  type="button"
+                  className="mr-3 icon"
+                  alt="icone editar"
+                />
               </Link>
               <img
-                onClick={() => handleDelete(recordData._id)}
-                type="button"
+                onClick={() => setToggleDelete(true)}
                 src={deleteIcon}
+                type="button"
                 className="icon"
-                alt="icone delete"
+                alt="deletar"
               />
             </div>
             <form className="forms">
@@ -95,6 +105,31 @@ function RecordDetail() {
             className="img-bottom pt-0 pb-20 sm:px-6 lg:px-8"
             src={telaRosaAzul}
           />
+        </div>
+      </div>
+      <div className="container" id="app">
+        <div className={`modal ${toggleDelete ? "is-active" : null}`}>
+          <div className="modal-background "></div>
+          <div className="modal-content is-flex is-justify-content-center is-flex-direction-column">
+            <h3 className="has-text-centered has-text-white is-size-3">
+              Deseja excluir esse registro?
+            </h3>
+            <div className="is-flex is-align-items-center is-justify-content-center mt-4">
+              <button
+                onClick={() => handleDelete(recordData._id)}
+                className="button salmon-btn bg-slate-300 mr-5"
+              >
+                Sim
+              </button>
+              <button
+                onClick={() => setToggleDelete(false)}
+                className="button gray-btn"
+                id="showModal"
+              >
+                Não
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

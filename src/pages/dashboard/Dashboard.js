@@ -10,7 +10,6 @@ import Loading from "../../components/Loading";
 import AnimalCard from "../animal/AnimalCard";
 import AppointmentCard from "../appointment/AppointmentCard";
 
-
 function Dashboard() {
   const params = useLocation();
   const [loading, setLoading] = useState(true);
@@ -91,7 +90,6 @@ function Dashboard() {
           return (a.date + a.hour).localeCompare(b.date + b.hour);
         });
 
-
         setAppointment({ ...response.data });
       } catch (err) {
         console.error(err);
@@ -101,7 +99,7 @@ function Dashboard() {
   }, [userData._id]);
 
   return (
-    <div className="flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8">
+    <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8">
       {loading ? (
         <Loading />
       ) : (
@@ -118,7 +116,7 @@ function Dashboard() {
           </section>
 
           <hr />
-
+        <Link to="/vet/prontuario/61ba42b2f488370ce41a43e3">dasfafd</Link>
           {userData.role === "user" ? (
             <>
               <h1 className="mt-8 ml-8">Meus Pets</h1>
@@ -164,16 +162,11 @@ function Dashboard() {
               <div className="ml-12 paw-container-right">
                 <img alt="pata" className="paw-small" src={pawImg} />
               </div>
-
-
               [Card com Foto, nome e dia da consulta marcada]
-
-{/*<AppointmentCard />*/}
-
+              {/*<AppointmentCard />*/}
               {/* {animalData.map((currentAnimal) => {
                 return <AnimalCard key={currentAnimal.id} {...currentAnimal} />;
               })} */}
-
               <h1 className="mb-4 mt-8 ml-8">Meus Pacientes</h1>
               <div className="flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8 ">
                 <input
@@ -199,7 +192,6 @@ function Dashboard() {
               </div>
             </>
           )}
-
 
           <div className="flex items-center justify-center">
             <img

@@ -1,63 +1,85 @@
 import api from "../../apis/api";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import deleteIcon from "../../assets/delete-icon.png";
 import editIcon from "../../assets/edit-icon.png";
 
-
 function AnimalCard(props) {
+  const [toggleDelete, setToggleDelete] = useState(false);
   const navigate = useNavigate();
   async function handleDelete(id) {
     try {
       await api.delete(`/animal/delete/${id}`);
       navigate("/dashboard");
+      setToggleDelete(false)
     } catch (err) {
       console.log(err);
     }
   }
 
   return (
-    
-      <div className="card-container mb-4">
-        <div className="pr-5 pt-1 flex justify-end align-items-center">
-          <button
+    <div className="card-container mb-4">
+      <div className="pt-3 pb-3 card-content">
+        <div className=" pt-1 flex justify-end align-items-center">
+          <img
             onClick={() => {
               navigate(`/animal/edit/${props._id}`);
             }}
             type="button"
-            className="mb-2 mt-2 lightgreen-btn btn "
-          >
-            Editar
-          </button>
-          <button
-            onClick={() => {
-              handleDelete(props._id);
-            }}
+            src={editIcon}
+            className="icon-img position-edit-img"
+            alt="editar"
+          />
+          <img
+            onClick={() => setToggleDelete(true)}
+            src={deleteIcon}
             type="button"
-            className="mb-8 purple-btn btn"
-          >
-            Deletar
-          </button>
+            className="icon-img position-delete-img"
+            alt="deletar"
+          />
         </div>
-        <div className="pt-1 card-content">
-          <div className="media">
-            <div className="media-left">
-              <div className="flex-shrink-0">
-                <img
-                  className="h-20 w-20 rounded-full"
-                  src={props.imageUrl}
-                  alt={props.name}
-                />
-              </div>
+        <div className="media">
+          <div className="media-left">
+            <div className="flex-shrink-0">
+              <img
+                className="h-20 w-20 rounded-full"
+                src={props.imageUrl}
+                alt={props.name}
+              />
             </div>
-            <div className="media-content">
-              <Link to={`/animal/detail/${props._id}`}><p className="title is-4">{props.name}</p></Link>
-              <p className="subtitle is-6 mb-2">Idade: {props.age} anos</p>
-              <p className="subtitle is-6">Peso: {props.weight}kg</p>
-            </div>
+          </div>
+          <div className="minimo-h media-content">
+            <p className="noto-bold">{props.name}</p>
+            <p className="subtitle is-6 mb-1">Idade: {props.age} anos</p>
+            <p className="subtitle is-6">Peso: {props.weight}kg</p>
           </div>
         </div>
       </div>
-    
+      <div className="container" id="app">
+          <div className={`modal ${toggleDelete ? "is-active" : null}`}>
+            <div className="modal-background "></div>
+            <div className="modal-content is-flex is-justify-content-center is-flex-direction-column">
+              <h3 className="has-text-centered has-text-white is-size-3">
+                Deseja excluir esse pet?
+              </h3>
+              <div className="is-flex is-align-items-center is-justify-content-center mt-4">
+                <button onClick={() => {
+              handleDelete(props._id);
+            }} className="button salmon-btn bg-slate-300 mr-5">
+                  Sim
+                </button>
+                <button
+                  onClick={() => setToggleDelete(false)}
+                  className="button gray-btn"
+                  id="showModal"
+                >
+                  Não
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
   );
 }
 

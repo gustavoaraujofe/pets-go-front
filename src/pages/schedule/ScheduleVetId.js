@@ -92,11 +92,11 @@ function ScheduleVetId() {
 
       if (!info.animalId) {
         setToggleConfirm(false);
-        toast.error("Você precisa selecionar um animal!")
+        toast.error("Você precisa selecionar um animal!");
         return console.error("ERROU");
       }
       await api.post("appointment/create", info);
-      toast.success("Agendamento realizado com sucesso!")
+      toast.success("Agendamento realizado com sucesso!");
       setTimeout(() => {
         navigate("/dashboard");
       }, 3000);
@@ -104,17 +104,19 @@ function ScheduleVetId() {
       console.error(err);
     }
   }
-
   return (
-    <>
-      <div className="pb-20 m-auto" style={{ maxWidth: "200px" }}>
-        <section className="mt-6 has-text-centered is-size-5">
-          <h1>
-            <strong>Horários disponíveis</strong>
-          </h1>
-        </section>
-        <select onChange={handleChangeSelect} className="select" required>
-          <option>Selecione um animal</option>
+    <div className="">
+      <div className="max-w-md w-full space-y-8 pb-20">
+        <div>
+          <h1 className="mt-3 mb-3 text-center">Horários Disponíveis</h1>
+        </div>
+
+        <select
+          onChange={handleChangeSelect}
+          className="label border-2 m-auto"
+          required
+        >
+          <option className="">Selecione um animal</option>
           {animalData !== []
             ? animalData.map((currentAnimal) => {
                 return (
@@ -128,22 +130,22 @@ function ScheduleVetId() {
         {dates && hours
           ? dates.map((date, index) => {
               return (
-                <div key={`date-${index}`} className="has-text-centered">
-                  <h2 className="mt-4">
-                    <strong>{date}</strong>
-                  </h2>
+                <div key={`date-${index}`} className="has-text-centered mt-3">
+                  <div>
+                    <h3 className="text-center noto-bold">{date}</h3>
+                  </div>
                   {hours[index].map((hour, index2) => {
                     return (
                       <div
                         key={`hour-${index2}`}
-                        className="is-flex is-justify-content-center"
+                        className="flex justify-center items-center"
                       >
                         <button
                           onClick={() => {
                             setToggleConfirm(true);
                             setAppointment([date, hour]);
                           }}
-                          className="salmon-btn is-size-6 mt-2"
+                          className="flex justify-center items-center lightgreen-btn hora-btn mt-2"
                         >
                           {hour}
                         </button>
@@ -153,7 +155,7 @@ function ScheduleVetId() {
                 </div>
               );
             })
-          : null}      
+          : null}
         <div className="flex items-center justify-center">
           <img
             alt="imagem inferior"
@@ -187,8 +189,8 @@ function ScheduleVetId() {
             </div>
           </div>
         </div>
-    
       </div>
+      <Navbar />
       <Toaster
         position="top-center"
         reverseOrder={false}
@@ -211,8 +213,7 @@ function ScheduleVetId() {
           },
         }}
       />
-     <Navbar />
-    </>
+    </div>
   );
 }
 
