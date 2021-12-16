@@ -1,16 +1,15 @@
 import api from "../../apis/api";
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
 import "./NewRecord.css";
-import { Link } from "react-router-dom";
 import telaBegeAzul from "../../assets/tela-bege-azul.png";
 
 function NewRecord() {
   const { loggedInUser } = useContext(AuthContext);
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
+  const params = useParams();
+  const [spinner, setSpinner] = useState(false);
   const [prontuarioData, setProntuarioData] = useState({
     clinicalSign: [],
     exam: [],
@@ -32,9 +31,9 @@ function NewRecord() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
+    setSpinner(true);
     try {
-      setLoading(true);
+      
 
       const response = await api.post("/medical-appointment/create", {
         ...prontuarioData,
@@ -42,10 +41,10 @@ function NewRecord() {
       });
 
       navigate("/prontuario");
-      setLoading(false);
+      setSpinner(false);
     } catch (err) {
       console.error(err);
-      setLoading(false);
+      setSpinner(false);
     }
   }
 
@@ -140,12 +139,22 @@ function NewRecord() {
           </div>
 
           <div className="max-w-md w-full is-flex is-justify-content-center">
-            <button
-              onClick={handleSubmit}
+          <button
+              disabled={spinner}
               type="submit"
-              className="mt-5 btn salmon-btn"
+              onClick={handleSubmit}
+              className={
+                params.type === "user" ? "btn purple-btn" : "btn lightgreen-btn"
+              }
             >
-              Adicionar
+              {spinner ? (
+                <>
+                  <span className="mr-3 animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900"></span>
+                  Carregando...
+                </>
+              ) : (
+                "Adicionar"
+              )}
             </button>
           </div>
         </form>
