@@ -116,7 +116,7 @@ function Dashboard() {
           </section>
 
           <hr />
-        <Link to="/vet/prontuario/61ba42b2f488370ce41a43e3">dasfafd</Link>
+          <Link to="/vet/prontuario/61bb8f32d1222082035ac3d9">dasfafd</Link>
           {userData.role === "user" ? (
             <>
               <h1 className="mt-8 ml-8">Meus Pets</h1>
@@ -183,10 +183,12 @@ function Dashboard() {
                 />
                 {listaFiltrada.map((currentAnimal) => {
                   return (
-                    <AnimalCard
+                    <Link
                       key={`filtered-${currentAnimal.id}`}
-                      {...currentAnimal}
-                    />
+                      to={`/animal/detail/${currentAnimal.id}`}
+                    >
+                      <AnimalCard {...currentAnimal} />
+                    </Link>
                   );
                 })}
               </div>

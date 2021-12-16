@@ -105,6 +105,20 @@ function AnimalEdit() {
         </div>
 
         <form className="forms">
+        <div className="mt-5 relative rounded-md shadow-sm">
+            <label htmlFor="name" className="pl-1 label">
+              Nome do Pet
+            </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md`}
+              onChange={handleChange}
+              value={animalData.name}
+              required
+            />
+          </div>
           <div className="mt-4 relative rounded-md shadow-sm">
             <label htmlFor="type" className="pl-1 label">
               Tipo
@@ -128,20 +142,7 @@ function AnimalEdit() {
               <option value="others">Outros</option>
             </select>
           </div>
-          <div className="mt-5 relative rounded-md shadow-sm">
-            <label htmlFor="name" className="pl-1 label">
-              Nome do Pet
-            </label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md`}
-              onChange={handleChange}
-              value={animalData.name}
-              required
-            />
-          </div>
+
           <div className="mt-5 relative rounded-md shadow-sm">
             <label htmlFor="age" className="pl-1 label">
               Idade
