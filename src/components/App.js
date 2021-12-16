@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
+
 import Home from "../pages/Home/Home";
 import Signup from "../pages/auth/Signup";
 import Login from "../pages/auth/login/Login";
-
 import ProtectedRoute from "../pages/auth/ProtectedRoute";
 import Topbar from "../components/topbar/Topbar";
 

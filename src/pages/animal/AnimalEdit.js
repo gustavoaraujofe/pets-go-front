@@ -2,10 +2,10 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../apis/api";
-import { AuthContext } from "../../contexts/authContext";
-
-// import telaAzulBege from "../../assets/tela-azul-bege.png";
+import {AuthContext} from "../../contexts/authContext"
 // import pawImg from "../../assets/pata.png";
+import toast, { Toaster } from "react-hot-toast";
+import BottomBege from "../../components/bottom/BottomBege";
 
 function AnimalEdit() {
   const { loggedInUser } = useContext(AuthContext);
@@ -25,7 +25,7 @@ function AnimalEdit() {
     imageUrl: "",
     type: "",
   });
-
+ 
   useEffect(() => {
     async function fetchAnimal() {
       try {
@@ -49,6 +49,18 @@ function AnimalEdit() {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    if (
+      animalData.name === "" ||
+      animalData.age === "" ||
+      animalData.breed === "" ||
+      animalData.weight === "" ||
+      animalData.gender === "" ||
+      animalData.type === ""
+    ) {
+      toast.error("Por favor preencha todos os campos.");
+    }
+
     setSpinner(true);
     async function updateAnimal(id) {
       try {
@@ -87,9 +99,9 @@ function AnimalEdit() {
     <div className="min-h-full flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Editar PET
-          </h2>
+          <h1 className="mt-6 text-center">
+            Editar Pet
+          </h1>
         </div>
 
         <form className="forms">
@@ -118,7 +130,7 @@ function AnimalEdit() {
           </div>
           <div className="mt-5 relative rounded-md shadow-sm">
             <label htmlFor="name" className="pl-1 label">
-              Nome do PET
+              Nome do Pet
             </label>
             <input
               type="text"
@@ -221,6 +233,7 @@ function AnimalEdit() {
             <button
               disabled={spinner}
               type="submit"
+              className="btn lightgreen-btn"
               onClick={handleSubmit}
               className={
                 params.type === "user" ? "btn purple-btn" : "btn lightgreen-btn"
@@ -237,7 +250,31 @@ function AnimalEdit() {
             </button>
           </div>
         </form>
+        <BottomBege/>
       </div>
+      <Toaster
+        position="center"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          className: "",
+          duration: 5000,
+          style: {
+            background: "#fff",
+            color: "#000",
+          },
+
+          success: {
+            duration: 3000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      />
     </div>
   );
 }

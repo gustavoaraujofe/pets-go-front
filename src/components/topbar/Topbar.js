@@ -60,9 +60,6 @@ function Topbar() {
             >
               <p>Editar cadastro</p>
             </Link>
-            <Link to="/" className="navbar-item">
-              <p >Meus pets</p>
-            </Link>
           </div>
 
           <div className="navbar-end bg-white">
@@ -75,7 +72,7 @@ function Topbar() {
                     setLogin(false);
                     setToggle(false);
                   }}
-                  className={`button noto-medium salmon-btn is-size-6 ${
+                  className={`button noto-medium salmon-btn hora-btn is-size-6 ${
                     !login ? "is-hidden" : null
                   }`}
                 >

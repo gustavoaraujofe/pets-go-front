@@ -2,7 +2,9 @@ import api from "../../apis/api";
 import { useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
- 
+import toast, { Toaster } from "react-hot-toast";
+import BottomBege from "../../components/bottom/BottomBege";
+
 function AnimalCreate() {
   const { loggedInUser } = useContext(AuthContext);
   
@@ -17,13 +19,14 @@ function AnimalCreate() {
     imageUrl: "",
     type: "",
   });
+
+  const [loading, setLoading] = useState(false);
   const params = useParams();
   
   const [spinner, setSpinner] = useState(false);
   const navigate = useNavigate();
 
   function handleChange(e) {
-
     setAnimalData({ ...animalData, [e.target.name]: e.target.value });
   }
 
@@ -34,7 +37,6 @@ function AnimalCreate() {
       uploadData.append("picture", file);
 
       const response = await api.post("/animal/upload", uploadData);
-
 
       return response.data.url;
     } catch (err) {
@@ -51,13 +53,27 @@ function AnimalCreate() {
     setSpinner(true);
     
 
+    if (
+      animalData.name === "" ||
+      animalData.age === "" ||
+      animalData.breed === "" ||
+      animalData.weight === "" ||
+      animalData.gender === "" ||
+      animalData.type === ""
+    ) {
+      toast.error("Por favor preencha todos os campos.");
+    }
     try {
       
       
 
       const imageUrl = await handleFileUpload(animalData.picture);
 
-      const response = await api.post("/animal/create", {...animalData, imageUrl: imageUrl , userId: loggedInUser.user.id});
+      const response = await api.post("/animal/create", {
+        ...animalData,
+        imageUrl: imageUrl,
+        userId: loggedInUser.user.id,
+      });
       navigate("/dashboard");
 
       setSpinner(false);
@@ -70,19 +86,18 @@ function AnimalCreate() {
   }
 
   return (
-    <div className="min-h-full flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8">
+    <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Adicionar PET
-          </h2>
+          <h1 className="mt-6 text-center ">
+            Adicionar Pet
+          </h1>
         </div>
 
         <form className="forms">
-
           <div className="mt-5 relative rounded-md shadow-sm">
             <label htmlFor="name" className="pl-1 label">
-              Nome do PET
+              Nome do Pet
             </label>
             <input
               type="text"
@@ -122,7 +137,7 @@ function AnimalCreate() {
               Idade
             </label>
             <input
-              type="text"
+              type="number"
               name="age"
               id="age"
               className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md `}
@@ -208,6 +223,7 @@ function AnimalCreate() {
           <button
               disabled={spinner}
               type="submit"
+              className="btn salmon-btn"
               onClick={handleSubmit}
               className={
                 params.type === "user" ? "btn purple-btn" : "btn lightgreen-btn"
@@ -224,7 +240,31 @@ function AnimalCreate() {
             </button>
           </div>
         </form>
+        <BottomBege />
       </div>
+      <Toaster
+        position="bottom-center"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          className: "",
+          duration: 5000,
+          style: {
+            background: "#fff",
+            color: "#000",
+          },
+
+          success: {
+            duration: 3000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      />
     </div>
   );
 }

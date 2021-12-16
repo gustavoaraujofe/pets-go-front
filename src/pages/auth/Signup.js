@@ -6,7 +6,7 @@ import api from "../../apis/api";
 import toast, { Toaster } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import "./Signup.css";
-import telaBegeAzul from "../../assets/tela-bege-azul.png";
+import BottomBege from "../../components/bottom/BottomBege";
 
 function Signup() {
   const [loading, setLoading] = useState(false);
@@ -106,12 +106,12 @@ function Signup() {
       signup();
     },
   });
-
+ 
   return (
     <div className="min-h-full flex items-center justify-center pt-0 pb-0 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h1 className="mt-5 text-center">Faça o seu cadastro</h1>
+          <h1 className="mt-3 text-center">Faça o seu cadastro</h1>
         </div>
         <form onSubmit={formik.handleSubmit} className="forms">
           <div className="mt-5 relative rounded-md shadow-sm">
@@ -310,13 +310,7 @@ function Signup() {
             </button>
           </div>
         </form>
-        <div className="flex items-center justify-center">
-          <img
-            alt="imagem inferior"
-            className="img-bottom pt-0 pb-20 sm:px-6 lg:px-8"
-            src={telaBegeAzul}
-          />
-        </div>
+        <BottomBege />
       </div>
       <Toaster
         position="top-center"

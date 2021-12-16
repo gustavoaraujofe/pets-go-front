@@ -109,12 +109,12 @@ function ScheduleVets() {
   }
 
   return (
-    <>
+    <div> 
       <div className="mt-10 is-flex is-align-items-center is-flex-direction-column table-container">
-        <h2 className="mb-1 is-size-5">
-          <strong>Disponibilidade de horário</strong>
-        </h2>
-        <label>Data inicial</label>
+      <div>
+          <h1 className="mt-3 text-center">Disponibilidade</h1>
+        </div>
+        <label className="pl-1 label">Escolha a semana</label>
         <input
           className="mb-5"
           name="monday"
@@ -160,7 +160,7 @@ function ScheduleVets() {
         <button
           onClick={handleSubmit}
           disabled={spinner}
-          className="btn lightgreen-btn is-size-6"
+          className="btn lightgreen-btn mb-20"
         >
           {spinner ? (
             <>
@@ -182,7 +182,7 @@ function ScheduleVets() {
       </div>
 
       <Navbar />
-    </>
+    </div>
   );
 }
 
