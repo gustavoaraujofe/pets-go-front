@@ -98,7 +98,7 @@ body {
 }
 
 .red-btn {
-  background-color: #f38b8b;
+  background-color: #f75d5d;
   color: #0d0d5e;
 }
 
@@ -169,6 +169,11 @@ body {
 .icon-img {
   max-width: 30px;
   margin: 0px;
+}
+
+.icon {
+    max-width: 20px;
+    height: 20px;
 }
 
 .position-edit-img {
