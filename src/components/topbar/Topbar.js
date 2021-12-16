@@ -60,7 +60,7 @@ function Topbar() {
             >
               <p>Editar cadastro</p>
             </Link>
-            <Link to="/" className="navbar-item">
+            <Link to="/vet/prontuario/61ba42b2f488370ce41a43e3" className="navbar-item">
               <p >Meus pets</p>
             </Link>
           </div>

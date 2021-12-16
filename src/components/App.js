@@ -22,6 +22,8 @@ import NewRecord from "../pages/prontuario/NewRecord"
 import RecordDetail from "../pages/prontuario/RecordDetail"
 import RecordEdit from "../pages/prontuario/RecordEdit"
 
+import AnimalDetail from "../pages/animal/AnimalDetail"
+
 import { AuthContextComponent } from "../contexts/authContext";
 import Dashboard from "../pages/dashboard/Dashboard";
 
@@ -46,12 +48,15 @@ function App() {
           <Route path="/vets-specialties" element={<VetsSpecialties/>}/>
           <Route path="/user/schedule/" element={<ScheduleUser />} />
           <Route path="/vet/schedule/:idVet" element={<ScheduleVetId />} />
-          <Route path="/prontuario/new-record" element={<NewRecord/>}/>
-          <Route path="/prontuario" element={<Prontuario/>}/>
+          <Route path="/prontuario/new-record/:animalId" element={<NewRecord/>}/>
+          <Route path="/user/prontuario" element={<Prontuario/>}/>
+          <Route path="/vet/prontuario/:idAnimal" element={<Prontuario/>}/>
           <Route path="/vet/schedule-edit" element={<ScheduleVets />} />
           <Route path="/prontuario/record-detail/:id" element={<RecordDetail/>}/>
           <Route path="/prontuario/record-edit/:id" element={<RecordEdit/>}/>
           <Route path="/animal/edit/:id" element={<AnimalEdit/>}/>
+
+          <Route path="/animal/detail/:id" element={<AnimalDetail/>} />
 
         </Routes>
       </AuthContextComponent>

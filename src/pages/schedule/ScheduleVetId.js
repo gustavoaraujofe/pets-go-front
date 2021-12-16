@@ -40,7 +40,7 @@ function ScheduleVetId() {
       try {
         const response = await api.get(`/vet/schedule/list/${idVet}`);
 
-        response.data.map((currentWeek) => {
+        response.data.forEach((currentWeek) => {
           for (let key in currentWeek) {
             if (key < new Date().toLocaleDateString()) {
               delete currentWeek[key];
@@ -51,7 +51,7 @@ function ScheduleVetId() {
 
               const arrClone = [...currentWeek[key]];
 
-              arrClone.map((day) => {
+              arrClone.forEach((day) => {
                 if (day.split(":")[0] <= hour.split(":")[0]) {
                   let index = currentWeek[key].indexOf(day);
                   currentWeek[key].splice(index, 1);
@@ -65,7 +65,7 @@ function ScheduleVetId() {
         });
         setSchedule(response.data);
 
-        response.data.map((currentWeek) => {
+        response.data.forEach((currentWeek) => {
           setDates(Object.keys(currentWeek));
           setHours(Object.values(currentWeek));
         });
