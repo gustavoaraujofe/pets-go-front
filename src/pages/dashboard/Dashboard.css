@@ -1,15 +1,15 @@
 .img-radio {
-    width: 40px;
-    object-fit: cover;
+    width: 40px!important;
+    object-fit: cover!important;
 }
 
 .img-profile {
-    border-radius: 40px;
+    border-radius: 40px!important;
 }
 
 .card-container{
-    border: rgb(208, 208, 208) solid 1px;
-    margin: 10px 20px;
-    border-radius: 30px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border: rgb(208, 208, 208) solid 1px!important;
+    margin: 10px 20px!important;
+    border-radius: 30px!important;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px!important;
 }

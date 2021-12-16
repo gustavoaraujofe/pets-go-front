@@ -7,7 +7,7 @@ import pawImg from "../../assets/pata.png";
 function Home() {
   return (
     <>
-    <div className="flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8 is-flex-direction-column" style={{height: "80%"}}>
+    <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8 is-flex-direction-column" style={{height: "80%"}}>
       
       <div className="paw-container-right">
         <img alt="pata" className="paw-medium" src={pawImg}/>
