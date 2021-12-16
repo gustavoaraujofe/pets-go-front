@@ -104,6 +104,11 @@ body {
   font-size: 0.8rem !important;
 }
 
+.hora-btn {
+  width: 90px !important;
+  height: 40px !important;
+}
+
 .lightgreen-btn {
   background-color: #c1e7df !important;
   color: #0d0d5e !important;
