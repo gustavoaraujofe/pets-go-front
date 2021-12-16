@@ -1,5 +1,5 @@
 import api from "../../apis/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 import deleteIcon from "../../assets/delete-icon.png";
 import editIcon from "../../assets/edit-icon.png";
@@ -38,6 +38,7 @@ function AnimalCard(props) {
             alt="deletar"
           />
         </div>
+        <Link to={`/animal/detail/${props._id}`}>
         <div className="media">
           <div className="media-left">
             <div className="flex-shrink-0">
@@ -54,6 +55,7 @@ function AnimalCard(props) {
             <p className="subtitle is-6">Peso: {props.weight}kg</p>
           </div>
         </div>
+        </Link>
       </div>
       <div className="container" id="app">
           <div className={`modal ${toggleDelete ? "is-active" : null}`}>
