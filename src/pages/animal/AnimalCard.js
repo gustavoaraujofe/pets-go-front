@@ -16,7 +16,7 @@ function AnimalCard(props) {
 
   return (
     <div className="card-container mb-4">
-      <div className="pt-1 pb-1 card-content">
+      <div className="pt-3 pb-3 card-content">
         <div className=" pt-1 flex justify-end align-items-center">
           <img
             onClick={() => {
@@ -45,8 +45,8 @@ function AnimalCard(props) {
               />
             </div>
           </div>
-          <div className="media-content">
-            <p className="title is-4">{props.name}</p>
+          <div className="minimo-h media-content">
+            <p className="noto-bold">{props.name}</p>
             <p className="subtitle is-6 mb-1">Idade: {props.age} anos</p>
             <p className="subtitle is-6">Peso: {props.weight}kg</p>
           </div>

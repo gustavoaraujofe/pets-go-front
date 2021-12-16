@@ -71,13 +71,13 @@ function Dashboard() {
   }, [userData._id, params]);
 
   return (
-    <>
+    <div className="flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8">
       {loading ? (
         <Loading />
       ) : (
         <div className="pb-20">
           <section className="mt-4 flex items-center justify-between mr-8 ml-8">
-            <h1>Olá, {userData.name}</h1>
+            <h2 className="noto-bold">Olá, {userData.name.split(" ")[0]}</h2>
             <div className="flex-shrink-0">
               <img
                 className="h-20 w-20 rounded-full"
@@ -87,25 +87,27 @@ function Dashboard() {
             </div>
           </section>
 
+          <hr/>
+
           {userData.role === "user" ? (
             <>
-              <h2 className="mt-8 ml-8">Meus Pets</h2>
+              <h1 className="mt-8 ml-8">Meus Pets</h1>
 
               <div className="ml-12 paw-container-right">
                 <img alt="pata" className="paw-medium" src={pawImg} />
               </div>
 
               <Link to="/animal-create">
-                <div className="card-container">
+                <div className="h-16 mb-4 flex items-center card-container">
                   <div className="card-content flex items-center">
-                    <div className="media">
+                    <div className="media items-center">
                       <div className="media-left">
                         <div className="img-radio">
                           <img src={addIcon} />
                         </div>
                       </div>
                       <div className="media-content">
-                        <p className="title is-4">Adicionar Pet</p>
+                        <p className="noto-bold">Adicionar Pet</p>
                       </div>
                     </div>
                   </div>
@@ -120,7 +122,7 @@ function Dashboard() {
                 <img alt="pata" className="paw-medium" src={pawImg} />
               </div>
 
-              <div className="max-w-md w-full is-flex is-justify-content-center">
+              <div className="mb-4 max-w-md w-full is-flex is-justify-content-center">
                 <Link to="/vets-specialties">
                   <button className="btn salmon-btn">Agendar</button>
                 </Link>
@@ -128,14 +130,17 @@ function Dashboard() {
             </>
           ) : (
             <>
-              <h2 className="mt-8 ml-8">Meus Agendamentos</h2>
+              <h1 className="mt-8 ml-8">Meus Agendamentos</h1>
+              <div className="ml-12 paw-container-right">
+                <img alt="pata" className="paw-small" src={pawImg} />
+              </div>
 
               <AppointmentCard/>
               {/* {animalData.map((currentAnimal) => {
                 return <AnimalCard key={currentAnimal.id} {...currentAnimal} />;
               })} */}
 
-              <h2 className="mt-8 ml-8">Meus Pacientes</h2>
+              <h1 className="mt-8 ml-8">Meus Pacientes</h1>
               <div className="mt-8 ml-8">
                 <input
                 className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md"
@@ -165,10 +170,10 @@ function Dashboard() {
               src={telaBegeAzul}
             />
           </div>
-          <Navbar />
         </div>
       )}
-    </>
+      <Navbar />
+    </div>
   );
 }
 

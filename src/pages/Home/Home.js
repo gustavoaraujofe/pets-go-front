@@ -8,11 +8,13 @@ function Home() {
   return (
     <>
     <div className="flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8 is-flex-direction-column" style={{height: "80%"}}>
+      
       <div className="paw-container-right">
         <img alt="pata" className="paw-medium" src={pawImg}/>
       </div>
 
-      <p className="title-home">Cadastrar</p>
+
+      <h2 className="title-home">Cadastrar</h2>
       <Link to="/signup/vet">
         <button type="button" className="mb-2 mt-2 lightgreen-btn btn">Sou Vet</button>
       </Link>
