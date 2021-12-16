@@ -172,7 +172,7 @@ function Login() {
               <button
                 type="submit"
                 disabled={loading ? true : false}
-                className={`btn-container beige-btn ${loading ? "bg-slate-300" : null}`}
+                className={`btn beige-btn ${loading ? "bg-slate-300" : null}`}
               >
                 Entrar
               </button>
