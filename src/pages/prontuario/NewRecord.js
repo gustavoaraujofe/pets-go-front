@@ -4,18 +4,21 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
 import "./NewRecord.css";
 import telaBegeAzul from "../../assets/tela-bege-azul.png";
+import toast, { Toaster } from "react-hot-toast";
+import Navbar from "../../components/navbar/Navbar";
 
 function NewRecord() {
+  const { animalId } = useParams();
   const { loggedInUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const params = useParams();
   const [spinner, setSpinner] = useState(false);
   const [prontuarioData, setProntuarioData] = useState({
-    clinicalSign: [],
-    exam: [],
-    disease: [],
-    prescription: [],
-    vaccine: [],
+    clinicalSign: "",
+    exam: "",
+    disease: "",
+    prescription: "",
+    vaccine: "",
   });
 
   function handleChange(e) {
@@ -35,13 +38,17 @@ function NewRecord() {
     try {
       
 
-      const response = await api.post("/medical-appointment/create", {
+      await api.post("/medical-appointment/create", {
         ...prontuarioData,
         vetId: loggedInUser.user.id,
+        animalId: animalId,
       });
 
-      navigate("/prontuario");
-      setSpinner(false);
+      toast.success("Registro adicionado com sucesso!");
+      setTimeout(() => {
+        navigate(`/vet/prontuario/${animalId}`);
+        setSpinner(false)
+      }, 2500);
     } catch (err) {
       console.error(err);
       setSpinner(false);
@@ -52,9 +59,7 @@ function NewRecord() {
     <div className="min-h-full flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">
         <div>
-          <h1 className="mt-5 text-center">
-            Adicionar Registro
-          </h1>
+          <h1 className="mt-5 text-center">Adicionar Registro</h1>
         </div>
 
         <form className="forms">
@@ -166,6 +171,30 @@ function NewRecord() {
           />
         </div>
       </div>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          className: "",
+          duration: 5000,
+          style: {
+            background: "#fff",
+            color: "#000",
+          },
+
+          success: {
+            duration: 3000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      />
+      <Navbar />
     </div>
   );
 }

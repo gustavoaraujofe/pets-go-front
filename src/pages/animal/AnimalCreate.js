@@ -69,11 +69,7 @@ function AnimalCreate() {
 
       const imageUrl = await handleFileUpload(animalData.picture);
 
-      const response = await api.post("/animal/create", {
-        ...animalData,
-        imageUrl: imageUrl,
-        userId: loggedInUser.user.id,
-      });
+      await api.post("/animal/create", {...animalData, imageUrl: imageUrl , userId: loggedInUser.user.id});
       navigate("/dashboard");
 
       setSpinner(false);
@@ -123,7 +119,7 @@ function AnimalCreate() {
               name="type"
               className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md`}
             >
-              <option value="select">Selecionar</option>
+              <option value="" selected>Selecionar</option>
               <option value="dog">Cachorro</option>
               <option value="cat">Gato</option>
               <option value="rabbit">Coelho</option>

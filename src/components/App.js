@@ -48,8 +48,9 @@ function App() {
           <Route path="/vets-specialties" element={<VetsSpecialties/>}/>
           <Route path="/user/schedule/" element={<ScheduleUser />} />
           <Route path="/vet/schedule/:idVet" element={<ScheduleVetId />} />
-          <Route path="/prontuario/new-record" element={<NewRecord/>}/>
-          <Route path="/prontuario" element={<Prontuario/>}/>
+          <Route path="/prontuario/new-record/:animalId" element={<NewRecord/>}/>
+          <Route path="/user/prontuario" element={<Prontuario/>}/>
+          <Route path="/vet/prontuario/:idAnimal" element={<Prontuario/>}/>
           <Route path="/vet/schedule-edit" element={<ScheduleVets />} />
           <Route path="/prontuario/record-detail/:id" element={<RecordDetail/>}/>
           <Route path="/prontuario/record-edit/:id" element={<RecordEdit/>}/>

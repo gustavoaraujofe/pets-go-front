@@ -4,23 +4,33 @@ import Navbar from "../../components/navbar/Navbar";
 import { Link } from "react-router-dom";
 import addIcon from "../../assets/add-icon.png";
 import api from "../../apis/api";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import AppointmentCard from "../appointment/AppointmentCard";
+import { AuthContext } from "../../contexts/authContext";
+import { useParams } from "react-router-dom";
+import { ControlPointSharp, PanoramaSharp } from "@material-ui/icons";
 
 function Prontuario() {
+  //loggedInUser.user.role
+  const params = useParams();
+  const { loggedInUser } = useContext(AuthContext);
   const [prontuarioData, setProntuarioData] = useState([]);
-
-  const [vetData, setVetData] = useState({
-    name: "",
-    role: "",
-    avatarUrl: "",
-  });
+  const [userData, setUserData] = useState({});
+  const [animalData, setAnimalData] = useState([]);
+  const [idAnimalSelect, setIdAnimalSelect] = useState("");
 
   useEffect(() => {
     async function fetchUser() {
       try {
-        const response = await api.get(`/vet/profile`);
-        setVetData({ ...response.data });
+        //if (loggedInUser.user.role === "vet") {
+        // const response = await api.get(`/vet/profile`);
+        // setUserData({ ...response.data });
+        // }
+
+        if (loggedInUser.user.role === "user") {
+          const response = await api.get(`/vet/profile`);
+          setUserData({ ...response.data });
+        }
       } catch (err) {
         console.error(err);
       }
@@ -33,11 +43,22 @@ function Prontuario() {
       try {
         const response = await api.get(`/medical-appointment/list`);
 
-        const appointmentFilter = await response.data.filter(
-          (currentAppointment) => {
-            return currentAppointment.vetId === vetData._id;
-          }
-        );
+        let appointmentFilter;
+        if (loggedInUser.user.role === "vet") {
+          appointmentFilter = await response.data.filter(
+            (currentAppointment) => {
+              return currentAppointment.animalId === params.idAnimal;
+            }
+          );
+        }
+
+        if (loggedInUser.user.role === "user") {
+          appointmentFilter = await response.data.filter(
+            (currentAppointment) => {
+              return currentAppointment.animalId === idAnimalSelect;
+            }
+          );
+        }
 
         setProntuarioData(appointmentFilter);
       } catch (err) {
@@ -45,7 +66,41 @@ function Prontuario() {
       }
     }
     fetchAppointment();
-  }, [vetData._id]);
+  }, [idAnimalSelect, animalData]);
+
+  useEffect(() => {
+    async function fetchAnimals() {
+      try {
+        
+        
+        if (loggedInUser.user.role === "user") {
+          const response = await api.get("animal/list");
+         const animalsFiltered = response.data.filter((currentAnimal) => {
+            return currentAnimal.userId === userData._id;
+          });
+          setAnimalData([animalsFiltered])
+        }
+
+        if (loggedInUser.user.role === "vet") {
+          const response = await api.get(`animal/search/${params.idAnimal}`);
+          setAnimalData([response.data])
+        }
+
+        
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchAnimals();
+  }, [userData._id]);
+
+  function handleChangeSelect(e) {
+    console.log(e.target.value);
+    setIdAnimalSelect(e.target.value);
+  }
+  console.log(animalData);
+  console.log(prontuarioData);
+ 
 
   return (
     <>
@@ -57,48 +112,73 @@ function Prontuario() {
           </div>
 
           {/* Dados do animal */}
-
-          <div className="card-container mb-4">
-            <div className="card-content">
-              <div className="flex items-center justify-center">
-                <div className="media-left">
-                  <div className="flex-shrink-0">
-                    <img className="h-20 w-20 rounded-full" src="" />
+          {loggedInUser.user.role === "user" ? (
+            <select onChange={handleChangeSelect} className="select" required>
+              <option>Selecione um animal</option>
+              {animalData !== []
+                ? animalData.map((currentAnimal) => {
+                    return (
+                      <option key={currentAnimal._id} value={currentAnimal._id}>
+                        {currentAnimal.name}
+                      </option>
+                    );
+                  })
+                : null}
+            </select>
+          ) : null}
+          {animalData[0] ? (
+            <div className="card-container mb-4">
+              <div className="card-content">
+                <div className="flex items-center justify-center">
+                  <div className="media-left">
+                    <div className="flex-shrink-0">
+                      <img
+                        className="h-20 w-20 rounded-full"
+                        src={animalData[0].imageUrl}
+                        alt="Avatar Animal"
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="media-content">
-                  <p className="noto-bold">Nome do Pet</p>
-                  <p>Nome do Tutor</p>
+                  <div className="media-content">
+                    <p className="noto-bold">{animalData[0].name}</p>
+                    <p>{animalData[0].userId.name}</p>
 
-                  {/* Adicionar Registro */}
-                  <Link to="/prontuario/new-record">
-                    <div className="m-0 mt-2 card-container">
-                      <div className="p-2 card-content">
-                        <div className="flex items-center justify-center">
-                          <div className="pl-2 mr-1 img-radio">
-                            <img className="icon-img" src={addIcon} />
-                          </div>
+                    {/* Adicionar Registro */}
+                    <Link to={`/prontuario/new-record/${animalData[0]._id}`}>
+                      <div className="m-0 mt-2 card-container">
+                        <div className="p-2 card-content">
+                          <div className="flex items-center justify-center">
+                            <div className="pl-2 mr-1 img-radio">
+                              <img
+                                className="icon-img"
+                                src={addIcon}
+                                alt="adicionar registro"
+                              />
+                            </div>
 
-                          <div className="media-content">
-                            <p>Registro</p>
+                            <div className="media-content">
+                              <p>Registro</p>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </Link>
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {prontuarioData.map((currentProntuario) => {
-              return (
-                <AppointmentCard
-                  key={currentProntuario._id}
-                  {...currentProntuario}
-                />
-              );
-            })}
-          </div>
+              {prontuarioData
+                ? prontuarioData.map((currentProntuario) => {
+                    return (
+                      <AppointmentCard
+                        key={currentProntuario._id}
+                        {...currentProntuario}
+                      />
+                    );
+                  })
+                : null}
+            </div>
+          ) : null}
 
           <div className="flex items-center justify-center">
             <img
@@ -109,7 +189,7 @@ function Prontuario() {
           </div>
         </div>
       </div>
-        <Navbar />
+      <Navbar />
     </>
   );
 }

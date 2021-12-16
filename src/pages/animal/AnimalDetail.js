@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import api from "../../apis/api";
 
 function AnimalDetail() {
+  const { id } = useParams();
+
   const [animalDetail, setAnimalDetail] = useState({
     name: "",
     age: "",
@@ -26,8 +28,7 @@ function AnimalDetail() {
     vetId: "",
   });
 
-  const { id } = useParams();
-  const {animalId} = useParams();
+
 
   useEffect(() => {
     async function fetchAnimalId() {
