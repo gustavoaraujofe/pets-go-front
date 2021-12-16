@@ -100,7 +100,7 @@ body {
 }
 
 .lightgreen-btn {
-  background-color: #c1e7df;
+  background-color: #c1e7df !important;
   color: #0d0d5e;
 }
 
@@ -115,7 +115,7 @@ body {
 }
 
 .purple-btn {
-  background-color: #ddcfe8;
+  background-color: #ddcfe8 !important;
   color: #0d0d5e;
 }
 
