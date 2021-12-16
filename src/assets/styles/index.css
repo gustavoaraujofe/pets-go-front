@@ -62,7 +62,7 @@ body {
   height: 100%;
 }
 
-.btn {
+.btn-container {
   border: none;
   width: 200px;
   height: 60px;
