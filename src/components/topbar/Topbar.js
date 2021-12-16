@@ -50,7 +50,7 @@ function Topbar() {
           <div
             className={`navbar-start bg-white ${!login ? "is-hidden" : null}`}
           >
-            <Link to="/" className="navbar-item">
+            <Link to="/dashboard" className="navbar-item">
               <p >Home</p>
             </Link>
 
