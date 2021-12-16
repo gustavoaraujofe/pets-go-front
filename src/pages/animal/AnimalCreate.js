@@ -1,12 +1,13 @@
 import api from "../../apis/api";
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
 import toast, { Toaster } from "react-hot-toast";
 import BottomBege from "../../components/bottom/BottomBege";
 
 function AnimalCreate() {
   const { loggedInUser } = useContext(AuthContext);
+  
 
   const [animalData, setAnimalData] = useState({
     name: "",
@@ -20,6 +21,9 @@ function AnimalCreate() {
   });
 
   const [loading, setLoading] = useState(false);
+  const params = useParams();
+  
+  const [spinner, setSpinner] = useState(false);
   const navigate = useNavigate();
 
   function handleChange(e) {
@@ -46,6 +50,8 @@ function AnimalCreate() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setSpinner(true);
+    
 
     if (
       animalData.name === "" ||
@@ -58,7 +64,8 @@ function AnimalCreate() {
       toast.error("Por favor preencha todos os campos.");
     }
     try {
-      setLoading(true);
+      
+      
 
       const imageUrl = await handleFileUpload(animalData.picture);
 
@@ -69,10 +76,12 @@ function AnimalCreate() {
       });
       navigate("/dashboard");
 
-      setLoading(false);
+      setSpinner(false);
+      
     } catch (err) {
       console.error(err);
-      setLoading(false);
+      setSpinner(false);
+      
     }
   }
 
@@ -183,8 +192,8 @@ function AnimalCreate() {
               <option value="" disabled defaultValue hidden>
                 Gênero
               </option>
-              <option value="male">Macho</option>
-              <option value="female">Fêmea</option>
+              <option value="Male">Macho</option>
+              <option value="Female">Fêmea</option>
             </select>
           </div>
 
@@ -211,13 +220,23 @@ function AnimalCreate() {
           </div>
 
           <div className="max-w-md w-full is-flex is-justify-content-center">
-            <button
-              disabled={loading}
-              onClick={handleSubmit}
+          <button
+              disabled={spinner}
               type="submit"
               className="btn salmon-btn"
+              onClick={handleSubmit}
+              className={
+                params.type === "user" ? "btn purple-btn" : "btn lightgreen-btn"
+              }
             >
-              Adicionar
+              {spinner ? (
+                <>
+                  <span className="mr-3 animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900"></span>
+                  Carregando...
+                </>
+              ) : (
+                "Adicionar"
+              )}
             </button>
           </div>
         </form>

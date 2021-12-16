@@ -3,17 +3,18 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../apis/api";
 import {AuthContext} from "../../contexts/authContext"
-// import { Link } from "react-router-dom";
 // import pawImg from "../../assets/pata.png";
 import toast, { Toaster } from "react-hot-toast";
 import BottomBege from "../../components/bottom/BottomBege";
 
 function AnimalEdit() {
-    const { loggedInUser } = useContext(AuthContext);
+  const { loggedInUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const { id } = useParams();
-  //const [isSending, setIsSending] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const params = useParams();
+  const [spinner, setSpinner] = useState(false);
+
+  //const [loading, setLoading] = useState(false);
   const [animalData, setAnimalData] = useState({
     name: "",
     age: "",
@@ -60,19 +61,21 @@ function AnimalEdit() {
       toast.error("Por favor preencha todos os campos.");
     }
 
+    setSpinner(true);
     async function updateAnimal(id) {
       try {
-        setLoading(true);
         const imageUrl = await handleFileUpload(animalData.picture);
 
         await api.patch(`animal/edit/${id}`, {
-          ...animalData, imageUrl: imageUrl , userId: loggedInUser.user.id
+          ...animalData,
+          imageUrl: imageUrl,
+          userId: loggedInUser.user.id,
         });
         navigate("/dashboard");
-        setLoading(false);
+        setSpinner(false);
       } catch (err) {
         console.log(err);
-        setLoading(false);
+        setSpinner(false);
       }
     }
     updateAnimal(id);
@@ -228,12 +231,22 @@ function AnimalEdit() {
 
           <div className="max-w-md w-full is-flex is-justify-content-center">
             <button
-              disabled={loading}
-              onClick={handleSubmit}
+              disabled={spinner}
               type="submit"
               className="btn lightgreen-btn"
+              onClick={handleSubmit}
+              className={
+                params.type === "user" ? "btn purple-btn" : "btn lightgreen-btn"
+              }
             >
-              Editar
+              {spinner ? (
+                <>
+                  <span className="mr-3 animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900"></span>
+                  Carregando...
+                </>
+              ) : (
+                "Editar"
+              )}
             </button>
           </div>
         </form>
