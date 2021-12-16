@@ -15,7 +15,7 @@ function VetsSpecialties() {
       toast.error("Por favor, selecione uma especialidade");
       return;
     }
-  } 
+  }
 
   return (
     <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8">
