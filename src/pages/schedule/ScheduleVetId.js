@@ -19,6 +19,7 @@ function ScheduleVetId() {
   const [animalData, setAnimalData] = useState([]);
   const [idAnimal, setIdAnimal] = useState("");
 
+  
   useEffect(() => {
     async function fetchAnimals() {
       try {
@@ -104,6 +105,7 @@ function ScheduleVetId() {
       console.error(err);
     }
   }
+   
 
   return (
     <>

@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import api from "../../apis/api";
 import {AuthContext} from "../../contexts/authContext"
 // import { Link } from "react-router-dom";
-// import telaAzulBege from "../../assets/tela-azul-bege.png";
 // import pawImg from "../../assets/pata.png";
+import toast, { Toaster } from "react-hot-toast";
+import BottomBege from "../../components/bottom/BottomBege";
 
 function AnimalEdit() {
     const { loggedInUser } = useContext(AuthContext);
@@ -23,7 +24,7 @@ function AnimalEdit() {
     imageUrl: "",
     type: "",
   });
-
+ 
   useEffect(() => {
     async function fetchAnimal() {
       try {
@@ -47,6 +48,18 @@ function AnimalEdit() {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    if (
+      animalData.name === "" ||
+      animalData.age === "" ||
+      animalData.breed === "" ||
+      animalData.weight === "" ||
+      animalData.gender === "" ||
+      animalData.type === ""
+    ) {
+      toast.error("Por favor preencha todos os campos.");
+    }
+
     async function updateAnimal(id) {
       try {
         setLoading(true);
@@ -83,9 +96,9 @@ function AnimalEdit() {
     <div className="min-h-full flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Editar PET
-          </h2>
+          <h1 className="mt-6 text-center">
+            Editar Pet
+          </h1>
         </div>
 
         <form className="forms">
@@ -114,7 +127,7 @@ function AnimalEdit() {
           </div>
           <div className="mt-5 relative rounded-md shadow-sm">
             <label htmlFor="name" className="pl-1 label">
-              Nome do PET
+              Nome do Pet
             </label>
             <input
               type="text"
@@ -218,13 +231,37 @@ function AnimalEdit() {
               disabled={loading}
               onClick={handleSubmit}
               type="submit"
-              className="button is-info"
+              className="btn lightgreen-btn"
             >
               Editar
             </button>
           </div>
         </form>
+        <BottomBege/>
       </div>
+      <Toaster
+        position="center"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          className: "",
+          duration: 5000,
+          style: {
+            background: "#fff",
+            color: "#000",
+          },
+
+          success: {
+            duration: 3000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      />
     </div>
   );
 }

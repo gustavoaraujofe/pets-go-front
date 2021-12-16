@@ -9,10 +9,9 @@ label {
 }
  
 input {
-    width: 400px!important;
     padding: 0.65rem 0.5rem!important;
     font-size: 1rem!important;
-    border: 2px solid #edf2f7!important;
+    border: 2px solid #B6B6B7!important;
     background-color: #f7fafc!important;
     color: #2d3748!important;
     border-radius: 10px!important;
@@ -23,15 +22,12 @@ input:focus {
 }
  
 button {
-    padding: 0.5rem 1.25rem!important;
-    font-size: 1rem!important;
+    /* padding: 0.5rem 1.25rem!important; */
+    /* font-size: 1rem!important; */
     border-radius: 10px!important;
-    background-color: #4a5568!important;
-    border: 2px solid #4a5568!important;
-    color: white!important;
-    font-weight: bold!important;
-    margin-bottom: 1rem!important;
+    /* font-weight: bold!important; */
+    /* margin-bottom: 1rem!important; */
     cursor: pointer!important;
     display: flex!important;
-    margin-top: 1rem!important;
+    /* margin-top: 1rem!important; */
 }

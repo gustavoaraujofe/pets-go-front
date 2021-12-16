@@ -60,9 +60,6 @@ function Topbar() {
             >
               <p>Editar cadastro</p>
             </Link>
-            <Link to="/" className="navbar-item">
-              <p >Meus pets</p>
-            </Link>
           </div>
 
           <div className="navbar-end bg-white">

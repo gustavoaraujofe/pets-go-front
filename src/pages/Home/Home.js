@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import telaRosaAzul from "../../assets/tela-rosa-azul.png";
 import "./Home.css";
 import pawImg from "../../assets/pata.png";
+import BottomPink from "../../components/bottom/BottomPink";
 
 function Home() {
   return (
@@ -31,9 +31,7 @@ function Home() {
         <button type="button" className="mt-2 enter-btn btn-global">Entrar</button>
       </Link>
     
-      <div className="flex items-center justify-center">
-        <img alt="imagem inferior" className="img-bottom pt-0 pb-20 sm:px-6 lg:px-8" src={telaRosaAzul} />
-      </div>
+      <BottomPink/>
     </div>
     </>
   );
