@@ -6,6 +6,7 @@ import api from "../../apis/api";
 import toast, { Toaster } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import "./Signup.css";
+import telaBegeAzul from "../../assets/tela-bege-azul-02.png";
 
 function Signup() {
   const [loading, setLoading] = useState(false);
@@ -20,7 +21,7 @@ function Signup() {
 
       uploadData.append("picture", file);
 
-      let response = ""; 
+      let response = "";
 
       // Condição para o envio dos arquivos
       if (params.type === "vet") {
@@ -107,12 +108,10 @@ function Signup() {
   });
 
   return (
-    <div className="min-h-full flex items-center justify-center mt-12 pt-0 pb-20 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-full flex items-center justify-center pt-0 pb-0 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Faça o seu cadastro
-          </h2>
+          <h1 className="mt-5 text-center">Faça o seu cadastro</h1>
         </div>
         <form onSubmit={formik.handleSubmit} className="forms">
           <div className="mt-5 relative rounded-md shadow-sm">
@@ -311,6 +310,13 @@ function Signup() {
             </button>
           </div>
         </form>
+        <div className="flex items-center justify-center">
+          <img
+            alt="imagem inferior"
+            className="img-bottom pt-0 pb-20 sm:px-6 lg:px-8"
+            src={telaBegeAzul}
+          />
+        </div>
       </div>
       <Toaster
         position="top-center"

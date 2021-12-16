@@ -70,7 +70,7 @@ function Login() {
       }
       login();
     },
-  });
+  }); 
 
   return (
     <>
@@ -80,9 +80,9 @@ function Login() {
       >
         <div className="max-w-sm w-full space-y-8">
           <div>
-            <h2 className="mb-5 text-center text-3xl font-extrabold text-gray-900">
-              Entrar em sua conta
-            </h2>
+            <h1 className="text-center">
+              Entrar na conta
+            </h1>
           </div>
           <form onSubmit={formik.handleSubmit} className="mt-8 space-y-6 forms">
             <div className="rounded-md shadow-sm -space-y-px">
@@ -153,7 +153,7 @@ function Login() {
                 />
                 <label
                   htmlFor="remember-me"
-                  className="m-auto block text-sm text-gray-900"
+                  className="m-auto block text-sm noto-bold"
                 >
                   Lembrar-me
                 </label>
@@ -161,7 +161,7 @@ function Login() {
               <div className="text-sm">
                 <Link
                   to="/forgot-password"
-                  className="font-medium text-indigo-600 hover:text-indigo-500"
+                  className="noto-bold text-indigo-600 hover:text-indigo-500"
                 >
                   Esqueceu sua senha?
                 </Link>

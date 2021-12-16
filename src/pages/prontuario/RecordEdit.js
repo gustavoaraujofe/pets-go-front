@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
 import { Link } from "react-router-dom";
+import telaBegeAzul from "../../assets/tela-bege-azul.png"
 
 function RecordEdit(){
     const navigate = useNavigate();
@@ -154,12 +155,19 @@ function RecordEdit(){
               <button
                 onClick={handleSubmit}
                 type="submit"
-                className="mt-5 btn blue-btn"
+                className="mt-5 btn lightgreen-btn"
               >
-                Enviar
+                Editar
               </button>
             </div>
           </form>
+          <div className="flex items-center justify-center">
+          <img
+            alt="imagem inferior"
+            className="img-bottom pt-0 pb-20 sm:px-6 lg:px-8"
+            src={telaBegeAzul}
+          />
+        </div>
         </div>
       </div>
     )
