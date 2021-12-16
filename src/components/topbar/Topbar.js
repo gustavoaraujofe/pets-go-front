@@ -60,6 +60,12 @@ function Topbar() {
             >
               <p>Editar cadastro</p>
             </Link>
+            <Link
+              to={`/vet/schedule-edit`}
+              className="navbar-item"
+            >
+              <p>Criar agenda</p>
+            </Link>
           </div>
 
           <div className="navbar-end bg-white">
