@@ -172,8 +172,8 @@ function AnimalCreate() {
               <option value="" disabled defaultValue hidden>
                 Gênero
               </option>
-              <option value="male">Macho</option>
-              <option value="female">Fêmea</option>
+              <option value="Male">Macho</option>
+              <option value="Female">Fêmea</option>
             </select>
           </div>
 
