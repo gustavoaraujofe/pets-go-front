@@ -91,7 +91,7 @@ function Dashboard() {
           return (a.date + a.hour).localeCompare(b.date + b.hour);
         });
 
-        console.log(appointmentFilter);
+
         setAppointment({ ...response.data });
       } catch (err) {
         console.error(err);

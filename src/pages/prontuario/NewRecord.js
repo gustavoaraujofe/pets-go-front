@@ -42,7 +42,6 @@ function NewRecord() {
       });
 
       navigate("/prontuario");
-      console.log(response);
       setLoading(false);
     } catch (err) {
       console.error(err);

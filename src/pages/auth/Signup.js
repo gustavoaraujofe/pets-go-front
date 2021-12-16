@@ -6,7 +6,7 @@ import api from "../../apis/api";
 import toast, { Toaster } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import "./Signup.css";
-import telaBegeAzul from "../../assets/tela-bege-azul-02.png";
+import telaBegeAzul from "../../assets/tela-bege-azul.png";
 
 function Signup() {
   const [loading, setLoading] = useState(false);
