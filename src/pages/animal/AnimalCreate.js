@@ -115,7 +115,7 @@ function AnimalCreate() {
               Idade
             </label>
             <input
-              type="number"
+              type="text"
               name="age"
               id="age"
               className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md `}

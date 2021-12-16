@@ -28,7 +28,6 @@ function AnimalEdit() {
     async function fetchAnimal() {
       try {
         const response = await api.get(`/animal/search/${id}`);
-        console.log(response.data);
         setAnimalData({ ...response.data });
       } catch (err) {
         console.error(err);
@@ -73,8 +72,6 @@ function AnimalEdit() {
       uploadData.append("picture", file);
 
       const response = await api.post("/animal/upload", uploadData);
-
-      console.log(response);
 
       return response.data.url;
     } catch (err) {
