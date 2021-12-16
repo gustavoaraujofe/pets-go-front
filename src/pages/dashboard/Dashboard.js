@@ -10,11 +10,13 @@ import Loading from "../../components/Loading";
 import AnimalCard from "../animal/AnimalCard";
 import AppointmentCard from "../appointment/AppointmentCard";
 
+
 function Dashboard() {
   const params = useLocation();
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [animalData, setAnimalData] = useState([]);
+  const [appointment, setAppointment] = useState();
 
   const [userData, setUserData] = useState({
     name: "",
@@ -53,7 +55,6 @@ function Dashboard() {
   }, []);
 
   useEffect(() => {
-    
     async function fetchAnimal() {
       try {
         const response = await api.get(`/animal/list`);
@@ -69,6 +70,35 @@ function Dashboard() {
     }
     fetchAnimal();
   }, [userData._id, params]);
+
+  useEffect(() => {
+    async function fetchAppointment() {
+      try {
+        const response = await api.get(`/appointment/list`);
+        let appointmentFilter;
+
+        if (userData.role === "user") {
+          appointmentFilter = response.data.filter((currentAppointment) => {
+            return currentAppointment.userId === userData._id;
+          });
+        } else {
+          appointmentFilter = response.data.filter((currentAppointment) => {
+            return currentAppointment.vetId === userData._id;
+          });
+        }
+
+        await appointmentFilter.sort((a, b) => {
+          return (a.date + a.hour).localeCompare(b.date + b.hour);
+        });
+
+        console.log(appointmentFilter);
+        setAppointment({ ...response.data });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchAppointment();
+  }, [userData._id]);
 
   return (
     <>
@@ -130,7 +160,7 @@ function Dashboard() {
             <>
               <h2 className="mt-8 ml-8">Meus Agendamentos</h2>
 
-              <AppointmentCard/>
+              <AppointmentCard />
               {/* {animalData.map((currentAnimal) => {
                 return <AnimalCard key={currentAnimal.id} {...currentAnimal} />;
               })} */}
@@ -138,7 +168,7 @@ function Dashboard() {
               <h2 className="mt-8 ml-8">Meus Pacientes</h2>
               <div className="mt-8 ml-8">
                 <input
-                className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md"
+                  className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md"
                   onChange={(event) => {
                     clearTimeout(timer);
                     let timer = setTimeout(
@@ -151,7 +181,10 @@ function Dashboard() {
                 />
                 {listaFiltrada.map((currentAnimal) => {
                   return (
-                    <AnimalCard key={currentAnimal.id} {...currentAnimal} />
+                    <AnimalCard
+                      key={`filtered-${currentAnimal.id}`}
+                      {...currentAnimal}
+                    />
                   );
                 })}
               </div>

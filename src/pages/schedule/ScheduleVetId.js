@@ -5,6 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import api from "../../apis/api";
 import { AuthContext } from "../../contexts/authContext";
+import toast, { Toaster } from "react-hot-toast";
 
 function ScheduleVetId() {
   const navigate = useNavigate();
@@ -76,7 +77,6 @@ function ScheduleVetId() {
   }, []);
 
   function handleChangeSelect(e) {
-    console.log(e.target.value)
     setIdAnimal(e.target.value);
   }
 
@@ -88,14 +88,18 @@ function ScheduleVetId() {
         animalId: idAnimal,
         userId: loggedInUser.user.id,
         vetId: idVet,
-      };   
-      
-      await api.post("appointment/create", info)
+      };
 
+      if (!info.animalId) {
+        setToggleConfirm(false);
+        toast.error("Você precisa selecionar um animal!")
+        return console.error("ERROU");
+      }
+      await api.post("appointment/create", info);
+      toast.success("Agendamento realizado com sucesso!")
       setTimeout(() => {
-        navigate("/dashboard")
-      }, 3000)
-      
+        navigate("/dashboard");
+      }, 3000);
     } catch (err) {
       console.error(err);
     }
@@ -109,9 +113,6 @@ function ScheduleVetId() {
             <strong>Horários disponíveis</strong>
           </h1>
         </section>
-        <div className="ml-12 paw-container-right">
-          <img alt="pata" className="paw-medium" src={pawImg} />
-        </div>
         <select onChange={handleChangeSelect} className="select" required>
           <option>Selecione um animal</option>
           {animalData !== []
@@ -152,11 +153,7 @@ function ScheduleVetId() {
                 </div>
               );
             })
-          : null}
-
-        <div className="ml-5 pt-1 paw-container-left">
-          <img alt="pata" className="paw-medium" src={pawImg} />
-        </div>
+          : null}      
         <div className="flex items-center justify-center">
           <img
             alt="imagem inferior"
@@ -164,7 +161,6 @@ function ScheduleVetId() {
             src={telaBegeAzul}
           />
         </div>
-        <Navbar />
       </div>
       <div className="container" id="app">
         <div className={`modal ${toggleConfirm ? "is-active" : null}`}>
@@ -191,7 +187,31 @@ function ScheduleVetId() {
             </div>
           </div>
         </div>
+    
       </div>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          className: "",
+          duration: 5000,
+          style: {
+            background: "#fff",
+            color: "#000",
+          },
+          success: {
+            duration: 3000,
+            theme: {
+              primary: "green",
+              secondary: "black",
+            },
+          },
+        }}
+      />
+     <Navbar />
     </>
   );
 }
