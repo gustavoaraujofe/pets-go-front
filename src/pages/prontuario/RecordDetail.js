@@ -36,7 +36,6 @@ function RecordDetail() {
 
   async function handleDelete(id) {
     try {
-      console.log(id);
       await api.delete(`/medical-appointment/delete/${id}`);
       navigate("/prontuario");
     } catch (err) {

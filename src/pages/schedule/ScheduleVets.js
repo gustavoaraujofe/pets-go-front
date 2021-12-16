@@ -29,7 +29,6 @@ function ScheduleVets() {
   const [scheduleDates, setScheduleDates] = useState({});
 
   function handleChange(e) {
-    console.log(e.target.checked);
     if (e.target.checked) {
       setSchedule({
         ...schedule,
