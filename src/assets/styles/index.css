@@ -1,8 +1,6 @@
 /* Seus estilos globais vão aqui */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@import "bulma/css/bulma.css";
+
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 
 /* font-family: 'Noto Sans Display', sans-serif; 300 400 700
 font-family: 'Open Sans', sans-serif; 300 400 500 700*/
@@ -62,7 +60,7 @@ body {
   height: 100%;
 }
 
-.btn-container {
+.btn {
   border: none;
   width: 200px;
   height: 60px;
