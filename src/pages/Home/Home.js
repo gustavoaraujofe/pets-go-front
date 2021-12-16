@@ -16,10 +16,10 @@ function Home() {
 
       <h2 className="title-home">Cadastrar</h2>
       <Link to="/signup/vet">
-        <button type="button" className="mb-2 mt-2 lightgreen-btn btn">Sou Vet</button>
+        <button type="button" className="mb-2 mt-2 lightgreen-btn btn-global">Sou Vet</button>
       </Link>
       <Link to="/signup/user">
-        <button type="button" className="mb-8 purple-btn btn">Sou Tutor</button>
+        <button type="button" className="mb-8 purple-btn btn-global">Sou Tutor</button>
       </Link>
 
       <div className="paw-container-left">
@@ -28,7 +28,7 @@ function Home() {
 
       <p>Já tenho uma conta</p>
       <Link to="/login">
-        <button type="button" className="mt-2 enter-btn btn">Entrar</button>
+        <button type="button" className="mt-2 enter-btn btn-global">Entrar</button>
       </Link>
     
       <div className="flex items-center justify-center">
