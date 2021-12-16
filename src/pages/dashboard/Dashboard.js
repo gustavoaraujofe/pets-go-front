@@ -11,6 +11,7 @@ import AnimalCard from "../animal/AnimalCard";
 import AppointmentCard from "../appointment/AppointmentCard";
 
 function Dashboard() {
+  let timer;
   const params = useLocation();
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -23,21 +24,25 @@ function Dashboard() {
     avatarUrl: "",
   });
 
-  function handleChange(animal) {
-    setSearch(animal);
+  function handleChange(e) {
+    console.log(e.target.value)
+    setSearch(e.target.value);
   }
+
 
   let listaFiltrada = [];
   if (search) {
     const re = new RegExp(`${search}`, "gi");
     animalData.forEach((currentAnimal) => {
-      if (currentAnimal.name.common.match(re) !== null) {
+      if (currentAnimal.name.match(re) !== null) {
         listaFiltrada.push(currentAnimal);
       }
     });
   } else {
     listaFiltrada = animalData;
   }
+
+  console.log(listaFiltrada);
 
   useEffect(() => {
     async function fetchUser() {
@@ -53,14 +58,21 @@ function Dashboard() {
     fetchUser();
   }, []);
 
+  console.log(userData);
   useEffect(() => {
     async function fetchAnimal() {
       try {
         const response = await api.get(`/animal/list`);
-
-        const animalFilter = await response.data.filter((currentAnimal) => {
-          return currentAnimal.userId === userData._id;
-        });
+        let animalFilter;
+        if (userData.role === "user") {
+          animalFilter = await response.data.filter((currentAnimal) => {
+            return currentAnimal.userId === userData._id;
+          });
+        } else {
+          animalFilter = response.data.filter((currentAnimal) => {
+            return userData.patients.includes(currentAnimal._id);
+          });
+        }
 
         setAnimalData(animalFilter);
       } catch (err) {
@@ -68,7 +80,7 @@ function Dashboard() {
       }
     }
     fetchAnimal();
-  }, [userData._id, params]);
+  }, [userData._id]);
 
   useEffect(() => {
     async function fetchAppointment() {
@@ -116,7 +128,7 @@ function Dashboard() {
           </section>
 
           <hr />
-        <Link to="/vet/prontuario/61ba42b2f488370ce41a43e3">dasfafd</Link>
+    
           {userData.role === "user" ? (
             <>
               <h1 className="mt-8 ml-8">Meus Pets</h1>
@@ -168,28 +180,31 @@ function Dashboard() {
                 return <AnimalCard key={currentAnimal.id} {...currentAnimal} />;
               })} */}
               <h1 className="mb-4 mt-8 ml-8">Meus Pacientes</h1>
-              <div className="flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8 ">
+              <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8 ">
                 <input
                   className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md"
-                  onChange={(event) => {
+                  onChange={(e) => {
                     clearTimeout(timer);
-                    let timer = setTimeout(
-                      () => handleChange(event.target.value),
-                      700
-                    );
+                    timer = setTimeout(() => handleChange(e), 600);
                   }}
                   type="text"
                   placeholder="Buscar paciente"
                 />
-                {listaFiltrada.map((currentAnimal) => {
-                  return (
-                    <AnimalCard
-                      key={`filtered-${currentAnimal.id}`}
-                      {...currentAnimal}
-                    />
-                  );
-                })}
               </div>
+              {listaFiltrada !== [] ? (
+                <div>
+                  {listaFiltrada.map((currentAnimal) => {
+                    return (
+                      <Link
+                        to={`/vet/prontuario/${currentAnimal._id}`}
+                        key={`filtered-${currentAnimal._id}`}
+                      >
+                        <AnimalCard {...currentAnimal} />
+                      </Link>
+                    );
+                  })}
+                </div>
+              ) : null}
             </>
           )}
 
