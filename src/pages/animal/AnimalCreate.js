@@ -21,7 +21,6 @@ function AnimalCreate() {
   const navigate = useNavigate();
 
   function handleChange(e) {
-    console.log(e.target.value)
 
     setAnimalData({ ...animalData, [e.target.name]: e.target.value });
   }
@@ -34,7 +33,6 @@ function AnimalCreate() {
 
       const response = await api.post("/animal/upload", uploadData);
 
-      console.log(response);
 
       return response.data.url;
     } catch (err) {
@@ -53,10 +51,10 @@ function AnimalCreate() {
       setLoading(true);
 
       const imageUrl = await handleFileUpload(animalData.picture);
-      console.log(animalData)
+
       const response = await api.post("/animal/create", {...animalData, imageUrl: imageUrl , userId: loggedInUser.user.id});
       navigate("/dashboard");
-      console.log(response);
+
       setLoading(false);
     } catch (err) {
       console.error(err);
