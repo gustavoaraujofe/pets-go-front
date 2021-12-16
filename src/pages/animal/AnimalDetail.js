@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import api from "../../apis/api";
+import pawImg from "../../assets/pata.png";
 
 function AnimalDetail() {
   const { id } = useParams();
@@ -46,6 +47,7 @@ function AnimalDetail() {
     async function fetchMedicalAppointment() {
       try {
         const response = await api.get(`/medical-appointment/search/${animalDetail.medicalAppointmentHistory}`);
+        console.log(response.data)
         setmedicalAppointmentHistory({ ...response.data });
       } catch (err) {
         console.log(err);
@@ -55,14 +57,45 @@ function AnimalDetail() {
   }, [animalDetail.medicalAppointmentHistory]);
 
   return (
+    <>
+      <div className="flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-sm w-full space-y-8">
+          <div className="paw-container-right ml-5">
+              <img alt="pata" className="paw-medium" src={pawImg} />
+          </div>
+          <div className="card-container mb-4">
+            <div className="flex-shrink-0">
+              <img
+              className="h-20 w-20 rounded-full"
+              src={animalDetail.imageUrl}
+              alt={animalDetail.name}
+              />
+            </div>
+
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
     <div className="min-h-full flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">
         <div className="flex-shrink-0">
-          <img
-            className="h-20 w-20 rounded-full"
-            src={animalDetail.imageUrl}
-            alt={animalDetail.name}
-          />
+          
         </div>
         <div>
           <p>
@@ -118,6 +151,7 @@ function AnimalDetail() {
         </p>
       </div>
     </div>
+    </>
   );
 }
 

@@ -53,7 +53,7 @@ function RecordEdit(){
             `/medical-appointment/edit/${params.id}`,
             prontuarioData
           );
-          navigate("/prontuario");
+          navigate("/vet/prontuario/61bb66a51575e028e4e8a277");
 
       } catch (error) {
         console.error(error.response.data);
