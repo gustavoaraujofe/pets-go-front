@@ -4,6 +4,7 @@ import api from "../../../apis/api";
 import { useContext, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import "./login.css";
+import "../../../assets/styles/index.css"
 import * as Yup from "yup";
 import telaRosaAzul from "../../../assets/tela-rosa-azul.png";
 
