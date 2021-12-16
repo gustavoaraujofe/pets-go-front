@@ -1,11 +1,11 @@
 .forms
 select {
-  border: 2px solid rgb(181, 181, 182);
-  border-radius: 8px;
-  height: 40px;
-  padding: 7px 20px;
-  margin: 8px 0;
-  width: 100%;
-  font-size: 1rem;
-  color: #757575;
+  border: 2px solid rgb(181, 181, 182)!important;
+  border-radius: 8px!important;
+  height: 40px!important;
+  padding: 7px 20px!important;
+  margin: 8px 0!important;
+  width: 100%!important;
+  font-size: 1rem!important;
+  color: #757575!important;
 }
