@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/authContext";
 import "./NewRecord.css";
 import { Link } from "react-router-dom";
+import telaBegeAzul from "../../assets/tela-bege-azul.png";
 
 function NewRecord() {
   const { loggedInUser } = useContext(AuthContext);
@@ -41,7 +42,6 @@ function NewRecord() {
       });
 
       navigate("/prontuario");
-      console.log(response);
       setLoading(false);
     } catch (err) {
       console.error(err);
@@ -53,7 +53,7 @@ function NewRecord() {
     <div className="min-h-full flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">
         <div>
-          <h1 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h1 className="mt-5 text-center">
             Adicionar Registro
           </h1>
         </div>
@@ -143,12 +143,19 @@ function NewRecord() {
             <button
               onClick={handleSubmit}
               type="submit"
-              className="mt-5 btn blue-btn"
+              className="mt-5 btn salmon-btn"
             >
-              Enviar
+              Adicionar
             </button>
           </div>
         </form>
+        <div className="flex items-center justify-center">
+          <img
+            alt="imagem inferior"
+            className="img-bottom pt-0 pb-20 sm:px-6 lg:px-8"
+            src={telaBegeAzul}
+          />
+        </div>
       </div>
     </div>
   );

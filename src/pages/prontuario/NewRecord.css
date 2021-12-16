@@ -1,17 +1,17 @@
 textarea {
-  border: 2px solid rgb(181, 181, 182);
-  border-radius: 8px;
-  padding: 7px 20px;
-  margin: 8px 0;
-  color: #757575;
-  resize: none;
+  border: 2px solid rgb(181, 181, 182)!important;
+  border-radius: 8px!important;
+  padding: 7px 20px!important;
+  margin: 8px 0!important;
+  color: #757575!important;
+  resize: none!important;
 }
 
 .pront-input {
-  border: 2px solid rgb(181, 181, 182);
-  border-radius: 8px;
-  padding: 7px 20px;
-  margin: 8px 0;
-  color: #757575;
-  resize: none;
+  border: 2px solid rgb(181, 181, 182)!important;
+  border-radius: 8px!important;
+  padding: 7px 20px!important;
+  margin: 8px 0!important;
+  color: #757575!important;
+  resize: none!important;
 }

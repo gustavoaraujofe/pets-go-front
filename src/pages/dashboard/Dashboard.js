@@ -10,11 +10,13 @@ import Loading from "../../components/Loading";
 import AnimalCard from "../animal/AnimalCard";
 import AppointmentCard from "../appointment/AppointmentCard";
 
+
 function Dashboard() {
   const params = useLocation();
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [animalData, setAnimalData] = useState([]);
+  const [appointment, setAppointment] = useState();
 
   const [userData, setUserData] = useState({
     name: "",
@@ -53,7 +55,6 @@ function Dashboard() {
   }, []);
 
   useEffect(() => {
-    
     async function fetchAnimal() {
       try {
         const response = await api.get(`/animal/list`);
@@ -70,14 +71,43 @@ function Dashboard() {
     fetchAnimal();
   }, [userData._id, params]);
 
+  useEffect(() => {
+    async function fetchAppointment() {
+      try {
+        const response = await api.get(`/appointment/list`);
+        let appointmentFilter;
+
+        if (userData.role === "user") {
+          appointmentFilter = response.data.filter((currentAppointment) => {
+            return currentAppointment.userId === userData._id;
+          });
+        } else {
+          appointmentFilter = response.data.filter((currentAppointment) => {
+            return currentAppointment.vetId === userData._id;
+          });
+        }
+
+        await appointmentFilter.sort((a, b) => {
+          return (a.date + a.hour).localeCompare(b.date + b.hour);
+        });
+
+
+        setAppointment({ ...response.data });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchAppointment();
+  }, [userData._id]);
+
   return (
-    <>
+    <div className="flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8">
       {loading ? (
         <Loading />
       ) : (
         <div className="pb-20">
           <section className="mt-4 flex items-center justify-between mr-8 ml-8">
-            <h1>Olá, {userData.name}</h1>
+            <h2 className="noto-bold">Olá, {userData.name.split(" ")[0]}</h2>
             <div className="flex-shrink-0">
               <img
                 className="h-20 w-20 rounded-full"
@@ -87,40 +117,42 @@ function Dashboard() {
             </div>
           </section>
 
+          <hr />
+
           {userData.role === "user" ? (
             <>
-              <h2 className="mt-8 ml-8">Meus Pets</h2>
+              <h1 className="mt-8 ml-8">Meus Pets</h1>
 
               <div className="ml-12 paw-container-right">
                 <img alt="pata" className="paw-medium" src={pawImg} />
               </div>
 
-              {animalData.map((currentAnimal) => {
-                return <AnimalCard key={currentAnimal.id} {...currentAnimal} />;
-              })}
-
               <Link to="/animal-create">
-                <div className="card-container">
-                  <div className="card-content">
-                    <div className="media">
+                <div className="h-16 mb-4 flex items-center card-container">
+                  <div className="card-content flex items-center">
+                    <div className="media items-center">
                       <div className="media-left">
                         <div className="img-radio">
                           <img src={addIcon} />
                         </div>
                       </div>
                       <div className="media-content">
-                        <p className="title is-4">Adicionar Pet</p>
+                        <p className="noto-bold">Adicionar Pet</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </Link>
 
+              {animalData.map((currentAnimal) => {
+                return <AnimalCard key={currentAnimal.id} {...currentAnimal} />;
+              })}
+
               <div className="ml-5 pt-1 paw-container-left">
                 <img alt="pata" className="paw-medium" src={pawImg} />
               </div>
 
-              <div className="max-w-md w-full is-flex is-justify-content-center">
+              <div className="mb-4 max-w-md w-full is-flex is-justify-content-center">
                 <Link to="/vets-specialties">
                   <button className="btn salmon-btn">Agendar</button>
                 </Link>
@@ -128,17 +160,24 @@ function Dashboard() {
             </>
           ) : (
             <>
-              <h2 className="mt-8 ml-8">Meus Agendamentos</h2>
+              <h1 className="mt-8 ml-8">Meus Agendamentos</h1>
+              <div className="ml-12 paw-container-right">
+                <img alt="pata" className="paw-small" src={pawImg} />
+              </div>
 
-              <AppointmentCard/>
+
+              [Card com Foto, nome e dia da consulta marcada]
+
+{/*<AppointmentCard />*/}
+
               {/* {animalData.map((currentAnimal) => {
                 return <AnimalCard key={currentAnimal.id} {...currentAnimal} />;
               })} */}
 
-              <h2 className="mt-8 ml-8">Meus Pacientes</h2>
-              <div className="mt-8 ml-8">
+              <h1 className="mb-4 mt-8 ml-8">Meus Pacientes</h1>
+              <div className="flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8 ">
                 <input
-                className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md"
+                  className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md"
                   onChange={(event) => {
                     clearTimeout(timer);
                     let timer = setTimeout(
@@ -151,12 +190,16 @@ function Dashboard() {
                 />
                 {listaFiltrada.map((currentAnimal) => {
                   return (
-                    <AnimalCard key={currentAnimal.id} {...currentAnimal} />
+                    <AnimalCard
+                      key={`filtered-${currentAnimal.id}`}
+                      {...currentAnimal}
+                    />
                   );
                 })}
               </div>
             </>
           )}
+
 
           <div className="flex items-center justify-center">
             <img
@@ -165,10 +208,10 @@ function Dashboard() {
               src={telaBegeAzul}
             />
           </div>
-          <Navbar />
         </div>
       )}
-    </>
+      <Navbar />
+    </div>
   );
 }
 

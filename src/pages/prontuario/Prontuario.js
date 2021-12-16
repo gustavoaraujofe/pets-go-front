@@ -1,4 +1,4 @@
-import telaBegeAzul from "../../assets/tela-bege-azul.png";
+import telaRosaAzul from "../../assets/tela-rosa-azul.png";
 import pawImg from "../../assets/pata.png";
 import Navbar from "../../components/navbar/Navbar";
 import { Link } from "react-router-dom";
@@ -35,7 +35,6 @@ function Prontuario() {
 
         const appointmentFilter = await response.data.filter(
           (currentAppointment) => {
-
             return currentAppointment.vetId === vetData._id;
           }
         );
@@ -50,64 +49,67 @@ function Prontuario() {
 
   return (
     <>
-      <h1 className="mt-10 pl-5">Prontuário</h1>
+      <h1 className="mt-8 ml-8">Prontuário</h1>
+      <div className="flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-sm w-full space-y-8">
+          <div className="paw-container-right ml-5">
+            <img alt="pata" className="paw-medium" src={pawImg} />
+          </div>
 
-      <div className="paw-container-right">
-        <img alt="pata" className="paw-medium" src={pawImg} />
-      </div>
+          {/* Dados do animal */}
 
-      {/* Dados do animal */}
-
-      <div className="card-container mb-4">
-        <div className="pt-5 card-content">
-          <div className="flex items-center justify-center">
-            <div className="media-left">
-              <div className="flex-shrink-0">
-                <img className="h-20 w-20 rounded-full" src="" />
-              </div>
-            </div>
-            <div className="media-content">
-              <p className="title is-5">Nome do Pet</p>
-              <p className="subtitle is-6 mb-2">Nome do Tutor</p>
-
-              {/* Adicionar Registro */}
-              <Link to="/prontuario/new-record">
-                <div className="m-0 card-container">
-                  <div className="p-2 card-content">
-                    <div className="flex items-center justify-center">
-                      <div className="pl-2 pr-0 img-radio">
-                        <img className="icon-img" src={addIcon} />
-                      </div>
-
-                      <div className="media-content">
-                        <p className="subtitle is-6">Adicionar Registro</p>
-                      </div>
-                    </div>
+          <div className="card-container mb-4">
+            <div className="card-content">
+              <div className="flex items-center justify-center">
+                <div className="media-left">
+                  <div className="flex-shrink-0">
+                    <img className="h-20 w-20 rounded-full" src="" />
                   </div>
                 </div>
-              </Link>
+                <div className="media-content">
+                  <p className="noto-bold">Nome do Pet</p>
+                  <p>Nome do Tutor</p>
+
+                  {/* Adicionar Registro */}
+                  <Link to="/prontuario/new-record">
+                    <div className="m-0 mt-2 card-container">
+                      <div className="p-2 card-content">
+                        <div className="flex items-center justify-center">
+                          <div className="pl-2 mr-1 img-radio">
+                            <img className="icon-img" src={addIcon} />
+                          </div>
+
+                          <div className="media-content">
+                            <p>Registro</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              </div>
             </div>
+
+            {prontuarioData.map((currentProntuario) => {
+              return (
+                <AppointmentCard
+                  key={currentProntuario._id}
+                  {...currentProntuario}
+                />
+              );
+            })}
+          </div>
+
+          <div className="flex items-center justify-center">
+            <img
+              alt="imagem inferior"
+              className="img-bottom pt-0 pb-20 sm:px-6 lg:px-8"
+              src={telaRosaAzul}
+            />
           </div>
         </div>
-
-        {/* Appointment card */}
-        {prontuarioData.map((currentProntuario) => {
-          return (
-            <AppointmentCard key={currentProntuario._id} {...currentProntuario}/>
-          );
-        })}
-
-        
       </div>
-
-      <div className="flex items-center justify-center">
-        <img
-          alt="imagem inferior"
-          className="img-bottom pt-0 pb-20 sm:px-6 lg:px-8"
-          src={telaBegeAzul}
-        />
-      </div>
-      <Navbar />
+        <Navbar />
     </>
   );
 }

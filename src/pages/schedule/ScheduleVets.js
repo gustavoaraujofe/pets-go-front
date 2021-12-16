@@ -29,7 +29,6 @@ function ScheduleVets() {
   const [scheduleDates, setScheduleDates] = useState({});
 
   function handleChange(e) {
-    console.log(e.target.checked);
     if (e.target.checked) {
       setSchedule({
         ...schedule,
@@ -73,13 +72,6 @@ function ScheduleVets() {
     const friday = incrementDate(5).toLocaleDateString();
     const saturday = incrementDate(6).toLocaleDateString();
 
-    console.log(monday);
-    console.log(tuesday);
-    console.log(wednesday);
-    console.log(thursday);
-    console.log(friday);
-    console.log(saturday);
-
     setDate({
       monday,
       tuesday,
@@ -118,7 +110,7 @@ function ScheduleVets() {
 
   return (
     <>
-      <div className="mt-10 is-flex is-align-items-center is-flex-direction-column">
+      <div className="mt-10 is-flex is-align-items-center is-flex-direction-column table-container">
         <h2 className="mb-1 is-size-5">
           <strong>Disponibilidade de horário</strong>
         </h2>
@@ -132,7 +124,7 @@ function ScheduleVets() {
           onChange={handleChangeDate}
         ></input>
 
-        <table className="table">
+        <table className="table" >
           <thead>
             <tr>
               <th className="is-size-7">{date.monday}</th>

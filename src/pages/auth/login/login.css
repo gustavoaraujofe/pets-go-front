@@ -1,37 +1,37 @@
 * {
-    box-sizing: border-box;
+    box-sizing: border-box!important;
 }
  
 label {
-    margin-top: 1rem;
-    font-weight: bold;
-    display: flex;
+    margin-top: 1rem!important;
+    font-weight: bold!important;
+    display: flex!important;
 }
  
 input {
-    width: 400px;
-    padding: 0.65rem 0.5rem;
-    font-size: 1rem;
-    border: 2px solid #edf2f7;
-    background-color: #f7fafc;
-    color: #2d3748;
-    border-radius: 10px;
+    width: 400px!important;
+    padding: 0.65rem 0.5rem!important;
+    font-size: 1rem!important;
+    border: 2px solid #edf2f7!important;
+    background-color: #f7fafc!important;
+    color: #2d3748!important;
+    border-radius: 10px!important;
 }
  
 input:focus {
-    outline: none;
+    outline: none!important;
 }
  
 button {
-    padding: 0.5rem 1.25rem;
-    font-size: 1rem;
-    border-radius: 10px;
-    background-color: #4a5568;
-    border: 2px solid #4a5568;
-    color: white;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    cursor: pointer;
-    display: flex;
-    margin-top: 1rem;
+    padding: 0.5rem 1.25rem!important;
+    font-size: 1rem!important;
+    border-radius: 10px!important;
+    background-color: #4a5568!important;
+    border: 2px solid #4a5568!important;
+    color: white!important;
+    font-weight: bold!important;
+    margin-bottom: 1rem!important;
+    cursor: pointer!important;
+    display: flex!important;
+    margin-top: 1rem!important;
 }
