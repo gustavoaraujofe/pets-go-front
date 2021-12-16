@@ -1,5 +1,7 @@
 /* Seus estilos globais vão aqui */
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @import "bulma/css/bulma.css";
 
 /* font-family: 'Noto Sans Display', sans-serif; 300 400 700
