@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import addIcon from "../../assets/add-icon.png";
 import api from "../../apis/api";
 import { useEffect, useState, useContext } from "react";
-import AppointmentCard from "../appointment/AppointmentCard";
+import AppointmentCard from "../../components/appointment/AppointmentCard";
 import { AuthContext } from "../../contexts/authContext";
 import { useParams } from "react-router-dom";
 import { ControlPointSharp, PanoramaSharp } from "@material-ui/icons";
