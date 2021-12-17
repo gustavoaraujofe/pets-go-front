@@ -110,7 +110,7 @@ function Prontuario() {
               {animalData !== []
                 ? animalData.map((currentAnimal) => {
                     return (
-                      <option key={currentAnimal._id} value={currentAnimal._id}>
+                      <option key={`animal${currentAnimal._id}`} value={currentAnimal._id}>
                         {currentAnimal.name}
                       </option>
                     );
@@ -162,10 +162,12 @@ function Prontuario() {
               {prontuarioData
                 ? prontuarioData.map((currentProntuario) => {
                     return (
-                      <AppointmentCard
+                      <Link
+                        to={`/prontuario/record-detail/${currentProntuario._id}`}
                         key={currentProntuario._id}
-                        {...currentProntuario}
-                      />
+                      >
+                        <AppointmentCard {...currentProntuario} />
+                      </Link>
                     );
                   })
                 : null}
