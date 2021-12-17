@@ -8,6 +8,7 @@ import pawImg from "../../assets/pata.png";
 import Navbar from "../../components/navbar/Navbar";
 import Loading from "../../components/Loading";
 import AnimalCard from "../animal/AnimalCard";
+import AnimalCardVet from "../animal/AnimalCardVet";
 import AppointmentCardVet from "../../components/appointment/AppointmentCardVet";
 
 function Dashboard() {
@@ -84,7 +85,7 @@ function Dashboard() {
       }
     }
     fetchAnimal();
-  }, [userData._id]);
+  }, [userData._id, params]);
 
   useEffect(() => {
     async function fetchAppointment() {
@@ -171,10 +172,9 @@ function Dashboard() {
               </Link>
               <div>
                 {animalData.map((currentAnimal) => {
-                  return(
-                  <Link to={`/animal/detail/${currentAnimal._id}`}>
+                  return (
                     <AnimalCard key={currentAnimal.id} {...currentAnimal} />
-                  </Link>)
+                  );
                 })}
               </div>
               <div className="ml-5 pt-1 paw-container-left">
@@ -222,14 +222,7 @@ function Dashboard() {
               {listaFiltrada !== [] ? (
                 <div>
                   {listaFiltrada.map((currentAnimal) => {
-                    return (
-                      <Link
-                        to={`/vet/prontuario/${currentAnimal._id}`}
-                        key={`filtered-${currentAnimal._id}`}
-                      >
-                        <AnimalCard {...currentAnimal} />
-                      </Link>
-                    );
+                    return <AnimalCardVet {...currentAnimal} />;
                   })}
                 </div>
               ) : null}

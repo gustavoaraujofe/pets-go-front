@@ -39,6 +39,7 @@ function AnimalCard(props) {
           />
         </div>
 
+        <Link to={`/animal/detail/${props._id}`}>
         <div className="media">
           <div className="media-left">
             <div className="flex-shrink-0">
@@ -55,6 +56,7 @@ function AnimalCard(props) {
             <p className="subtitle is-6">Peso: {props.weight}kg</p>
           </div>
         </div>
+        </Link>
 
       </div>
       <div className="container" id="app">
