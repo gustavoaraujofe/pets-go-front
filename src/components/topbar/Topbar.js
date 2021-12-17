@@ -34,7 +34,7 @@ function Topbar() {
           </div>
 
           <button
-            className={`navbar-burger ${!login ? "is-hidden" : null}`}
+            className={`navbar-burger  ${!login ? "is-hidden" : null}`}
             onClick={() => setToggle(!toggle)}
           >
             <span aria-hidden="true"></span>
@@ -60,12 +60,11 @@ function Topbar() {
             >
               <p>Editar cadastro</p>
             </Link>
-            <Link
-              to={`/vet/schedule-edit`}
-              className="navbar-item"
-            >
-              <p>Criar agenda</p>
-            </Link>
+            {loggedInUser.user.role === "vet" ? (
+              <Link to={`/vet/schedule-edit`} className="navbar-item">
+                <p>Criar agenda</p>
+              </Link>
+            ) : null}
           </div>
 
           <div className="navbar-end bg-white">

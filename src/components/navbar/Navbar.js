@@ -20,7 +20,7 @@ function Navbar() {
           <span>Home</span>
         </div>
       </Link>
-      <Link to={loggedInUser.user.role === "vet" ? "/vet/agendamentos" : "/user/agendamentos"}>
+      <Link to={loggedInUser.user.role === "vet" ? `/vet/agendamentos/${loggedInUser.user.id}` : "/user/agendamentos"}>
         <div
           className="icon-nav flex is-flex-direction-column
  direction-column items-center justify-center"
@@ -29,7 +29,7 @@ function Navbar() {
           <span>Agendamentos</span>
         </div>
       </Link>
-      <Link to={loggedInUser.user.role === "vet" ? "/vet/prontuario" : "/dashboard"}>
+      <Link to={loggedInUser.user.role === "vet" ? "/dashboard" : "/dashboard"}>
         <div
           className="icon-nav flex is-flex-direction-column
  direction-column items-center justify-center"

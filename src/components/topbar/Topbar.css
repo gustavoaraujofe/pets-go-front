@@ -18,9 +18,15 @@
     position: absolute;
 }
 
+
 @media(min-width: 1024px) {
     .container-logo {
         position: relative;
         text-align: start;
     }
+
+    .navbar-burger {
+        display: none !important;
+    }
+
 }
