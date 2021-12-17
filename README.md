@@ -23,7 +23,7 @@ Nesse projeto, construímos uma aplicação para conectar tutores e veterinário
 
 
 ###
-<img src="https://res.cloudinary.com/dkzcbs84l/image/upload/v1639756127/picture_vet/Tela_1_ijs7xp.png" alt="print" style="height:300px;"/> &nbsp; <img src="https://res.cloudinary.com/dkzcbs84l/image/upload/v1639763685/picture_vet/WhatsApp_Image_2021-12-17_at_12.54.20_sn2bgx.jpg" alt="print" style="height:300px;"/>  &nbsp; <img src="https://res.cloudinary.com/dkzcbs84l/image/upload/v1639763685/picture_vet/WhatsApp_Image_2021-12-17_at_12.54.11_utncue.jpg" alt="print" style="height:300px;"/>  &nbsp; <img src="https://res.cloudinary.com/dkzcbs84l/image/upload/v1639764358/picture_vet/Capturaraaa2_pxx7kl.png" alt="print" style="height:300px;"/>
+<img src="https://res.cloudinary.com/dkzcbs84l/image/upload/v1639756127/picture_vet/Tela_1_ijs7xp.png" alt="print" style="height:250px;"/> &nbsp; <img src="https://res.cloudinary.com/dkzcbs84l/image/upload/v1639763685/picture_vet/WhatsApp_Image_2021-12-17_at_12.54.20_sn2bgx.jpg" alt="print" style="height:250px;"/>  &nbsp; <img src="https://res.cloudinary.com/dkzcbs84l/image/upload/v1639763685/picture_vet/WhatsApp_Image_2021-12-17_at_12.54.11_utncue.jpg" alt="print" style="height:250px;"/>  &nbsp; <img src="https://res.cloudinary.com/dkzcbs84l/image/upload/v1639764358/picture_vet/Capturaraaa2_pxx7kl.png" alt="print" style="height:250px;"/>
 ###
 
 
