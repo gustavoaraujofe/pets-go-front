@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 
 import { AuthContext } from "../../contexts/authContext";
 
-function ProtectedRoute({ component: Component }) {
+function ProtectedRoute({ component: Component}) {
   const { loggedInUser } = useContext(AuthContext);
 
   if (loggedInUser.user.id) {

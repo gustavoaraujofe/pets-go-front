@@ -40,27 +40,27 @@ function App() {
             element={<ProtectedRoute component={Dashboard} />}
           />
           <Route path="/signup/:type" element={<Signup />} />
-          <Route path="/edit-account/:type" element={<EditAccount />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/edit-account/:type" element={<ProtectedRoute component={EditAccount} />} />
+          <Route path="/" element={<ProtectedRoute component={Home} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/new-password/:token" element={<NewPassword />} /> 
-          <Route path="/animal-create" element={<AnimalCreate/>}/>
-          <Route path="/vets-list/:specialties" element={<VetsList/>}/>
-          <Route path="/vets-specialties" element={<VetsSpecialties/>}/>
-          <Route path="/user/schedule/" element={<ScheduleUser />} />
-          <Route path="/vet/schedule/:idVet" element={<ScheduleVetId />} />
-          <Route path="/prontuario/new-record/:animalId" element={<NewRecord/>}/>
-          <Route path="/user/prontuario" element={<Prontuario/>}/>
-          <Route path="/vet/prontuario/:idAnimal" element={<Prontuario/>}/>
-          <Route path="/vet/schedule-edit" element={<ScheduleVets />} />
-          <Route path="/prontuario/record-detail/:id" element={<RecordDetail/>}/>
-          <Route path="/prontuario/record-edit/:id" element={<RecordEdit/>}/>
-          <Route path="/animal/edit/:id" element={<AnimalEdit/>}/>
-          <Route path="/user/agendamentos" element={<AppointmentUser/>}/>
-          <Route path="/vet/agendamentos/:vetId" element={<AppointmentVet />}/>
+          <Route path="/animal-create" element={<ProtectedRoute component={AnimalCreate} />}/>
+          <Route path="/vets-list/:specialties" element={<ProtectedRoute component={VetsList}/>}/>
+          <Route path="/vets-specialties" element={<ProtectedRoute component={VetsSpecialties}/>}/>
+          <Route path="/user/schedule/" element={<ProtectedRoute component={ScheduleUser} />} />
+          <Route path="/vet/schedule/:idVet" element={<ProtectedRoute component={ScheduleVetId} />} />
+          <Route path="/prontuario/new-record/:animalId" element={<ProtectedRoute component={NewRecord}/>}/>
+          <Route path="/user/prontuario" element={<ProtectedRoute component={Prontuario}/>}/>
+          <Route path="/vet/prontuario/:idAnimal" element={<ProtectedRoute component={Prontuario}/>}/>
+          <Route path="/vet/schedule-edit" element={<ProtectedRoute component={ScheduleVets} />} />
+          <Route path="/prontuario/record-detail/:id" element={<ProtectedRoute component={RecordDetail}/>}/>
+          <Route path="/prontuario/record-edit/:id" element={<ProtectedRoute component={RecordEdit}/>}/>
+          <Route path="/animal/edit/:id" element={<ProtectedRoute component={AnimalEdit}/>}/>
+          <Route path="/user/agendamentos" element={<ProtectedRoute component={AppointmentUser}/>}/>
+          <Route path="/vet/agendamentos/:vetId" element={<ProtectedRoute component={AppointmentVet} />}/>
 
-          <Route path="/animal/detail/:id" element={<AnimalDetail/>} />
+          <Route path="/animal/detail/:id" element={<ProtectedRoute component={AnimalDetail}/>} />
 
         </Routes>
       </AuthContextComponent>
