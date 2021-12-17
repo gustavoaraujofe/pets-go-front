@@ -12,7 +12,7 @@ function AppointmentCard(props) {
           </div>
         </div>
       </div>
-    </Link>
+    </Link> 
   );
 }
 

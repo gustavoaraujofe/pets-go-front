@@ -11,7 +11,6 @@ import { useParams } from "react-router-dom";
 import { ControlPointSharp, PanoramaSharp } from "@material-ui/icons";
 
 function Prontuario() {
-  //loggedInUser.user.role
   const params = useParams();
   const { loggedInUser } = useContext(AuthContext);
   const [prontuarioData, setProntuarioData] = useState([]);
@@ -71,22 +70,18 @@ function Prontuario() {
   useEffect(() => {
     async function fetchAnimals() {
       try {
-        
-        
         if (loggedInUser.user.role === "user") {
           const response = await api.get("animal/list");
-         const animalsFiltered = response.data.filter((currentAnimal) => {
+          const animalsFiltered = response.data.filter((currentAnimal) => {
             return currentAnimal.userId === userData._id;
           });
-          setAnimalData([animalsFiltered])
+          setAnimalData([animalsFiltered]);
         }
 
         if (loggedInUser.user.role === "vet") {
           const response = await api.get(`animal/search/${params.idAnimal}`);
-          setAnimalData([response.data])
+          setAnimalData([response.data]);
         }
-
-        
       } catch (err) {
         console.error(err);
       }
@@ -98,9 +93,6 @@ function Prontuario() {
     console.log(e.target.value);
     setIdAnimalSelect(e.target.value);
   }
-  console.log(animalData);
-  console.log(prontuarioData);
- 
 
   return (
     <>

@@ -71,11 +71,12 @@ function Dashboard() {
           });
         }
 
-        for(let i = 0 ; i < animalFilter.length; i++) {
-          
-          const response = await api.get(`/user/profile/${animalFilter[i].userId}`)
-          console.log(response)
-           animalFilter[i].tutor = response.data
+        for (let i = 0; i < animalFilter.length; i++) {
+          const response = await api.get(
+            `/user/profile/${animalFilter[i].userId}`
+          );
+          console.log(response);
+          animalFilter[i].tutor = response.data;
         }
         setAnimalData(animalFilter);
       } catch (err) {
@@ -83,9 +84,7 @@ function Dashboard() {
       }
     }
     fetchAnimal();
-
   }, [userData._id]);
-
 
   useEffect(() => {
     async function fetchAppointment() {
@@ -170,11 +169,14 @@ function Dashboard() {
                   </div>
                 </div>
               </Link>
-
-              {animalData.map((currentAnimal) => {
-                return <AnimalCard key={currentAnimal.id} {...currentAnimal} />;
-              })}
-
+              <div>
+                {animalData.map((currentAnimal) => {
+                  return(
+                  <Link to={`/animal/detail/${currentAnimal._id}`}>
+                    <AnimalCard key={currentAnimal.id} {...currentAnimal} />
+                  </Link>)
+                })}
+              </div>
               <div className="ml-5 pt-1 paw-container-left">
                 <img alt="pata" className="paw-medium" src={pawImg} />
               </div>
@@ -187,7 +189,9 @@ function Dashboard() {
             </>
           ) : (
             <>
-              <h1 className="mt-8 ml-8 has-text-centered">Próximas consultas</h1>
+              <h1 className="mt-8 ml-8 has-text-centered">
+                Próximas consultas
+              </h1>
               <div className="ml-12 paw-container-right">
                 <img alt="pata" className="paw-small" src={pawImg} />
               </div>
