@@ -71,22 +71,18 @@ function Prontuario() {
   useEffect(() => {
     async function fetchAnimals() {
       try {
-        
-        
         if (loggedInUser.user.role === "user") {
           const response = await api.get("animal/list");
-         const animalsFiltered = response.data.filter((currentAnimal) => {
+          const animalsFiltered = response.data.filter((currentAnimal) => {
             return currentAnimal.userId === userData._id;
           });
-          setAnimalData([animalsFiltered])
+          setAnimalData([animalsFiltered]);
         }
 
         if (loggedInUser.user.role === "vet") {
           const response = await api.get(`animal/search/${params.idAnimal}`);
-          setAnimalData([response.data])
+          setAnimalData([response.data]);
         }
-
-        
       } catch (err) {
         console.error(err);
       }
@@ -98,9 +94,6 @@ function Prontuario() {
     console.log(e.target.value);
     setIdAnimalSelect(e.target.value);
   }
-  console.log(animalData);
-  console.log(prontuarioData);
- 
 
   return (
     <>
@@ -118,7 +111,7 @@ function Prontuario() {
               {animalData !== []
                 ? animalData.map((currentAnimal) => {
                     return (
-                      <option key={currentAnimal._id} value={currentAnimal._id}>
+                      <option key={`animal${currentAnimal._id}`} value={currentAnimal._id}>
                         {currentAnimal.name}
                       </option>
                     );
@@ -170,10 +163,12 @@ function Prontuario() {
               {prontuarioData
                 ? prontuarioData.map((currentProntuario) => {
                     return (
-                      <AppointmentCard
+                      <Link
+                        to={`/prontuario/record-detail/${currentProntuario._id}`}
                         key={currentProntuario._id}
-                        {...currentProntuario}
-                      />
+                      >
+                        <AppointmentCard {...currentProntuario} />
+                      </Link>
                     );
                   })
                 : null}

@@ -1,8 +1,7 @@
-import { Link } from "react-router-dom";
 
 function AppointmentCard(props) {
+ 
   return (
-    <Link to={`/prontuario/record-detail/${props.id}`}>
       <div className="card-container mb-4">
         <div className="p-5 card-content">
           <div className="media pl-0">
@@ -12,7 +11,6 @@ function AppointmentCard(props) {
           </div>
         </div>
       </div>
-    </Link>
   );
 }
 

@@ -66,15 +66,17 @@ function Dashboard() {
             return currentAnimal.userId === userData._id;
           });
         } else {
-          animalFilter = response.data.filter((currentAnimal) => {
-            return userData.patients.includes(currentAnimal._id);
-          });
+         
+            animalFilter = response.data.filter((currentAnimal) => {
+              return userData.patients.includes(currentAnimal._id);
+            });
+          
+          
         }
 
         for(let i = 0 ; i < animalFilter.length; i++) {
           
           const response = await api.get(`/user/profile/${animalFilter[i].userId}`)
-          console.log(response)
            animalFilter[i].tutor = response.data
         }
         setAnimalData(animalFilter);
@@ -84,7 +86,7 @@ function Dashboard() {
     }
     fetchAnimal();
 
-  }, [userData._id]);
+  }, [userData._id, params]);
 
 
   useEffect(() => {
@@ -126,7 +128,7 @@ function Dashboard() {
     fetchAppointment();
   }, [userData._id]);
 
-  console.log(animalData);
+
 
   return (
     <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8">
@@ -160,7 +162,7 @@ function Dashboard() {
                     <div className="media items-center">
                       <div className="media-left">
                         <div className="img-radio">
-                          <img src={addIcon} />
+                          <img src={addIcon}  alt="adicionar animal"/>
                         </div>
                       </div>
                       <div className="media-content">
@@ -172,7 +174,7 @@ function Dashboard() {
               </Link>
 
               {animalData.map((currentAnimal) => {
-                return <AnimalCard key={currentAnimal.id} {...currentAnimal} />;
+                return <AnimalCard key={`userAnimal${currentAnimal._id}`} {...currentAnimal} />;
               })}
 
               <div className="ml-5 pt-1 paw-container-left">
@@ -187,13 +189,15 @@ function Dashboard() {
             </>
           ) : (
             <>
-              <h1 className="mt-8 ml-8 has-text-centered">Próximas consultas</h1>
+              <h1 className="mt-8 ml-8">Próximas consultas</h1>
+              
               <div className="ml-12 paw-container-right">
                 <img alt="pata" className="paw-small" src={pawImg} />
               </div>
 
               {animalData.map((currentAnimal) => {
                 return (
+                  <div key={`appointment${currentAnimal._id}`}>
                   <AppointmentCardVet
                     id={currentAnimal._id}
                     avatar={currentAnimal.imageUrl}
@@ -201,8 +205,10 @@ function Dashboard() {
                     hour="13h"
                     tutor={currentAnimal.tutor.name.split(" ")[0]}
                   />
+                  </div>
                 );
               })}
+              <Link to={`/vet/agendamentos/${userData._id}`}><p className="is-size-6 has-text-right mr-5"><strong>Mostrar todas</strong></p></Link>
               <h1 className="mb-4 mt-8 ml-8">Meus Pacientes</h1>
               <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8 ">
                 <input
