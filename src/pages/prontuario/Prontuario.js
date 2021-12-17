@@ -11,7 +11,6 @@ import { useParams } from "react-router-dom";
 import { ControlPointSharp, PanoramaSharp } from "@material-ui/icons";
 
 function Prontuario() {
-  //loggedInUser.user.role
   const params = useParams();
   const { loggedInUser } = useContext(AuthContext);
   const [prontuarioData, setProntuarioData] = useState([]);
