@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../../apis/api";
 import { Link } from "react-router-dom";
@@ -6,7 +6,10 @@ import telaRosaAzul from "../../assets/tela-rosa-azul.png";
 import deleteIcon from "../../assets/delete-icon.png";
 import editIcon from "../../assets/edit-icon.png";
 
+import { AuthContext } from "../../contexts/authContext";
+
 function RecordDetail() {
+  const { loggedInUser } = useContext(AuthContext);
   const [toggleDelete, setToggleDelete] = useState(false);
   const navigate = useNavigate();
   const [recordData, setRecordData] = useState({});
@@ -19,7 +22,6 @@ function RecordDetail() {
         const response = await api.get(
           `/medical-appointment/search/${params.id}`
         );
-        console.log(response.data);
 
         setRecordData(response.data);
       } catch (err) {
@@ -40,8 +42,6 @@ function RecordDetail() {
     }
   }
 
-  console.log(recordData.date);
-  console.log(recordData);
   return (
     <div className="min-h-full flex items-start justify-center pt-6 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">
@@ -55,21 +55,25 @@ function RecordDetail() {
               <Link to={`/vet/prontuario/${recordData.animalId}`}>
                 <i className="fas fa-arrow-left fa-2x mr-3 icon"></i>
               </Link>
-              <Link to={`/prontuario/record-edit/${recordData._id}`}>
-                <img
-                  src={editIcon}
-                  type="button"
-                  className="mr-3 icon"
-                  alt="icone editar"
-                />
-              </Link>
-              <img
-                onClick={() => setToggleDelete(true)}
-                src={deleteIcon}
-                type="button"
-                className="icon"
-                alt="deletar"
-              />
+              {loggedInUser.user.role === "vet" ? (
+                <>
+                  <Link to={`/prontuario/record-edit/${recordData._id}`}>
+                    <img
+                      src={editIcon}
+                      type="button"
+                      className="mr-3 icon"
+                      alt="icone editar"
+                    />
+                  </Link>
+                  <img
+                    onClick={() => setToggleDelete(true)}
+                    src={deleteIcon}
+                    type="button"
+                    className="icon"
+                    alt="deletar"
+                  />
+                </>
+              ) : null}
             </div>
             <form className="forms">
               <div className="mt-5 relative rounded-md shadow-sm">

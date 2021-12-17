@@ -167,14 +167,14 @@ function Dashboard() {
                 </div>
               </Link>
 
-              {animalData.map((currentAnimal) => {
-                return (
-                  <AnimalCard
-                    key={`userAnimal${currentAnimal._id}`}
-                    {...currentAnimal}
-                  />
-                );
-              })}
+              <div>
+                {animalData.map((currentAnimal) => {
+                  return(
+                  <Link to={`/animal/detail/${currentAnimal._id}`}>
+                    <AnimalCard key={currentAnimal.id} {...currentAnimal} />
+                  </Link>)
+                })}
+              </div>
 
               <div className="ml-5 pt-1 paw-container-left">
                 <img alt="pata" className="paw-medium" src={pawImg} />
@@ -188,6 +188,7 @@ function Dashboard() {
             </>
           ) : (
             <>
+
               <h1 className="mt-8 ml-8">Próximas consultas</h1>
 
               <div className="ml-12 paw-container-right">

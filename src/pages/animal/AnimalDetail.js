@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import api from "../../apis/api";
 import pawImg from "../../assets/pata.png";
+import BottomPink from "../../components/bottom/BottomPink";
 
 function AnimalDetail() {
   const { id } = useParams();
@@ -17,19 +18,9 @@ function AnimalDetail() {
     medicalAppointmentHistory: "",
   });
 
-  const [medicalAppointmentHistory, setmedicalAppointmentHistory] = useState({
-    animalId: "",
-    date: "",
-    weight: "",
-    clinicalSign: "",
-    exam: "",
-    disease: "",
-    prescription: "",
-    vaccine: "",
-    vetId: "",
-  });
-
-
+  const [medicalAppointmentHistory, setmedicalAppointmentHistory] = useState(
+    []
+  );
 
   useEffect(() => {
     async function fetchAnimalId() {
@@ -46,9 +37,15 @@ function AnimalDetail() {
   useEffect(() => {
     async function fetchMedicalAppointment() {
       try {
-        const response = await api.get(`/medical-appointment/search/${animalDetail.medicalAppointmentHistory}`);
-        console.log(response.data)
-        setmedicalAppointmentHistory({ ...response.data });
+        const response = await api.get(`/medical-appointment/list`);
+
+        const appointmentFiltered = response.data.filter(
+          (currentAppointment) => {
+            return currentAppointment.animalId === animalDetail._id;
+          }
+        );
+
+        setmedicalAppointmentHistory([...appointmentFiltered]);
       } catch (err) {
         console.log(err);
       }
@@ -56,101 +53,71 @@ function AnimalDetail() {
     fetchMedicalAppointment();
   }, [animalDetail.medicalAppointmentHistory]);
 
+  console.log(medicalAppointmentHistory);
   return (
     <>
       <div className="flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-sm w-full space-y-8">
-          <div className="paw-container-right ml-5">
-              <img alt="pata" className="paw-medium" src={pawImg} />
-          </div>
-          <div className="card-container mb-4">
-            <div className="flex-shrink-0">
-              <img
-              className="h-20 w-20 rounded-full"
-              src={animalDetail.imageUrl}
-              alt={animalDetail.name}
-              />
+        <div className="max-w-md w-full mt-5 ">
+          <div className="flex items-center justify-center card-container mb-4">
+            <div className="pt-3 pb-3 card-content">
+              <div className="media">
+                <div className="media-right">
+                  <div className="flex-shrink-0">
+                    <img
+                      className="mb-4 h-20 w-20 rounded-full"
+                      src={animalDetail.imageUrl}
+                      alt={animalDetail.name}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <p>
+                  <span className="noto-bold">Nome: </span> {animalDetail.name}
+                </p>
+                <p>
+                  <span className="noto-bold">Idade: </span> {animalDetail.age}{" "}
+                  anos
+                </p>
+                <p>
+                  <span className="noto-bold">Peso: </span>{" "}
+                  {animalDetail.weight} kg
+                </p>
+                <p>
+                  <span className="noto-bold">Raça: </span> {animalDetail.breed}
+                </p>
+                <p>
+                  <span className="noto-bold">Sexo: </span>{" "}
+                  {animalDetail.gender}
+                </p>
+                <p>
+                  <span className="noto-bold">Tipo: </span> {animalDetail.type}
+                </p>
+                <hr />
+              </div>
+              {medicalAppointmentHistory
+                ? medicalAppointmentHistory.map((currentAppointment) => {
+                    return (
+                      <Link to={`/prontuario/record-detail/${currentAppointment._id}`} >
+                      <div className="card-container mb-4">
+                        <div className="p-5 card-content">
+                          <div className="media pl-0">
+                            <div className="media-content">
+                              <p><strong>Consulta dia:</strong> {currentAppointment.date}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </Link>
+                    );
+                  })
+                : null}
             </div>
-
-
-
-
-
-
           </div>
+          <BottomPink />
         </div>
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-    <div className="min-h-full flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full">
-        <div className="flex-shrink-0">
-          
-        </div>
-        <div>
-          <p>
-            <strong>Nome do pet: </strong>
-            {animalDetail.name}
-          </p>
-          <p>
-            <strong>Idade: </strong>
-            {animalDetail.age} anos
-          </p>
-          <p>
-            <strong>Peso: </strong>
-            {animalDetail.weight} kg
-          </p>
-          <p>
-            <strong>Raça: </strong>
-            {animalDetail.breed}
-          </p>
-          <p>
-            <strong>Sexo: </strong>
-            {animalDetail.gender}
-          </p>
-          <p>
-            <strong>Tipo: </strong>
-            {animalDetail.type}
-          </p>
-        </div>
-      </div>
-      <div>
-        <h2>
-          <strong>Prontuário</strong>
-        </h2>
-        <p>
-          <strong>Sinais Clínicos: </strong>
-
-          {medicalAppointmentHistory.clinicalSign}
-        </p>
-        <p>
-          <strong>Exame: </strong>
-          {medicalAppointmentHistory.exam}
-        </p>
-        <p>
-          <strong>Doenças: </strong>
-          {medicalAppointmentHistory.disease}
-        </p>
-        <p>
-          <strong>Prescrião: </strong>
-          {medicalAppointmentHistory.prescription}
-        </p>
-        <p>
-          <strong>Vacina: </strong>
-          {medicalAppointmentHistory.vaccine}
-        </p>
-      </div>
-    </div>
     </>
   );
 }
