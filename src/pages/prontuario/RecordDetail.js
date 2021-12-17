@@ -43,7 +43,7 @@ function RecordDetail() {
   }
 
   return (
-    <div className="min-h-full flex items-start justify-center pt-6 pb-20 px-4 sm:px-6 lg:px-8">
+    <div className="flex is-flex-direction-column items-center justify-center mt-4">
       <div className="max-w-md w-full">
         <div>
           <h1 className="text-center">Registro</h1>

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import telaBegeAzul from "../../assets/tela-bege-azul.png"
 
 function RecordEdit(){
+  const [spinner, setSpinner] = useState(false);
     const navigate = useNavigate();
     const params = useParams();
   
@@ -33,7 +34,8 @@ function RecordEdit(){
       }
       fetchProntuario();
     }, [params.id]);
-  
+
+      
     function handleChange(event) {
         setProntuarioData({
         ...prontuarioData,
@@ -43,6 +45,7 @@ function RecordEdit(){
   
     async function handleSubmit(event) {
       event.preventDefault();
+      setSpinner(true);
   
       setProntuarioData({
         ...prontuarioData
@@ -53,10 +56,12 @@ function RecordEdit(){
             `/medical-appointment/edit/${params.id}`,
             prontuarioData
           );
-          navigate("/vet/prontuario/61bb66a51575e028e4e8a277");
+          navigate(`/dashboard`);
+          setSpinner(false);
 
       } catch (error) {
         console.error(error.response.data);
+        setSpinner(false);
       }
     }
 
@@ -152,13 +157,23 @@ function RecordEdit(){
             </div>
   
             <div className="max-w-md w-full is-flex is-justify-content-center">
-              <button
-                onClick={handleSubmit}
-                type="submit"
-                className="mt-5 btn lightgreen-btn"
-              >
-                Editar
-              </button>
+            <button
+              disabled={spinner}
+              type="submit"
+              onClick={handleSubmit}
+              className={
+                params.type === "user" ? "btn purple-btn" : "btn lightgreen-btn"
+              }
+            >
+              {spinner ? (
+                <>
+                  <span className="mr-3 animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900"></span>
+                  Carregando...
+                </>
+              ) : (
+                "Editar"
+              )}
+            </button>
             </div>
           </form>
           <div className="flex items-center justify-center">

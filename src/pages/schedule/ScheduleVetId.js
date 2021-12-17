@@ -105,8 +105,8 @@ function ScheduleVetId() {
     }
   }
   return (
-    <div className="">
-      <div className="max-w-md w-full space-y-8 pb-20">
+    <div className="flex is-flex-direction-column items-center justify-center mt-4">
+      <div className="max-w-md w-full space-y-8 pb-20 mr-0">
         <div>
           <h1 className="mt-3 mb-3 text-center">Horários Disponíveis</h1>
         </div>
