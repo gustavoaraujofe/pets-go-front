@@ -1,6 +1,6 @@
 # Pets Go
 
->Projeto 3 do bootcamp de Web Dev da Ironhack, desenvolvido em 1 semana;
+>Pet’s Go é um SPA (Single Page Application) usando MERN stack (MongoDB, Express, React & Node.js). Foi desenvolvido para o projeto final do Bootcamp de Web Development da Ironhack São Paulo.
 
 ###
 
@@ -15,7 +15,8 @@
 
 ###
 
-Aplicação full-stack utilizando React desenvolvida em uma semana.
+
+Nesse projeto, construímos uma aplicação para conectar tutores e veterinários. O veterinário escolhe quais os dias estará disponível para consulta, acessa os agendamentos e dados do pet. Já o tutor pode agendar consultas, adicionar pets e acessar os prontuários enviados pelos veterinários.
 
 
 
