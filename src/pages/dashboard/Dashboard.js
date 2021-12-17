@@ -5,7 +5,7 @@ import "./Dashboard.css";
 import addIcon from "../../assets/add-icon.png";
 import telaBegeAzul from "../../assets/tela-bege-azul.png";
 import pawImg from "../../assets/pata.png";
-// import Navbar from "../../components/navbar/Navbar";
+import Navbar from "../../components/navbar/Navbar";
 import Loading from "../../components/Loading";
 import AnimalCard from "../animal/AnimalCard";
 import AppointmentCardVet from "../../components/appointment/AppointmentCardVet";
@@ -242,7 +242,7 @@ function Dashboard() {
           </div>
         </div>
       )}
-      {/* <Navbar /> */}
+      <Navbar />
     </div>
   );
 }
