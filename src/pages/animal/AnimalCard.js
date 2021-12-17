@@ -11,7 +11,7 @@ function AnimalCard(props) {
     try {
       await api.delete(`/animal/delete/${id}`);
       navigate("/dashboard");
-      setToggleDelete(false)
+      setToggleDelete(false);
     } catch (err) {
       console.log(err);
     }

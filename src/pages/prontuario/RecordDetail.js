@@ -19,7 +19,7 @@ function RecordDetail() {
         const response = await api.get(
           `/medical-appointment/search/${params.id}`
         );
-        console.log(response.data);
+        
 
         setRecordData(response.data);
       } catch (err) {
@@ -40,8 +40,7 @@ function RecordDetail() {
     }
   }
 
-  console.log(recordData.date);
-  console.log(recordData);
+  
   return (
     <div className="min-h-full flex items-start justify-center pt-6 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full">

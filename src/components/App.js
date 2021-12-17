@@ -5,6 +5,7 @@ import Signup from "../pages/auth/Signup";
 import Login from "../pages/auth/login/Login";
 import ProtectedRoute from "../pages/auth/ProtectedRoute";
 import Topbar from "../components/topbar/Topbar";
+import NavBar from "../components/navbar/Navbar"
 
 import ForgotPassword from "../pages/auth/recoveryPassword/ForgotPassword";
 import NewPassword from "../pages/auth/recoveryPassword/NewPassword";
@@ -55,11 +56,11 @@ function App() {
           <Route path="/prontuario/record-detail/:id" element={<RecordDetail/>}/>
           <Route path="/prontuario/record-edit/:id" element={<RecordEdit/>}/>
           <Route path="/animal/edit/:id" element={<AnimalEdit/>}/>
-
           <Route path="/animal/detail/:id" element={<AnimalDetail/>} />
-
         </Routes>
+        <NavBar />
       </AuthContextComponent>
+      
     </div>
   );
 }
