@@ -8,14 +8,15 @@ import pawImg from "../../assets/pata.png";
 import Navbar from "../../components/navbar/Navbar";
 import Loading from "../../components/Loading";
 import AnimalCard from "../animal/AnimalCard";
-import AppointmentCard from "../appointment/AppointmentCard";
+import AppointmentCardVet from "../../components/appointment/AppointmentCardVet";
 
 function Dashboard() {
+  let timer;
   const params = useLocation();
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [animalData, setAnimalData] = useState([]);
-  const [appointment, setAppointment] = useState();
+  const [appointment, setAppointment] = useState([]);
 
   const [userData, setUserData] = useState({
     name: "",
@@ -23,15 +24,16 @@ function Dashboard() {
     avatarUrl: "",
   });
 
-  function handleChange(animal) {
-    setSearch(animal);
+  function handleChange(e) {
+    console.log(e.target.value);
+    setSearch(e.target.value);
   }
 
   let listaFiltrada = [];
   if (search) {
     const re = new RegExp(`${search}`, "gi");
     animalData.forEach((currentAnimal) => {
-      if (currentAnimal.name.common.match(re) !== null) {
+      if (currentAnimal.name.match(re) !== null) {
         listaFiltrada.push(currentAnimal);
       }
     });
@@ -53,22 +55,37 @@ function Dashboard() {
     fetchUser();
   }, []);
 
+  console.log(userData);
   useEffect(() => {
     async function fetchAnimal() {
       try {
         const response = await api.get(`/animal/list`);
+        let animalFilter;
+        if (userData.role === "user") {
+          animalFilter = await response.data.filter((currentAnimal) => {
+            return currentAnimal.userId === userData._id;
+          });
+        } else {
+          animalFilter = response.data.filter((currentAnimal) => {
+            return userData.patients.includes(currentAnimal._id);
+          });
+        }
 
-        const animalFilter = await response.data.filter((currentAnimal) => {
-          return currentAnimal.userId === userData._id;
-        });
-
+        for(let i = 0 ; i < animalFilter.length; i++) {
+          
+          const response = await api.get(`/user/profile/${animalFilter[i].userId}`)
+          console.log(response)
+           animalFilter[i].tutor = response.data
+        }
         setAnimalData(animalFilter);
       } catch (err) {
         console.error(err);
       }
     }
     fetchAnimal();
-  }, [userData._id, params]);
+
+  }, [userData._id]);
+
 
   useEffect(() => {
     async function fetchAppointment() {
@@ -86,17 +103,30 @@ function Dashboard() {
           });
         }
 
+        const appointmentDay = appointmentFilter.filter(
+          (currentAppointment) => {
+            return (
+              currentAppointment.date === new Date().toLocaleDateString() &&
+              currentAppointment.hour.split(":")[0] >
+                new Date().toLocaleTimeString().split(":")[0]
+            );
+          }
+        );
+
         await appointmentFilter.sort((a, b) => {
           return (a.date + a.hour).localeCompare(b.date + b.hour);
         });
 
-        setAppointment({ ...response.data });
+        appointmentFilter.splice(3);
+        setAppointment([...appointmentFilter]);
       } catch (err) {
         console.error(err);
       }
     }
     fetchAppointment();
   }, [userData._id]);
+
+  console.log(animalData);
 
   return (
     <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8">
@@ -116,7 +146,6 @@ function Dashboard() {
           </section>
 
           <hr />
-          <Link to="/vet/prontuario/61bb8f32d1222082035ac3d9">dasfafd</Link>
           {userData.role === "user" ? (
             <>
               <h1 className="mt-8 ml-8">Meus Pets</h1>
@@ -158,40 +187,48 @@ function Dashboard() {
             </>
           ) : (
             <>
-              <h1 className="mt-8 ml-8">Meus Agendamentos</h1>
+              <h1 className="mt-8 ml-8 has-text-centered">Próximas consultas</h1>
               <div className="ml-12 paw-container-right">
                 <img alt="pata" className="paw-small" src={pawImg} />
               </div>
-              [Card com Foto, nome e dia da consulta marcada]
-              {/*<AppointmentCard />*/}
-              {/* {animalData.map((currentAnimal) => {
-                return <AnimalCard key={currentAnimal.id} {...currentAnimal} />;
-              })} */}
+
+              {animalData.map((currentAnimal) => {
+                return (
+                  <AppointmentCardVet
+                    id={currentAnimal._id}
+                    avatar={currentAnimal.imageUrl}
+                    name={currentAnimal.name}
+                    hour="13h"
+                    tutor={currentAnimal.tutor.name.split(" ")[0]}
+                  />
+                );
+              })}
               <h1 className="mb-4 mt-8 ml-8">Meus Pacientes</h1>
-              <div className="flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8 ">
+              <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8 ">
                 <input
                   className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md"
-                  onChange={(event) => {
+                  onChange={(e) => {
                     clearTimeout(timer);
-                    let timer = setTimeout(
-                      () => handleChange(event.target.value),
-                      700
-                    );
+                    timer = setTimeout(() => handleChange(e), 600);
                   }}
                   type="text"
                   placeholder="Buscar paciente"
                 />
-                {listaFiltrada.map((currentAnimal) => {
-                  return (
-                    <Link
-                      key={`filtered-${currentAnimal.id}`}
-                      to={`/animal/detail/${currentAnimal.id}`}
-                    >
-                      <AnimalCard {...currentAnimal} />
-                    </Link>
-                  );
-                })}
               </div>
+              {listaFiltrada !== [] ? (
+                <div>
+                  {listaFiltrada.map((currentAnimal) => {
+                    return (
+                      <Link
+                        to={`/vet/prontuario/${currentAnimal._id}`}
+                        key={`filtered-${currentAnimal._id}`}
+                      >
+                        <AnimalCard {...currentAnimal} />
+                      </Link>
+                    );
+                  })}
+                </div>
+              ) : null}
             </>
           )}
 
