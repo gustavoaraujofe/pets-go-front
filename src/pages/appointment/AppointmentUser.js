@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
 import pawImg from "../../assets/pata.png";
 import api from "../../apis/api";
 import { useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/authContext";
 import { useContext } from "react";
+import BottomPink from "../../components/bottom/BottomPink"
+import Navbar from "../../components/navbar/Navbar"
 
 function AppointmentUser() {
   const [appointmentData, setAppointmentData] = useState([]);
@@ -27,7 +28,11 @@ function AppointmentUser() {
   }, [loggedInUser.user.id]);
 
   return (
-    <>
+    <div className="min-h-full flex is-flex-direction-column items-center justify-start mt-5 pt-0 pb-0 px-4 sm:px-6 lg:px-8">
+      <h1>Agendamentos</h1>
+      <div className="paw-container-right">
+        <img alt="pata" className="paw-medium" src={pawImg}/>
+      </div>
       {appointmentData.map((currentData) => {
         return (
           <div className="card-container mb-4">
@@ -41,15 +46,15 @@ function AppointmentUser() {
                       alt={currentData._id}
                     />
                   </div>
-                  <p>{currentData.vetId.name}</p>
-                  <p>{currentData.vetId.specialties[0]}</p>
+                  <p><span className="noto-bold">Veterinário: </span> {currentData.vetId.name}</p>
+                  <p><span className="noto-bold">Especialidade: </span>{currentData.vetId.specialties[0]}</p>
                 </div>
               </div>
               <div className="media pl-0">
                 <div className="media-content">
-                  <p className="noto-bold">Pet: {currentData.animalId.name}</p>
-                  <p className="noto-bold">
-                    Consulta dia: {currentData.date} - {currentData.hour}
+                  <p> <span className="noto-bold">Pet: </span>{currentData.animalId.name}</p>
+                  <p> <span className="noto-bold">
+                    Consulta dia: </span>{currentData.date} - {currentData.hour}
                   </p>
                 </div>
               </div>
@@ -57,7 +62,9 @@ function AppointmentUser() {
           </div>
         );
       })}
-    </>
+      <Navbar/>
+      <BottomPink/>
+    </div>
   );
 }
 

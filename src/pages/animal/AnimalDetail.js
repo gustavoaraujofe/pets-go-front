@@ -100,6 +100,9 @@ function AnimalDetail() {
                 <hr />
               </div>
 
+
+
+
               <div className="card-container mb-4">
                 <div className="p-5 card-content">
                   <div className="media pl-0">
