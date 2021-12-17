@@ -90,7 +90,6 @@ function Prontuario() {
   }, [userData._id]);
 
   function handleChangeSelect(e) {
-    console.log(e.target.value);
     setIdAnimalSelect(e.target.value);
   }
 

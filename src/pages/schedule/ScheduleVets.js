@@ -4,6 +4,8 @@ import ScheduleLine from "../../components/table/ScheduleLine";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../apis/api";
+import toast, { Toaster } from "react-hot-toast";
+
 
 function ScheduleVets() {
   const navigate = useNavigate();
@@ -36,7 +38,6 @@ function ScheduleVets() {
       });
     } else if (!e.target.checked) {
       const index = schedule[e.target.name].indexOf(e.target.value);
-      console.log(schedule[e.target.name].length);
 
       if (schedule[e.target.name].length === 1) {
         setSchedule({
@@ -57,7 +58,8 @@ function ScheduleVets() {
     const dateInitial = new Date(e.target.value);
 
     if (!String(incrementDate(1)).includes("Mon")) {
-      return console.error("ERROU");
+      toast.error("Selecione uma segunda-feira");
+      return;
     }
 
     function incrementDate(days) {
@@ -95,7 +97,8 @@ function ScheduleVets() {
 
   async function handleSubmit() {
     if (!date.monday) {
-      return console.error("ERROU");
+      toast.error("Selecione uma segunda-feira");
+      return;
     }
 
     try {
@@ -182,6 +185,29 @@ function ScheduleVets() {
       </div>
 
       <Navbar />
+      <Toaster
+          position="top-center"
+          reverseOrder={false}
+          gutter={8}
+          containerClassName=""
+          containerStyle={{}}
+          toastOptions={{
+            className: "",
+            duration: 5000,
+            style: {
+              background: "#fff",
+              color: "#000",
+            },
+
+            success: {
+              duration: 3000,
+              theme: {
+                primary: "green",
+                secondary: "black",
+              },
+            },
+          }}
+        />
     </div>
   );
 }

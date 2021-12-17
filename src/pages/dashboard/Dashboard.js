@@ -26,7 +26,7 @@ function Dashboard() {
   });
 
   function handleChange(e) {
-    console.log(e.target.value);
+
     setSearch(e.target.value);
   }
 
@@ -56,7 +56,7 @@ function Dashboard() {
     fetchUser();
   }, []);
 
-  console.log(userData);
+
   useEffect(() => {
     async function fetchAnimal() {
       try {
