@@ -1,6 +1,6 @@
 # Pets Go
 
->Pet’s Go é um SPA (Single Page Application) usando MERN stack (MongoDB, Express, React & Node.js). Foi desenvolvido para o projeto final do Bootcamp de Web Development da Ironhack São Paulo.
+>Pet’s Go é um SPA (Single Page Application) usando MERN stack (MongoDB, Express, React & Node.js). Foi desenvolvido durante 1 semana para o projeto final do Bootcamp de Web Development da Ironhack São Paulo.
 
 ###
 
