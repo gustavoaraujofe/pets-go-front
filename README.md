@@ -23,7 +23,7 @@ Nesse projeto, construímos uma aplicação para conectar tutores e veterinário
 
 
 ###
-<img src="./src/assets/images/printscreen.png" alt="print" style="height:340px;"/>&nbsp; &nbsp; <img src="./src/assets/images/printscreen-mobile.jpg" alt="print" style="height:340px;"/> 
+<img src="https://res.cloudinary.com/dkzcbs84l/image/upload/v1639756127/picture_vet/Tela_1_ijs7xp.png" alt="print" style="height:340px;"/>&nbsp; &nbsp; <img src="./src/assets/images/printscreen-mobile.jpg" alt="print" style="height:340px;"/> 
 ###
 
 
