@@ -66,20 +66,16 @@ function Dashboard() {
             return currentAnimal.userId === userData._id;
           });
         } else {
-         
-            animalFilter = response.data.filter((currentAnimal) => {
-              return userData.patients.includes(currentAnimal._id);
-            });
-          
-          
+          animalFilter = response.data.filter((currentAnimal) => {
+            return userData.patients.includes(currentAnimal._id);
+          });
         }
 
-
-        for(let i = 0 ; i < animalFilter.length; i++) {
-          
-          const response = await api.get(`/user/profile/${animalFilter[i].userId}`)
-           animalFilter[i].tutor = response.data
-
+        for (let i = 0; i < animalFilter.length; i++) {
+          const response = await api.get(
+            `/user/profile/${animalFilter[i].userId}`
+          );
+          animalFilter[i].tutor = response.data;
         }
         setAnimalData(animalFilter);
       } catch (err) {
@@ -87,10 +83,7 @@ function Dashboard() {
       }
     }
     fetchAnimal();
-
-
   }, [userData._id, params]);
-
 
   useEffect(() => {
     async function fetchAppointment() {
@@ -131,8 +124,6 @@ function Dashboard() {
     fetchAppointment();
   }, [userData._id]);
 
-
-
   return (
     <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8">
       {loading ? (
@@ -165,7 +156,7 @@ function Dashboard() {
                     <div className="media items-center">
                       <div className="media-left">
                         <div className="img-radio">
-                          <img src={addIcon}  alt="adicionar animal"/>
+                          <img src={addIcon} alt="adicionar animal" />
                         </div>
                       </div>
                       <div className="media-content">
@@ -199,7 +190,6 @@ function Dashboard() {
             <>
 
               <h1 className="mt-8 ml-8">Próximas consultas</h1>
-              
 
               <div className="ml-12 paw-container-right">
                 <img alt="pata" className="paw-small" src={pawImg} />
@@ -208,17 +198,21 @@ function Dashboard() {
               {animalData.map((currentAnimal) => {
                 return (
                   <div key={`appointment${currentAnimal._id}`}>
-                  <AppointmentCardVet
-                    id={currentAnimal._id}
-                    avatar={currentAnimal.imageUrl}
-                    name={currentAnimal.name}
-                    hour="13h"
-                    tutor={currentAnimal.tutor.name.split(" ")[0]}
-                  />
+                    <AppointmentCardVet
+                      id={currentAnimal._id}
+                      avatar={currentAnimal.imageUrl}
+                      name={currentAnimal.name}
+                      hour="13h"
+                      tutor={currentAnimal.tutor.name.split(" ")[0]}
+                    />
                   </div>
                 );
               })}
-              <Link to={`/vet/agendamentos/${userData._id}`}><p className="is-size-6 has-text-right mr-5"><strong>Mostrar todas</strong></p></Link>
+              <Link to={`/vet/agendamentos/${userData._id}`}>
+                <p className="is-size-6 has-text-right mr-5">
+                  <strong>Mostrar todas</strong>
+                </p>
+              </Link>
               <h1 className="mb-4 mt-8 ml-8">Meus Pacientes</h1>
               <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8 ">
                 <input

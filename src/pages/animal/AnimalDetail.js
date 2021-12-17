@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import api from "../../apis/api";
 import pawImg from "../../assets/pata.png";
 import BottomPink from "../../components/bottom/BottomPink";
@@ -18,17 +18,9 @@ function AnimalDetail() {
     medicalAppointmentHistory: "",
   });
 
-  const [medicalAppointmentHistory, setmedicalAppointmentHistory] = useState({
-    animalId: "",
-    date: "",
-    weight: "",
-    clinicalSign: "",
-    exam: "",
-    disease: "",
-    prescription: "",
-    vaccine: "",
-    vetId: "",
-  });
+  const [medicalAppointmentHistory, setmedicalAppointmentHistory] = useState(
+    []
+  );
 
   useEffect(() => {
     async function fetchAnimalId() {
@@ -45,11 +37,15 @@ function AnimalDetail() {
   useEffect(() => {
     async function fetchMedicalAppointment() {
       try {
-        const response = await api.get(
-          `/medical-appointment/search/${animalDetail.medicalAppointmentHistory}`
+        const response = await api.get(`/medical-appointment/list`);
+
+        const appointmentFiltered = response.data.filter(
+          (currentAppointment) => {
+            return currentAppointment.animalId === animalDetail._id;
+          }
         );
-        console.log(response.data);
-        setmedicalAppointmentHistory({ ...response.data });
+
+        setmedicalAppointmentHistory([...appointmentFiltered]);
       } catch (err) {
         console.log(err);
       }
@@ -57,6 +53,7 @@ function AnimalDetail() {
     fetchMedicalAppointment();
   }, [animalDetail.medicalAppointmentHistory]);
 
+  console.log(medicalAppointmentHistory);
   return (
     <>
       <div className="flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8">
@@ -99,43 +96,23 @@ function AnimalDetail() {
                 </p>
                 <hr />
               </div>
-
-
-
-
-              <div className="card-container mb-4">
-                <div className="p-5 card-content">
-                  <div className="media pl-0">
-                    <div className="media-content">
-                      <p className="noto-bold">Consulta dia: </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <p className="mt-5">
-                  <span className="noto-bold">Sinais Clínicos: </span>{" "}
-                  {medicalAppointmentHistory.clinicalSign}
-                </p>
-                <p>
-                  <span className="noto-bold">Exame: </span>{" "}
-                  {medicalAppointmentHistory.exam}
-                </p>
-
-                <p>
-                  <span className="noto-bold">Doenças: </span>{" "}
-                  {medicalAppointmentHistory.disease}
-                </p>
-                <p>
-                  <span className="noto-bold">Prescrição: </span>{" "}
-                  {medicalAppointmentHistory.prescription}
-                </p>
-                <p>
-                  <span className="noto-bold">Vacina: </span>{" "}
-                  {medicalAppointmentHistory.vaccine}
-                </p>
-              </div>
+              {medicalAppointmentHistory
+                ? medicalAppointmentHistory.map((currentAppointment) => {
+                    return (
+                      <Link to={`/prontuario/record-detail/${currentAppointment._id}`} >
+                      <div className="card-container mb-4">
+                        <div className="p-5 card-content">
+                          <div className="media pl-0">
+                            <div className="media-content">
+                              <p><strong>Consulta dia:</strong> {currentAppointment.date}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </Link>
+                    );
+                  })
+                : null}
             </div>
           </div>
           <BottomPink />
