@@ -53,7 +53,6 @@ function AnimalDetail() {
     fetchMedicalAppointment();
   }, [animalDetail.medicalAppointmentHistory]);
 
-  console.log(medicalAppointmentHistory);
   return (
     <>
       <div className="flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8">

@@ -32,7 +32,7 @@ function AppointmentUser() {
       <h1>Agendamentos</h1>
       <div className="paw-container-right">
         <img alt="pata" className="paw-medium" src={pawImg}/>
-      </div>
+      </div> 
       {appointmentData.map((currentData) => {
         return (
           <div className="card-container mb-4">
@@ -50,6 +50,7 @@ function AppointmentUser() {
                   <p><span className="noto-bold">Especialidade: </span>{currentData.vetId.specialties[0]}</p>
                 </div>
               </div>
+              
               <div className="media pl-0">
                 <div className="media-content">
                   <p> <span className="noto-bold">Pet: </span>{currentData.animalId.name}</p>

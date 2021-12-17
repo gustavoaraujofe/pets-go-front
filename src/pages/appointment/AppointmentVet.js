@@ -51,17 +51,23 @@ function AppointmentVet() {
                       alt={currentData.animalId.name}
                     />
                   </div>
-                  <p>{currentData.animalId.name}</p>
-                  <p>{currentData.animalId.breed}</p>
+                  <p>
+                    <span className="noto-bold">Pet: </span>{" "}
+                    {currentData.animalId.name}
+                  </p>
+                  <p>
+                    <span className="noto-bold">Raça: </span>
+                    {currentData.animalId.breed}
+                  </p>
                 </div>
               </div>
               <div className="media pl-0">
                 <div className="media-content">
-                  <p className="noto-bold">
-                    Tutor: {currentData.userId.name.split(" ")[0]}
+                  <p>
+                  <span className="noto-bold">Tutor: </span> {currentData.userId.name.split(" ")[0]}
                   </p>
-                  <p className="noto-bold">
-                    Consulta dia: {currentData.date} - {currentData.hour}
+                  <p><span className="noto-bold">Consulta dia: </span>
+                    {currentData.date} - {currentData.hour}
                   </p>
                 </div>
               </div>
