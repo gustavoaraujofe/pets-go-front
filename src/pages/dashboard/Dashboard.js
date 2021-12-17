@@ -146,7 +146,6 @@ function Dashboard() {
           </section>
 
           <hr />
-
           {userData.role === "user" ? (
             <>
               <h1 className="mt-8 ml-8">Meus Pets</h1>

@@ -21,6 +21,7 @@ import Prontuario from "../pages/prontuario/Prontuario"
 import NewRecord from "../pages/prontuario/NewRecord"
 import RecordDetail from "../pages/prontuario/RecordDetail"
 import RecordEdit from "../pages/prontuario/RecordEdit"
+import AppointmentUser from "../pages/appointment/AppointmentUser"
 
 import AnimalDetail from "../pages/animal/AnimalDetail"
 
@@ -55,6 +56,7 @@ function App() {
           <Route path="/prontuario/record-detail/:id" element={<RecordDetail/>}/>
           <Route path="/prontuario/record-edit/:id" element={<RecordEdit/>}/>
           <Route path="/animal/edit/:id" element={<AnimalEdit/>}/>
+          <Route path="user/agendamentos" element={<AppointmentUser/>}/>
 
           <Route path="/animal/detail/:id" element={<AnimalDetail/>} />
 

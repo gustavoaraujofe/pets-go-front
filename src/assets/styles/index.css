@@ -104,6 +104,10 @@ body {
   font-size: 0.8rem !important;
 }
 
+.center {
+  margin:0 auto; 
+}
+
 .hora-btn {
   width: 90px !important;
   height: 40px !important;

@@ -17,3 +17,4 @@ function AppointmentCard(props) {
 }
 
 export default AppointmentCard;
+

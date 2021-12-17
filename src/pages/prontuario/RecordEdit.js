@@ -70,7 +70,7 @@ function RecordEdit(){
             </h1>
           </div>
   
-          <form className="forms">
+          <form className="forms ">
             <div className="mt-5 relative rounded-md shadow-sm">
               <label htmlFor="clinicalSign" className="pl-1 label">
                 Sinais clínicos

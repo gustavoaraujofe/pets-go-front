@@ -7,7 +7,6 @@ import BottomBege from "../../components/bottom/BottomBege";
 
 function AnimalCreate() {
   const { loggedInUser } = useContext(AuthContext);
-  
 
   const [animalData, setAnimalData] = useState({
     name: "",
@@ -22,7 +21,7 @@ function AnimalCreate() {
 
   const [loading, setLoading] = useState(false);
   const params = useParams();
-  
+
   const [spinner, setSpinner] = useState(false);
   const navigate = useNavigate();
 
@@ -51,7 +50,6 @@ function AnimalCreate() {
   async function handleSubmit(e) {
     e.preventDefault();
     setSpinner(true);
-    
 
     if (
       animalData.name === "" ||
@@ -64,33 +62,30 @@ function AnimalCreate() {
       toast.error("Por favor preencha todos os campos.");
     }
     try {
-      
-      
-
       const imageUrl = await handleFileUpload(animalData.picture);
 
-      await api.post("/animal/create", {...animalData, imageUrl: imageUrl , userId: loggedInUser.user.id});
+      await api.post("/animal/create", {
+        ...animalData,
+        imageUrl: imageUrl,
+        userId: loggedInUser.user.id,
+      });
       navigate("/dashboard");
 
       setSpinner(false);
-      
     } catch (err) {
       console.error(err);
       setSpinner(false);
-      
     }
   }
 
   return (
-    <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8">
+    <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8 pb-10">
       <div className="max-w-md w-full">
         <div>
-          <h1 className="mt-6 text-center ">
-            Adicionar Pet
-          </h1>
+          <h1 className="mt-6 text-center ">Adicionar Pet</h1>
         </div>
 
-        <form className="forms">
+        <form className="forms ">
           <div className="mt-5 relative rounded-md shadow-sm">
             <label htmlFor="name" className="pl-1 label">
               Nome do Pet
@@ -119,7 +114,9 @@ function AnimalCreate() {
               name="type"
               className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md`}
             >
-              <option value="" selected>Selecionar</option>
+              <option value="" selected>
+                Selecionar
+              </option>
               <option value="dog">Cachorro</option>
               <option value="cat">Gato</option>
               <option value="rabbit">Coelho</option>
@@ -216,7 +213,7 @@ function AnimalCreate() {
           </div>
 
           <div className="max-w-md w-full is-flex is-justify-content-center">
-          <button
+            <button
               disabled={spinner}
               type="submit"
               className="btn salmon-btn"
