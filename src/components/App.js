@@ -41,7 +41,7 @@ function App() {
           />
           <Route path="/signup/:type" element={<Signup />} />
           <Route path="/edit-account/:type" element={<ProtectedRoute component={EditAccount} />} />
-          <Route path="/" element={<ProtectedRoute component={Home} />} />
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/new-password/:token" element={<NewPassword />} /> 
