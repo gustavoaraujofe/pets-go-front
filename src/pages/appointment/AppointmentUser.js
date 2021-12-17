@@ -16,7 +16,7 @@ function AppointmentUser() {
         const response = await api.get(`/appointment/list`);
 
         const myAppointments = response.data.filter((currentAppointment) => {
-          return currentAppointment.userId === loggedInUser.user.id;
+          return currentAppointment.userId._id === loggedInUser.user.id;
         });
 
         setAppointmentData(myAppointments);
