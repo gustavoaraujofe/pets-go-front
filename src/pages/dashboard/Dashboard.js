@@ -76,7 +76,6 @@ function Dashboard() {
           const response = await api.get(
             `/user/profile/${animalFilter[i].userId}`
           );
-          console.log(response);
           animalFilter[i].tutor = response.data;
         }
         setAnimalData(animalFilter);
@@ -126,8 +125,6 @@ function Dashboard() {
     fetchAppointment();
   }, [userData._id]);
 
-  console.log(animalData);
-
   return (
     <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8">
       {loading ? (
@@ -160,7 +157,7 @@ function Dashboard() {
                     <div className="media items-center">
                       <div className="media-left">
                         <div className="img-radio">
-                          <img src={addIcon} />
+                          <img src={addIcon} alt="adicionar animal" />
                         </div>
                       </div>
                       <div className="media-content">
@@ -170,6 +167,7 @@ function Dashboard() {
                   </div>
                 </div>
               </Link>
+
               <div>
                 {animalData.map((currentAnimal) => {
                   return (
@@ -177,6 +175,7 @@ function Dashboard() {
                   );
                 })}
               </div>
+
               <div className="ml-5 pt-1 paw-container-left">
                 <img alt="pata" className="paw-medium" src={pawImg} />
               </div>
@@ -189,24 +188,31 @@ function Dashboard() {
             </>
           ) : (
             <>
-              <h1 className="mt-8 ml-8 has-text-centered">
-                Próximas consultas
-              </h1>
+
+              <h1 className="mt-8 ml-8">Próximas consultas</h1>
+
               <div className="ml-12 paw-container-right">
                 <img alt="pata" className="paw-small" src={pawImg} />
               </div>
 
               {animalData.map((currentAnimal) => {
                 return (
-                  <AppointmentCardVet
-                    id={currentAnimal._id}
-                    avatar={currentAnimal.imageUrl}
-                    name={currentAnimal.name}
-                    hour="13h"
-                    tutor={currentAnimal.tutor.name.split(" ")[0]}
-                  />
+                  <div key={`appointment${currentAnimal._id}`}>
+                    <AppointmentCardVet
+                      id={currentAnimal._id}
+                      avatar={currentAnimal.imageUrl}
+                      name={currentAnimal.name}
+                      hour="13h"
+                      tutor={currentAnimal.tutor.name.split(" ")[0]}
+                    />
+                  </div>
                 );
               })}
+              <Link to={`/vet/agendamentos/${userData._id}`}>
+                <p className="is-size-6 has-text-right mr-5">
+                  <strong>Mostrar todas</strong>
+                </p>
+              </Link>
               <h1 className="mb-4 mt-8 ml-8">Meus Pacientes</h1>
               <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8 ">
                 <input
