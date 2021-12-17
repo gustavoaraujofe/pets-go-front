@@ -39,7 +39,8 @@ Aplicação full-stack utilizando React desenvolvida em uma semana.
 
 ## Link para a apresentação em slides
 
--  [Slides]()
+-  [Slides](https://docs.google.com/presentation/d/11XhqbJQScNVW_5Qr0Gzp4MAR_Ogx6WN3VOIvNC-xMQw/edit?usp=sharing
+)
 
   
 
