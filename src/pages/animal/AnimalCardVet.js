@@ -37,8 +37,8 @@ function AnimalCard(props) {
             </div>
             <div className="minimo-h media-content">
               <p className="noto-bold">{props.name}</p>
-              <p className="subtitle is-6 mb-1">Idade: {props.age} anos</p>
-              <p className="subtitle is-6">Peso: {props.weight}kg</p>
+              <p className="subtitle is-6 mb-1">Idade: {props.age}</p>
+              <p className="subtitle is-6">Peso: {props.weight}</p>
             </div>
           </div>
         </Link>

@@ -77,11 +77,11 @@ function AnimalDetail() {
                 </p>
                 <p>
                   <span className="noto-bold">Idade: </span> {animalDetail.age}{" "}
-                  anos
+                
                 </p>
                 <p>
                   <span className="noto-bold">Peso: </span>{" "}
-                  {animalDetail.weight} kg
+                  {animalDetail.weight}
                 </p>
                 <p>
                   <span className="noto-bold">Raça: </span> {animalDetail.breed}
