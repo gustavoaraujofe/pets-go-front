@@ -104,8 +104,9 @@ function ScheduleVetId() {
       console.error(err);
     }
   }
-
-  console.log(dates);
+  console.log(`animais: ${animalData}`);
+  console.log(`datas: ${dates}`);
+  console.log(`horas: ${hours}`);
   return (
     <div className="flex is-flex-direction-column items-center justify-center mt-4">
       <div className="max-w-md w-full space-y-8 pb-20 mr-0">
@@ -119,22 +120,22 @@ function ScheduleVetId() {
           required
         >
           <option className="">Selecione um animal</option>
-          {animalData?.map((currentAnimal) => {
+          {animalData !== undefined ? animalData?.map((currentAnimal) => {
             return (
               <option key={currentAnimal._id} value={currentAnimal._id}>
                 {currentAnimal.name}
               </option>
             );
-          })}
+          }): null}
         </select>
-        {dates && hours
+        {dates && hours !== undefined
           ? dates?.map((date, index) => {
               return (
                 <div key={`date-${index}`} className="has-text-centered mt-3">
                   <div>
                     <h3 className="text-center noto-bold">{date}</h3>
                   </div>
-                  {hours[index].map((hour, index2) => {
+                  {hours[index] !== undefined ? hours[index]?.map((hour, index2) => {
                     return (
                       <div
                         key={`hour-${index2}`}
@@ -151,7 +152,7 @@ function ScheduleVetId() {
                         </button>
                       </div>
                     );
-                  })}
+                  }): null}
                 </div>
               );
             })
