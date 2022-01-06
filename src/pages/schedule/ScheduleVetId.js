@@ -61,10 +61,11 @@ function ScheduleVetId() {
                 }
 
               });
-              
-              if (!currentWeek[key].length) {
-                delete currentWeek[key];
-              }
+
+            }
+            
+            if (!currentWeek[key].length) {
+              delete currentWeek[key];
             }
           }
         });
