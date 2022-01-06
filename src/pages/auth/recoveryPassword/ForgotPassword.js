@@ -125,7 +125,7 @@ function ForgotPassword() {
           },
         }}
       />
-      <Spinner loading={loading} texto="Enviando o E-mail..."/>
+      <Spinner loading={loading} texto="Enviando o E-mail..." />
     </>
   );
 }

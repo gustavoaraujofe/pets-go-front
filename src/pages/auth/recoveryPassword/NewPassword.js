@@ -8,6 +8,7 @@ import "../login/login.css";
 import * as Yup from "yup";
 import telaRosaAzul from "../../../assets/tela-rosa-azul.png";
 import toast, { Toaster } from "react-hot-toast";
+import Spinner from "../../../components/spinner/Spinner";
 
 function NewPassword() {
   const [loading, setLoading] = useState(false);
@@ -36,7 +37,7 @@ function NewPassword() {
           setLoading(true);
 
           await api.put(`/password/reset-password/${params.token}`, values);
-
+          setLoading(false);
           toast.success("Senha alterada com sucesso!");
 
           //Direciona o usuário para o dashboard
@@ -128,6 +129,7 @@ function NewPassword() {
           },
         }}
       />
+      <Spinner loading={loading} texto="Alterando..." />
     </>
   );
 }

@@ -100,8 +100,13 @@ function Signup() {
           setLoading(false);
           navigate("/login");
         } catch (e) {
-          console.error(e.response);
+          console.error(e.response.data);
           setLoading(false);
+          if (e.response.data.includes("duplicate")) {
+            toast.error("E-mail já cadastrado!");
+          } else {
+            toast.error("Erro desconhecido. Tente novamente!");
+          }
         }
       }
       signup();
@@ -241,9 +246,9 @@ function Signup() {
                 type="password"
                 name="password"
                 id="password"
-                className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md ${
+                className={`focus:ring-indigo-500  block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md ${
                   formik.errors.password && formik.touched.password
-                    ? "border-red-300"
+                    ? "borda-senha-errada "
                     : null
                 }`}
                 onChange={formik.handleChange}
@@ -261,9 +266,9 @@ function Signup() {
                 type="password"
                 name="confirmPassword"
                 id="confirmPassword"
-                className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md ${
+                className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm rounded-md ${
                   formik.errors.password && formik.touched.password
-                    ? "border-red-300"
+                    ? "borda-senha-errada "
                     : null
                 }`}
                 onChange={formik.handleChange}
@@ -340,7 +345,7 @@ function Signup() {
           }}
         />
       </div>
-      <Spinner loading={loading} texto="Carregando..."/>
+      <Spinner loading={loading} texto="Carregando..." />
     </>
   );
 }
