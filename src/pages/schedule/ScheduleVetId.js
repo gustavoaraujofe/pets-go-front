@@ -127,35 +127,33 @@ function ScheduleVetId() {
               })
             : null}
         </select>
-        {dates && hours
-          ? dates.map((date, index) => {
-              return (
-                <div key={`date-${index}`} className="has-text-centered mt-3">
-                  <div>
-                    <h3 className="text-center noto-bold">{date}</h3>
+        {dates?.map((date, index) => {
+          return (
+            <div key={`date-${index}`} className="has-text-centered mt-3">
+              <div>
+                <h3 className="text-center noto-bold">{date}</h3>
+              </div>
+              {hours[index].map((hour, index2) => {
+                return (
+                  <div
+                    key={`hour-${index2}`}
+                    className="flex justify-center items-center"
+                  >
+                    <button
+                      onClick={() => {
+                        setToggleConfirm(true);
+                        setAppointment([date, hour]);
+                      }}
+                      className="flex justify-center items-center lightgreen-btn hora-btn mt-2"
+                    >
+                      {hour}
+                    </button>
                   </div>
-                  {hours[index].map((hour, index2) => {
-                    return (
-                      <div
-                        key={`hour-${index2}`}
-                        className="flex justify-center items-center"
-                      >
-                        <button
-                          onClick={() => {
-                            setToggleConfirm(true);
-                            setAppointment([date, hour]);
-                          }}
-                          className="flex justify-center items-center lightgreen-btn hora-btn mt-2"
-                        >
-                          {hour}
-                        </button>
-                      </div>
-                    );
-                  })}
-                </div>
-              );
-            })
-          : null}
+                );
+              })}
+            </div>
+          );
+        })}
         <div className="flex items-center justify-center">
           <img
             alt="imagem inferior"
