@@ -67,7 +67,7 @@ function Dashboard() {
           });
         } else {
           animalFilter = response.data.filter((currentAnimal) => {
-            return userData.patients.includes(currentAnimal._id);
+            return userData.patients?.includes(currentAnimal._id);
           });
         }
 
@@ -111,12 +111,12 @@ function Dashboard() {
           }
         );
 
-        await appointmentFilter.sort((a, b) => {
+        await appointmentDay.sort((a, b) => {
           return (a.date + a.hour).localeCompare(b.date + b.hour);
         });
 
-        appointmentFilter.splice(3);
-        setAppointment([...appointmentFilter]);
+        appointmentDay.splice(3);
+        setAppointment([...appointmentDay]);
       } catch (err) {
         console.error(err);
       }

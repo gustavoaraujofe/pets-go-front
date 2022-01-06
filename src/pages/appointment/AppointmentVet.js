@@ -47,17 +47,17 @@ function AppointmentVet() {
                   <div className="flex-shrink-0">
                     <img
                       className="h-20 w-20 rounded-full object-cover"
-                      src={currentData.animalId.imageUrl}
-                      alt={currentData.animalId.name}
+                      src={currentData.animalId?.imageUrl}
+                      alt={currentData.animalId?.name}
                     />
                   </div>
                   <p>
                     <span className="noto-bold">Pet: </span>{" "}
-                    {currentData.animalId.name}
+                    {currentData.animalId?.name}
                   </p>
                   <p>
                     <span className="noto-bold">Raça: </span>
-                    {currentData.animalId.breed}
+                    {currentData.animalId?.breed}
                   </p>
                 </div>
               </div>
