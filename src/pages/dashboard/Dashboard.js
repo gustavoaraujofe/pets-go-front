@@ -135,7 +135,7 @@ function Dashboard() {
             <h2 className="noto-bold">Olá, {userData.name.split(" ")[0]}</h2>
             <div className="flex-shrink-0">
               <img
-                className="h-20 w-20 rounded-full"
+                className="h-20 w-20 rounded-full object-cover"
                 src={userData.avatarUrl}
                 alt="Avatar usuario"
               />

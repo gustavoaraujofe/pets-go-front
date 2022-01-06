@@ -52,7 +52,7 @@ function RecordDetail() {
         {recordData.date !== undefined ? (
           <>
             <div className="flex items-center justify-end">
-              <Link to={`/vet/prontuario/${recordData.animalId}`}>
+              <Link to={loggedInUser.user.role === "vet" ? `/vet/prontuario/${recordData.animalId}` : `/dashboard`}>
                 <i className="fas fa-arrow-left fa-2x mr-3 icon"></i>
               </Link>
               {loggedInUser.user.role === "vet" ? (
