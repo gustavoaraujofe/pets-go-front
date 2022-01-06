@@ -216,10 +216,9 @@ function AnimalCreate() {
             <button
               disabled={spinner}
               type="submit"
-              className="btn salmon-btn"
               onClick={handleSubmit}
               className={
-                params.type === "user" ? "btn purple-btn" : "btn lightgreen-btn"
+                params.type === "user" ? "purple-btn" : "lightgreen-btn"
               }
             >
               {spinner ? (
