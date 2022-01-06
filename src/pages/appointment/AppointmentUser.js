@@ -28,7 +28,7 @@ function AppointmentUser() {
   }, [loggedInUser.user.id]);
 
   return (
-    <div className="min-h-full flex is-flex-direction-column items-center justify-start mt-5 pt-0 pb-0 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-full flex is-flex-direction-column items-center justify-center mt-5 pt-0 pb-0 px-4 sm:px-6 lg:px-8">
       <h1>Agendamentos</h1>
       <div className="paw-container-right">
         <img alt="pata" className="paw-medium" src={pawImg}/>

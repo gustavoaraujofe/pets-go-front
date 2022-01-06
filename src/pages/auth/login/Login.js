@@ -6,7 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 import "./login.css";
 import * as Yup from "yup";
 import telaRosaAzul from "../../../assets/tela-rosa-azul.png";
-
+import Spinner from "../../../components/spinner/Spinner";
 import { AuthContext } from "../../../contexts/authContext";
 
 function Login() {
@@ -70,18 +70,14 @@ function Login() {
       }
       login();
     },
-  }); 
+  });
 
   return (
     <>
-      <div
-        className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8 mt-8"
-      >
+      <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8 mt-8">
         <div className="max-w-sm w-full space-y-8">
           <div>
-            <h1 className="text-center">
-              Entrar na conta
-            </h1>
+            <h1 className="text-center">Entrar na conta</h1>
           </div>
           <form onSubmit={formik.handleSubmit} className="mt-8 space-y-6 forms">
             <div className="rounded-md shadow-sm -space-y-px">
@@ -208,6 +204,7 @@ function Login() {
           },
         }}
       />
+      <Spinner loading={loading} texto="Autenticando..." />
     </>
   );
 }

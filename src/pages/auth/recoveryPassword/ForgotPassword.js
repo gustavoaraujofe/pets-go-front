@@ -6,6 +6,7 @@ import "../login/login.css";
 import * as Yup from "yup";
 import telaRosaAzul from "../../../assets/tela-rosa-azul.png";
 import toast, { Toaster } from "react-hot-toast";
+import Spinner from "../../../components/spinner/Spinner";
 
 function ForgotPassword() {
   const [loading, setLoading] = useState(false);
@@ -30,6 +31,7 @@ function ForgotPassword() {
           setLoading(true);
 
           await api.post("/password/forgot-password", values);
+          setLoading(false);
           toast.success("E-mail enviado com sucesso!");
 
           //Direciona o usuário para o dashboard
@@ -38,7 +40,7 @@ function ForgotPassword() {
           }, 3000);
         } catch (e) {
           setLoading(false);
-          console.error(e);
+          toast.error("E-mail não cadastrado!");
         }
       }
       login();
@@ -123,6 +125,7 @@ function ForgotPassword() {
           },
         }}
       />
+      <Spinner loading={loading} texto="Enviando o E-mail..." />
     </>
   );
 }

@@ -11,6 +11,7 @@ import AnimalCard from "../animal/AnimalCard";
 import AnimalCardVet from "../animal/AnimalCardVet";
 import AppointmentCardVet from "../../components/appointment/AppointmentCardVet";
 
+
 function Dashboard() {
   let timer;
   const params = useLocation();
@@ -26,7 +27,6 @@ function Dashboard() {
   });
 
   function handleChange(e) {
-
     setSearch(e.target.value);
   }
 
@@ -56,7 +56,6 @@ function Dashboard() {
     fetchUser();
   }, []);
 
-
   useEffect(() => {
     async function fetchAnimal() {
       try {
@@ -68,7 +67,7 @@ function Dashboard() {
           });
         } else {
           animalFilter = response.data.filter((currentAnimal) => {
-            return userData.patients.includes(currentAnimal._id);
+            return userData.patients?.includes(currentAnimal._id);
           });
         }
 
@@ -94,14 +93,14 @@ function Dashboard() {
 
         if (userData.role === "user") {
           appointmentFilter = response.data.filter((currentAppointment) => {
-            return currentAppointment.userId === userData._id;
+            return currentAppointment.userId._id === userData._id;
           });
         } else {
           appointmentFilter = response.data.filter((currentAppointment) => {
-            return currentAppointment.vetId === userData._id;
+            return currentAppointment.vetId._id === userData._id;
           });
         }
-
+   
         const appointmentDay = appointmentFilter.filter(
           (currentAppointment) => {
             return (
@@ -112,12 +111,12 @@ function Dashboard() {
           }
         );
 
-        await appointmentFilter.sort((a, b) => {
+        await appointmentDay.sort((a, b) => {
           return (a.date + a.hour).localeCompare(b.date + b.hour);
         });
 
-        appointmentFilter.splice(3);
-        setAppointment([...appointmentFilter]);
+        appointmentDay.splice(3);
+        setAppointment([...appointmentDay]);
       } catch (err) {
         console.error(err);
       }
@@ -125,127 +124,130 @@ function Dashboard() {
     fetchAppointment();
   }, [userData._id]);
 
+
   return (
-    <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8">
-      {loading ? (
-        <Loading />
-      ) : (
-        <div className="pb-20">
-          <section className="mt-4 flex items-center justify-between mr-8 ml-8">
-            <h2 className="noto-bold">Olá, {userData.name.split(" ")[0]}</h2>
-            <div className="flex-shrink-0">
-              <img
-                className="h-20 w-20 rounded-full"
-                src={userData.avatarUrl}
-                alt="Avatar usuario"
-              />
-            </div>
-          </section>
-
-          <hr />
-          {userData.role === "user" ? (
-            <>
-              <h1 className="mt-8 ml-8">Meus Pets</h1>
-
-              <div className="ml-12 paw-container-right">
-                <img alt="pata" className="paw-medium" src={pawImg} />
+    <>
+      <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8">
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className="pb-20">
+            <section className="mt-4 flex items-center justify-between mr-8 ml-8">
+              <h2 className="noto-bold">Olá, {userData.name.split(" ")[0]}</h2>
+              <div className="flex-shrink-0">
+                <img
+                  className="h-20 w-20 rounded-full object-cover"
+                  src={userData.avatarUrl}
+                  alt="Avatar usuario"
+                />
               </div>
+            </section>
 
-              <Link to="/animal-create">
-                <div className="h-16 mb-4 flex items-center card-container">
-                  <div className="card-content flex items-center">
-                    <div className="media items-center">
-                      <div className="media-left">
-                        <div className="img-radio">
-                          <img src={addIcon} alt="adicionar animal" />
+            <hr />
+            {userData.role === "user" ? (
+              <>
+                <h1 className="mt-8 ml-8">Meus Pets</h1>
+
+                <div className="ml-12 paw-container-right">
+                  <img alt="pata" className="paw-medium" src={pawImg} />
+                </div>
+
+                <Link to="/animal-create">
+                  <div className="h-16 mb-4 flex items-center card-container">
+                    <div className="card-content flex items-center">
+                      <div className="media items-center">
+                        <div className="media-left">
+                          <div className="img-radio">
+                            <img src={addIcon} alt="adicionar animal" />
+                          </div>
                         </div>
-                      </div>
-                      <div className="media-content">
-                        <p className="noto-bold">Adicionar Pet</p>
+                        <div className="media-content">
+                          <p className="noto-bold">Adicionar Pet</p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-
-              <div>
-                {animalData.map((currentAnimal) => {
-                  return (
-                    <AnimalCard key={currentAnimal.id} {...currentAnimal} />
-                  );
-                })}
-              </div>
-
-              <div className="ml-5 pt-1 paw-container-left">
-                <img alt="pata" className="paw-medium" src={pawImg} />
-              </div>
-
-              <div className="mb-4 max-w-md w-full is-flex is-justify-content-center">
-                <Link to="/vets-specialties">
-                  <button className="btn salmon-btn">Agendar</button>
                 </Link>
-              </div>
-            </>
-          ) : (
-            <>
 
-              <h1 className="mt-8 ml-8">Próximas consultas</h1>
-
-              <div className="ml-12 paw-container-right">
-                <img alt="pata" className="paw-small" src={pawImg} />
-              </div>
-
-              {animalData.map((currentAnimal) => {
-                return (
-                  <div key={`appointment${currentAnimal._id}`}>
-                    <AppointmentCardVet
-                      id={currentAnimal._id}
-                      avatar={currentAnimal.imageUrl}
-                      name={currentAnimal.name}
-                      hour="13h"
-                      tutor={currentAnimal.tutor.name.split(" ")[0]}
-                    />
-                  </div>
-                );
-              })}
-              <Link to={`/vet/agendamentos/${userData._id}`}>
-                <p className="is-size-6 has-text-right mr-5">
-                  <strong>Mostrar todas</strong>
-                </p>
-              </Link>
-              <h1 className="mb-4 mt-8 ml-8">Meus Pacientes</h1>
-              <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8 ">
-                <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md"
-                  onChange={(e) => {
-                    clearTimeout(timer);
-                    timer = setTimeout(() => handleChange(e), 600);
-                  }}
-                  type="text"
-                  placeholder="Buscar paciente"
-                />
-              </div>
-              {listaFiltrada !== [] ? (
                 <div>
-                  {listaFiltrada.map((currentAnimal) => {
-                    return <AnimalCardVet {...currentAnimal} />;
+                  {animalData.map((currentAnimal) => {
+                    return (
+                      <AnimalCard key={currentAnimal.id} {...currentAnimal} />
+                    );
                   })}
                 </div>
-              ) : null}
-            </>
-          )}
 
-          <div className="flex items-center justify-center">
-            <img
-              alt="imagem inferior"
-              className="img-bottom pt-0 pb-20 sm:px-6 lg:px-8"
-              src={telaBegeAzul}
-            />
+                <div className="ml-5 pt-1 paw-container-left">
+                  <img alt="pata" className="paw-medium" src={pawImg} />
+                </div>
+
+                <div className="mb-4 max-w-md w-full is-flex is-justify-content-center">
+                  <Link to="/vets-specialties">
+                    <button className="btn salmon-btn">Agendar</button>
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <>
+                <h1 className="mt-8 ml-8">Próximas consultas</h1>
+
+                <div className="ml-12 paw-container-right">
+                  <img alt="pata" className="paw-small" src={pawImg} />
+                </div>
+
+                {appointment?.map((currentAnimal) => {
+                  return (
+                    <div key={`appointment${currentAnimal._id}`}>
+                      <AppointmentCardVet
+                        id={currentAnimal._id}
+                        avatar={currentAnimal.animalId.imageUrl}
+                        name={currentAnimal.animalId.name}
+                        hour={currentAnimal.hour}
+                        tutor={currentAnimal.userId.name.split(" ")[0]}
+                      />
+                    </div>
+                  );
+                })}
+                <Link to={`/vet/agendamentos/${userData._id}`}>
+                  <p className="is-size-6 has-text-right mr-5">
+                    <strong>Mostrar todas</strong>
+                  </p>
+                </Link>
+                <h1 className="mb-4 mt-8 ml-8">Meus Pacientes</h1>
+                <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8 ">
+                  <input
+                    className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md"
+                    onChange={(e) => {
+                      clearTimeout(timer);
+                      timer = setTimeout(() => handleChange(e), 600);
+                    }}
+                    type="text"
+                    placeholder="Buscar paciente"
+                  />
+                </div>
+                {listaFiltrada !== [] ? (
+                  <div>
+                    {listaFiltrada.map((currentAnimal) => {
+                      return <AnimalCardVet key={currentAnimal._id} {...currentAnimal} />;
+                    })}
+                  </div>
+                ) : null}
+              </>
+            )}
+
+            <div className="flex items-center justify-center">
+              <img
+                alt="imagem inferior"
+                className="img-bottom pt-0 pb-20 sm:px-6 lg:px-8"
+                src={telaBegeAzul}
+              />
+            </div>
           </div>
-        </div>
-      )}
-      <Navbar />
-    </div>
+        )}
+        <Navbar />
+      </div>
+      
+    </>
   );
 }
 

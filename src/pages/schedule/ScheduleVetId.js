@@ -56,10 +56,11 @@ function ScheduleVetId() {
                   let index = currentWeek[key].indexOf(day);
                   currentWeek[key].splice(index, 1);
                 }
-                if (!currentWeek[key].length) {
-                  delete currentWeek[key];
-                }
               });
+            }
+
+            if (!currentWeek[key]?.length) {
+              delete currentWeek[key];
             }
           }
         });
@@ -104,6 +105,7 @@ function ScheduleVetId() {
       console.error(err);
     }
   }
+
   return (
     <div className="flex is-flex-direction-column items-center justify-center mt-4">
       <div className="max-w-md w-full space-y-8 pb-20 mr-0">
@@ -117,8 +119,8 @@ function ScheduleVetId() {
           required
         >
           <option className="">Selecione um animal</option>
-          {animalData !== []
-            ? animalData.map((currentAnimal) => {
+          {animalData !== undefined
+            ? animalData?.map((currentAnimal) => {
                 return (
                   <option key={currentAnimal._id} value={currentAnimal._id}>
                     {currentAnimal.name}
@@ -127,31 +129,33 @@ function ScheduleVetId() {
               })
             : null}
         </select>
-        {dates && hours
-          ? dates.map((date, index) => {
+        {dates && hours !== undefined
+          ? dates?.map((date, index) => {
               return (
                 <div key={`date-${index}`} className="has-text-centered mt-3">
                   <div>
                     <h3 className="text-center noto-bold">{date}</h3>
                   </div>
-                  {hours[index].map((hour, index2) => {
-                    return (
-                      <div
-                        key={`hour-${index2}`}
-                        className="flex justify-center items-center"
-                      >
-                        <button
-                          onClick={() => {
-                            setToggleConfirm(true);
-                            setAppointment([date, hour]);
-                          }}
-                          className="flex justify-center items-center lightgreen-btn hora-btn mt-2"
-                        >
-                          {hour}
-                        </button>
-                      </div>
-                    );
-                  })}
+                  {hours[index] !== undefined
+                    ? hours[index]?.map((hour, index2) => {
+                        return (
+                          <div
+                            key={`hour-${index2}`}
+                            className="flex justify-center items-center"
+                          >
+                            <button
+                              onClick={() => {
+                                setToggleConfirm(true);
+                                setAppointment([date, hour]);
+                              }}
+                              className="flex justify-center items-center lightgreen-btn hora-btn mt-2"
+                            >
+                              {hour}
+                            </button>
+                          </div>
+                        );
+                      })
+                    : null}
                 </div>
               );
             })
