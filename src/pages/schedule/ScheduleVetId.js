@@ -63,8 +63,9 @@ function ScheduleVetId() {
               });
 
             }
-            
-            if (!currentWeek[key].length) {
+
+            if (!currentWeek[key]?.length) {
+              console.log("entrei")
               delete currentWeek[key];
             }
           }
