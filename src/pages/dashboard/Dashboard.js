@@ -100,7 +100,7 @@ function Dashboard() {
             return currentAppointment.vetId._id === userData._id;
           });
         }
-        console.log(response.data);
+   
         const appointmentDay = appointmentFilter.filter(
           (currentAppointment) => {
             return (
@@ -123,7 +123,8 @@ function Dashboard() {
     }
     fetchAppointment();
   }, [userData._id]);
-  console.log(appointment)
+
+
   return (
     <>
       <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8">

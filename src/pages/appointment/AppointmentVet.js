@@ -38,7 +38,7 @@ function AppointmentVet() {
         <img alt="pata" className="paw-medium" src={pawImg} />
       </div>
 
-      {appointmentData.map((currentData) => {
+      {appointmentData?.map((currentData) => {
         return (
           <div key={currentData._id} className="card-container mb-4">
             <div className="p-5 card-content">
