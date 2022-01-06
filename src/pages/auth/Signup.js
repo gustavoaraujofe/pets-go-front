@@ -340,7 +340,7 @@ function Signup() {
           }}
         />
       </div>
-      <Spinner loading={loading} />
+      <Spinner loading={loading} texto="Carregando..."/>
     </>
   );
 }

@@ -5,7 +5,7 @@ export default function Spinner(props) {
         <div className="modal-background"></div>
         <div className="modal-content h-full w-full flex items-center justify-center flex-col">
           <span className="mr-3 animate-spin rounded-full h-5 w-5 border-b-2 border-gray-300 mb-2"></span>
-          <span>Carregando...</span>
+          <span>{props.texto}</span>
         </div>
       </div>
     </div>
