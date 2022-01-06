@@ -63,7 +63,7 @@ function AnimalDetail() {
                 <div className="media-right">
                   <div className="flex-shrink-0">
                     <img
-                      className="mb-4 h-20 w-20 rounded-full"
+                      className="mb-4 h-20 w-20 rounded-full object-cover"
                       src={animalDetail.imageUrl}
                       alt={animalDetail.name}
                     />
