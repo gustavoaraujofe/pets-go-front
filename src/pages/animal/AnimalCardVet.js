@@ -29,7 +29,7 @@ function AnimalCard(props) {
             <div className="media-left">
               <div className="flex-shrink-0">
                 <img
-                  className="h-20 w-20 rounded-full"
+                  className="h-20 w-20 rounded-full object-cover"
                   src={props.imageUrl}
                   alt={props.name}
                 />

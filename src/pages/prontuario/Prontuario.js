@@ -95,7 +95,7 @@ function Prontuario() {
 
   return (
     <>
-      <h1 className="mt-8 ml-8">Prontuário</h1>
+      <h1 className="mt-8 ml-8 text-center">Prontuário</h1>
       <div className="flex items-center justify-center pt-0 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-sm w-full space-y-8">
           <div className="paw-container-right ml-5">
@@ -124,7 +124,7 @@ function Prontuario() {
                   <div className="media-left">
                     <div className="flex-shrink-0">
                       <img
-                        className="h-20 w-20 rounded-full"
+                        className="h-20 w-20 rounded-full object-cover"
                         src={animalData[0].imageUrl}
                         alt="Avatar Animal"
                       />
