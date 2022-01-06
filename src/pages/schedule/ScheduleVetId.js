@@ -42,9 +42,15 @@ function ScheduleVetId() {
 
         response.data.forEach((currentWeek) => {
           for (let key in currentWeek) {
-            if (key < new Date().toLocaleDateString()) {
+            console.log(currentWeek[key].length);
+            if (
+              key < new Date().toLocaleDateString() ||
+              currentWeek[key] === []
+            ) {
               delete currentWeek[key];
             }
+
+            console.log(currentWeek);
 
             if (key === new Date().toLocaleDateString()) {
               let hour = new Date().toLocaleTimeString();
@@ -104,9 +110,7 @@ function ScheduleVetId() {
       console.error(err);
     }
   }
-  console.log(`animais: ${animalData}`);
-  console.log(`datas: ${dates}`);
-  console.log(`horas: ${hours}`);
+
   return (
     <div className="flex is-flex-direction-column items-center justify-center mt-4">
       <div className="max-w-md w-full space-y-8 pb-20 mr-0">
@@ -120,13 +124,15 @@ function ScheduleVetId() {
           required
         >
           <option className="">Selecione um animal</option>
-          {animalData !== undefined ? animalData?.map((currentAnimal) => {
-            return (
-              <option key={currentAnimal._id} value={currentAnimal._id}>
-                {currentAnimal.name}
-              </option>
-            );
-          }): null}
+          {animalData !== undefined
+            ? animalData?.map((currentAnimal) => {
+                return (
+                  <option key={currentAnimal._id} value={currentAnimal._id}>
+                    {currentAnimal.name}
+                  </option>
+                );
+              })
+            : null}
         </select>
         {dates && hours !== undefined
           ? dates?.map((date, index) => {
@@ -135,24 +141,26 @@ function ScheduleVetId() {
                   <div>
                     <h3 className="text-center noto-bold">{date}</h3>
                   </div>
-                  {hours[index] !== undefined ? hours[index]?.map((hour, index2) => {
-                    return (
-                      <div
-                        key={`hour-${index2}`}
-                        className="flex justify-center items-center"
-                      >
-                        <button
-                          onClick={() => {
-                            setToggleConfirm(true);
-                            setAppointment([date, hour]);
-                          }}
-                          className="flex justify-center items-center lightgreen-btn hora-btn mt-2"
-                        >
-                          {hour}
-                        </button>
-                      </div>
-                    );
-                  }): null}
+                  {hours[index] !== undefined
+                    ? hours[index]?.map((hour, index2) => {
+                        return (
+                          <div
+                            key={`hour-${index2}`}
+                            className="flex justify-center items-center"
+                          >
+                            <button
+                              onClick={() => {
+                                setToggleConfirm(true);
+                                setAppointment([date, hour]);
+                              }}
+                              className="flex justify-center items-center lightgreen-btn hora-btn mt-2"
+                            >
+                              {hour}
+                            </button>
+                          </div>
+                        );
+                      })
+                    : null}
                 </div>
               );
             })
