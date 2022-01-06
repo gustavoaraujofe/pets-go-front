@@ -93,14 +93,14 @@ function Dashboard() {
 
         if (userData.role === "user") {
           appointmentFilter = response.data.filter((currentAppointment) => {
-            return currentAppointment.userId === userData._id;
+            return currentAppointment.userId._id === userData._id;
           });
         } else {
           appointmentFilter = response.data.filter((currentAppointment) => {
-            return currentAppointment.vetId === userData._id;
+            return currentAppointment.vetId._id === userData._id;
           });
         }
-
+        console.log(response.data);
         const appointmentDay = appointmentFilter.filter(
           (currentAppointment) => {
             return (
@@ -123,7 +123,7 @@ function Dashboard() {
     }
     fetchAppointment();
   }, [userData._id]);
-
+  console.log(appointment)
   return (
     <>
       <div className="flex items-center justify-center pt-0 px-4 sm:px-6 lg:px-8">
@@ -194,15 +194,15 @@ function Dashboard() {
                   <img alt="pata" className="paw-small" src={pawImg} />
                 </div>
 
-                {animalData.map((currentAnimal) => {
+                {appointment?.map((currentAnimal) => {
                   return (
                     <div key={`appointment${currentAnimal._id}`}>
                       <AppointmentCardVet
                         id={currentAnimal._id}
-                        avatar={currentAnimal.imageUrl}
-                        name={currentAnimal.name}
-                        hour="13h"
-                        tutor={currentAnimal.tutor.name.split(" ")[0]}
+                        avatar={currentAnimal.animalId.imageUrl}
+                        name={currentAnimal.animalId.name}
+                        hour={currentAnimal.hour}
+                        tutor={currentAnimal.userId.name.split(" ")[0]}
                       />
                     </div>
                   );
@@ -227,7 +227,7 @@ function Dashboard() {
                 {listaFiltrada !== [] ? (
                   <div>
                     {listaFiltrada.map((currentAnimal) => {
-                      return <AnimalCardVet {...currentAnimal} />;
+                      return <AnimalCardVet key={currentAnimal._id} {...currentAnimal} />;
                     })}
                   </div>
                 ) : null}

@@ -32,7 +32,7 @@ function AppointmentVet() {
   }, []);
 
   return (
-    <div className="min-h-full flex is-flex-direction-column items-center justify-start mt-5 pt-0 pb-20 px-4 sm:px-6 lg:px-8 ">
+    <div className="min-h-full flex is-flex-direction-column items-center justify-center mt-5 pt-0 pb-20 px-4 sm:px-6 lg:px-8 ">
       <h1 className="pb-5">Agendamentos</h1>
       <div className="paw-container-right">
         <img alt="pata" className="paw-medium" src={pawImg} />
@@ -40,13 +40,13 @@ function AppointmentVet() {
 
       {appointmentData.map((currentData) => {
         return (
-          <div className="card-container mb-4">
+          <div key={currentData._id} className="card-container mb-4">
             <div className="p-5 card-content">
               <div className="media">
                 <div className="media-left">
                   <div className="flex-shrink-0">
                     <img
-                      className="h-20 w-20 rounded-full"
+                      className="h-20 w-20 rounded-full object-cover"
                       src={currentData.animalId.imageUrl}
                       alt={currentData.animalId.name}
                     />
