@@ -42,12 +42,9 @@ function ScheduleVetId() {
 
         response.data.forEach((currentWeek) => {
           for (let key in currentWeek) {
-            console.log(currentWeek[key].length);
             if (key < new Date().toLocaleDateString()) {
               delete currentWeek[key];
             }
-
-            console.log(currentWeek);
 
             if (key === new Date().toLocaleDateString()) {
               let hour = new Date().toLocaleTimeString();
@@ -59,13 +56,10 @@ function ScheduleVetId() {
                   let index = currentWeek[key].indexOf(day);
                   currentWeek[key].splice(index, 1);
                 }
-
               });
-
             }
 
             if (!currentWeek[key]?.length) {
-              console.log("entrei")
               delete currentWeek[key];
             }
           }
