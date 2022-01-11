@@ -54,6 +54,10 @@ function Topbar() {
               <p>Home</p>
             </Link>
 
+            <Link to="/user/agendamentos" className="navbar-item">
+              <p>Agendamentos</p>
+            </Link>
+
             <Link
               to={`/edit-account/${loggedInUser.user.role}`}
               className="navbar-item"
