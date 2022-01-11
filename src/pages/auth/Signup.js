@@ -314,8 +314,15 @@ function Signup() {
                     ? "btn purple-btn"
                     : "btn lightgreen-btn"
                 }
-              >
-                Cadastrar
+              > {loading ? (
+                <>
+                  <span className="mr-3 animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900"></span>
+                  Cadastrando...
+                </>
+              ) : (
+                "Cadastrar"
+              )}
+                
               </button>
             </div>
           </form>
@@ -345,7 +352,6 @@ function Signup() {
           }}
         />
       </div>
-      <Spinner loading={loading} texto="Carregando..." />
     </>
   );
 }

@@ -86,10 +86,17 @@ function ForgotPassword() {
             <div className="max-w-md w-full is-flex is-justify-content-center">
               <button
                 type="submit"
-                disabled={loading ? true : false}
+                disabled={loading}
                 className={`btn beige-btn ${loading ? "bg-slate-300" : null}`}
               >
-                Enviar e-mail
+                {loading ? (
+                  <>
+                    <span className="mr-3 animate-spin rounded-full h-5 w-5 border-b-2 border-gray-900"></span>
+                    Enviando...
+                  </>
+                ) : (
+                  "Enviar e-mail"
+                )}
               </button>
             </div>
           </form>
@@ -125,7 +132,6 @@ function ForgotPassword() {
           },
         }}
       />
-      <Spinner loading={loading} texto="Enviando o E-mail..." />
     </>
   );
 }
