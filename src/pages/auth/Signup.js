@@ -7,7 +7,6 @@ import toast, { Toaster } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import "./Signup.css";
 import BottomBege from "../../components/bottom/BottomBege";
-import Spinner from "../../components/spinner/Spinner";
 
 function Signup() {
   const [loading, setLoading] = useState(false);

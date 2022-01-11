@@ -148,7 +148,7 @@ function AnimalEdit() {
               Idade
             </label>
             <input
-              type="number"
+              type="text"
               name="age"
               id="age"
               className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md `}
@@ -162,7 +162,7 @@ function AnimalEdit() {
               Peso
             </label>
             <input
-              type="number"
+              type="text"
               name="weight"
               id="weight"
               className={`focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 pr-12 sm:text-sm border-gray-300 rounded-md `}
@@ -203,8 +203,8 @@ function AnimalEdit() {
               <option value="" disabled defaultValue hidden>
                 Gênero
               </option>
-              <option value="male">Macho</option>
-              <option value="female">Fêmea</option>
+              <option value="Macho">Macho</option>
+              <option value="Fêmea">Fêmea</option>
             </select>
           </div>
 

@@ -117,12 +117,12 @@ function AnimalCreate() {
               <option value="" selected>
                 Selecionar
               </option>
-              <option value="dog">Cachorro</option>
-              <option value="cat">Gato</option>
-              <option value="rabbit">Coelho</option>
-              <option value="bird">Ave</option>
-              <option value="wild">Silvestres</option>
-              <option value="others">Outros</option>
+              <option value="Cachorro">Cachorro</option>
+              <option value="Gato">Gato</option>
+              <option value="Coelho">Coelho</option>
+              <option value="Ave">Ave</option>
+              <option value="Silvestres">Silvestres</option>
+              <option value="Outros">Outros</option>
             </select>
           </div>
           <div className="mt-5 relative rounded-md shadow-sm">
@@ -185,8 +185,8 @@ function AnimalCreate() {
               <option value="" disabled defaultValue hidden>
                 Gênero
               </option>
-              <option value="Male">Macho</option>
-              <option value="Female">Fêmea</option>
+              <option value="Macho">Macho</option>
+              <option value="Fêmea">Fêmea</option>
             </select>
           </div>
 

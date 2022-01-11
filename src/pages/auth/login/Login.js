@@ -6,7 +6,6 @@ import toast, { Toaster } from "react-hot-toast";
 import "./login.css";
 import * as Yup from "yup";
 import telaRosaAzul from "../../../assets/tela-rosa-azul.png";
-import Spinner from "../../../components/spinner/Spinner";
 import { AuthContext } from "../../../contexts/authContext";
 
 function Login() {

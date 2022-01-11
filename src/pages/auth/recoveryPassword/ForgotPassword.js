@@ -6,7 +6,7 @@ import "../login/login.css";
 import * as Yup from "yup";
 import telaRosaAzul from "../../../assets/tela-rosa-azul.png";
 import toast, { Toaster } from "react-hot-toast";
-import Spinner from "../../../components/spinner/Spinner";
+// import Spinner from "../../../components/spinner/Spinner";
 
 function ForgotPassword() {
   const [loading, setLoading] = useState(false);
