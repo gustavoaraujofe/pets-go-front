@@ -104,9 +104,7 @@ function Dashboard() {
         const appointmentDay = appointmentFilter.filter(
           (currentAppointment) => {
             return (
-              currentAppointment.date >= new Date().toLocaleDateString("pt-BR", {timeZone: "America/Sao_Paulo"}) &&
-              currentAppointment.hour.split(":")[0] >
-                new Date().toLocaleTimeString().split(":")[0]
+              currentAppointment.date >= new Date().toLocaleDateString("pt-BR", {timeZone: "America/Sao_Paulo"})
             );
           }
         );
