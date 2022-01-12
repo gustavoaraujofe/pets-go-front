@@ -104,7 +104,7 @@ function Dashboard() {
         const appointmentDay = appointmentFilter.filter(
           (currentAppointment) => {
             return (
-              currentAppointment.date === new Date().toLocaleDateString() &&
+              currentAppointment.date >= new Date().toLocaleDateString() &&
               currentAppointment.hour.split(":")[0] >
                 new Date().toLocaleTimeString().split(":")[0]
             );
