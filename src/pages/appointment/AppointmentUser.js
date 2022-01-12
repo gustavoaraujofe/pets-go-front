@@ -14,9 +14,13 @@ function AppointmentUser() {
     async function fetchAnimal() {
       try {
         const response = await api.get(`/appointment/list`);
-
+        console.log(response.data)
         const myAppointments = response.data.filter((currentAppointment) => {
-          return currentAppointment.userId._id === loggedInUser.user.id;
+          return currentAppointment.userId?._id === loggedInUser.user.id;
+        });
+
+        await myAppointments.sort((a, b) => {
+          return (a.date + a.hour).localeCompare(b.date + b.hour);
         });
 
         setAppointmentData(myAppointments);

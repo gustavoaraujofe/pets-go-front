@@ -14,9 +14,9 @@ function AppointmentVet() {
     async function fetchAnimal() {
       try {
         const response = await api.get(`/appointment/list`);
-
+        console.log(response.data)
         const myAppointments = response.data.filter((currentAppointment) => {
-          return currentAppointment.vetId._id === vetId;
+          return currentAppointment.vetId?._id === vetId;
         });
 
         await myAppointments.sort((a, b) => {
@@ -29,7 +29,7 @@ function AppointmentVet() {
       }
     }
     fetchAnimal();
-  }, []);
+  }, [vetId]);
 
   return (
     <div className="min-h-full flex is-flex-direction-column items-center justify-center mt-5 pt-0 pb-20 px-4 sm:px-6 lg:px-8 ">
