@@ -67,12 +67,12 @@ function ScheduleVets() {
       dateNew.setDate(dateInitial.getDate() + days);
       return dateNew;
     }
-    const monday = incrementDate(1).toLocaleDateString();
-    const tuesday = incrementDate(2).toLocaleDateString();
-    const wednesday = incrementDate(3).toLocaleDateString();
-    const thursday = incrementDate(4).toLocaleDateString();
-    const friday = incrementDate(5).toLocaleDateString();
-    const saturday = incrementDate(6).toLocaleDateString();
+    const monday = incrementDate(1).toLocaleDateString("pt-BR", {timeZone: "America/Sao_Paulo"});
+    const tuesday = incrementDate(2).toLocaleDateString("pt-BR", {timeZone: "America/Sao_Paulo"});
+    const wednesday = incrementDate(3).toLocaleDateString("pt-BR", {timeZone: "America/Sao_Paulo"});
+    const thursday = incrementDate(4).toLocaleDateString("pt-BR", {timeZone: "America/Sao_Paulo"});
+    const friday = incrementDate(5).toLocaleDateString("pt-BR", {timeZone: "America/Sao_Paulo"});
+    const saturday = incrementDate(6).toLocaleDateString("pt-BR", {timeZone: "America/Sao_Paulo"});
 
     setDate({
       monday,
