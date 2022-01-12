@@ -54,7 +54,7 @@ function Topbar() {
               <p>Home</p>
             </Link>
 
-            <Link to="/user/agendamentos" className="navbar-item">
+            <Link to={loggedInUser.user.role === "vet" ? `/vet/agendamentos/${loggedInUser.user.id}` : "/user/agendamentos"} className="navbar-item">
               <p>Agendamentos</p>
             </Link>
 
