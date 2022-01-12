@@ -51,7 +51,7 @@ function ScheduleVetId() {
       }
     }
     fetchVet();
-  }, []);
+  }, [idVet]);
 
   function handleChangeSelect(e) {
     setIdAnimal(e.target.value);
@@ -69,8 +69,7 @@ function ScheduleVetId() {
 
       if (!info.animalId) {
         setToggleConfirm(false);
-        toast.error("Você precisa selecionar um animal!");
-        return console.error("ERROU");
+        return toast.error("Você precisa selecionar um animal!");
       }
       await api.post("appointment/create", info);
       toast.success("Agendamento realizado com sucesso!");
