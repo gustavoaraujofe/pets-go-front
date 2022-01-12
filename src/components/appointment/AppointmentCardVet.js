@@ -17,7 +17,7 @@ function AppointmentCardVet(props) {
             <p className="noto-bold is-size-6">{props.name}</p>
             <p className="subtitle is-6 mb-1 is-size-6">Tutor: {props.tutor}</p>
             <p className="subtitle is-6 is-size-6">
-              Horário: {props.hour.split("h")[0]}
+              Data: {`${props.date} - ${props.hour.split("h")[0]}`}
             </p>
           </div>
         </div>
