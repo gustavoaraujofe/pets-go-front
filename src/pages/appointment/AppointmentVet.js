@@ -37,46 +37,47 @@ function AppointmentVet() {
       <div className="paw-container-right">
         <img alt="pata" className="paw-medium" src={pawImg} />
       </div>
-
-      {appointmentData?.map((currentData) => {
-        return (
-          <div key={currentData._id} className="card-container mb-4">
-            <div className="p-5 card-content">
-              <div className="media">
-                <div className="media-left">
-                  <div className="flex-shrink-0">
-                    <img
-                      className="h-20 w-20 rounded-full object-cover"
-                      src={currentData.animalId?.imageUrl}
-                      alt={currentData.animalId?.name}
-                    />
+      <div className="pb-20">
+        {appointmentData?.map((currentData) => {
+          return (
+            <div key={currentData._id} className="card-container mb-4">
+              <div className="p-5 card-content">
+                <div className="media">
+                  <div className="media-left">
+                    <div className="flex-shrink-0">
+                      <img
+                        className="h-20 w-20 rounded-full object-cover"
+                        src={currentData.animalId?.imageUrl}
+                        alt={currentData.animalId?.name}
+                      />
+                    </div>
+                    <p>
+                      <span className="noto-bold">Pet: </span>{" "}
+                      {currentData.animalId?.name}
+                    </p>
+                    <p>
+                      <span className="noto-bold">Raça: </span>
+                      {currentData.animalId?.breed}
+                    </p>
                   </div>
-                  <p>
-                    <span className="noto-bold">Pet: </span>{" "}
-                    {currentData.animalId?.name}
-                  </p>
-                  <p>
-                    <span className="noto-bold">Raça: </span>
-                    {currentData.animalId?.breed}
-                  </p>
                 </div>
-              </div>
-              <div className="media pl-0">
-                <div className="media-content">
-                  <p>
-                    <span className="noto-bold">Tutor: </span>{" "}
-                    {currentData.userId.name.split(" ")[0]}
-                  </p>
-                  <p>
-                    <span className="noto-bold">Consulta dia: </span>
-                    {currentData.date} - {currentData.hour}
-                  </p>
+                <div className="media pl-0">
+                  <div className="media-content">
+                    <p>
+                      <span className="noto-bold">Tutor: </span>{" "}
+                      {currentData.userId.name.split(" ")[0]}
+                    </p>
+                    <p>
+                      <span className="noto-bold">Consulta dia: </span>
+                      {currentData.date} - {currentData.hour}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
       <BottomPink />
       <Navbar />
     </div>

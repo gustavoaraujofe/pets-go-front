@@ -37,6 +37,8 @@ function AppointmentUser() {
       <div className="paw-container-right">
         <img alt="pata" className="paw-medium" src={pawImg} />
       </div>
+      
+      <div className="pb-20">
       {appointmentData.map((currentData) => {
         return (
           <div className="card-container mb-4">
@@ -79,6 +81,7 @@ function AppointmentUser() {
           </div>
         );
       })}
+      </div>
       <Navbar />
       <BottomPink />
     </div>
