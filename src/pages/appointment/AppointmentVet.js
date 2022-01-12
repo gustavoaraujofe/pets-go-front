@@ -14,7 +14,7 @@ function AppointmentVet() {
     async function fetchAnimal() {
       try {
         const response = await api.get(`/appointment/list`);
-        console.log(response.data)
+
         const myAppointments = response.data.filter((currentAppointment) => {
           return currentAppointment.vetId?._id === vetId;
         });
@@ -64,9 +64,11 @@ function AppointmentVet() {
               <div className="media pl-0">
                 <div className="media-content">
                   <p>
-                  <span className="noto-bold">Tutor: </span> {currentData.userId.name.split(" ")[0]}
+                    <span className="noto-bold">Tutor: </span>{" "}
+                    {currentData.userId.name.split(" ")[0]}
                   </p>
-                  <p><span className="noto-bold">Consulta dia: </span>
+                  <p>
+                    <span className="noto-bold">Consulta dia: </span>
                     {currentData.date} - {currentData.hour}
                   </p>
                 </div>
