@@ -203,6 +203,7 @@ function Dashboard() {
                         avatar={currentAnimal.animalId.imageUrl}
                         name={currentAnimal.animalId.name}
                         hour={currentAnimal.hour}
+                        date={currentAnimal.date}
                         tutor={currentAnimal.userId.name.split(" ")[0]}
                       />
                     </div>
