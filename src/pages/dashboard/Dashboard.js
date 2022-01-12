@@ -93,11 +93,11 @@ function Dashboard() {
 
         if (userData.role === "user") {
           appointmentFilter = response.data.filter((currentAppointment) => {
-            return currentAppointment.userId._id === userData._id;
+            return currentAppointment.userId?._id === userData._id;
           });
         } else {
           appointmentFilter = response.data.filter((currentAppointment) => {
-            return currentAppointment.vetId._id === userData._id;
+            return currentAppointment.vetId?._id === userData._id;
           });
         }
    
@@ -122,7 +122,7 @@ function Dashboard() {
       }
     }
     fetchAppointment();
-  }, [userData._id]);
+  }, [userData.role, userData._id]);
 
 
   return (

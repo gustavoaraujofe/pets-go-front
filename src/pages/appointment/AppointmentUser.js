@@ -3,8 +3,8 @@ import api from "../../apis/api";
 import { useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/authContext";
 import { useContext } from "react";
-import BottomPink from "../../components/bottom/BottomPink"
-import Navbar from "../../components/navbar/Navbar"
+import BottomPink from "../../components/bottom/BottomPink";
+import Navbar from "../../components/navbar/Navbar";
 
 function AppointmentUser() {
   const [appointmentData, setAppointmentData] = useState([]);
@@ -14,7 +14,7 @@ function AppointmentUser() {
     async function fetchAnimal() {
       try {
         const response = await api.get(`/appointment/list`);
-        console.log(response.data)
+
         const myAppointments = response.data.filter((currentAppointment) => {
           return currentAppointment.userId?._id === loggedInUser.user.id;
         });
@@ -35,8 +35,8 @@ function AppointmentUser() {
     <div className="flex is-flex-direction-column items-center justify-center mb-5 mt-5 pt-0 pb-0 px-4 sm:px-6 lg:px-8">
       <h1>Agendamentos</h1>
       <div className="paw-container-right">
-        <img alt="pata" className="paw-medium" src={pawImg}/>
-      </div> 
+        <img alt="pata" className="paw-medium" src={pawImg} />
+      </div>
       {appointmentData.map((currentData) => {
         return (
           <div className="card-container mb-4">
@@ -50,16 +50,28 @@ function AppointmentUser() {
                       alt={currentData._id}
                     />
                   </div>
-                  <p><span className="noto-bold">Veterinário: </span> {currentData.vetId.name}</p>
-                  <p><span className="noto-bold">Especialidade: </span>{currentData.vetId.specialties[0]}</p>
+                  <p>
+                    <span className="noto-bold">Veterinário: </span>{" "}
+                    {currentData.vetId.name}
+                  </p>
+                  <p>
+                    <span className="noto-bold">Especialidade: </span>
+                    {currentData.vetId.specialties[0]}
+                  </p>
                 </div>
               </div>
-              
+
               <div className="media pl-0">
                 <div className="media-content">
-                  <p> <span className="noto-bold">Pet: </span>{currentData.animalId.name}</p>
-                  <p> <span className="noto-bold">
-                    Consulta dia: </span>{currentData.date} - {currentData.hour}
+                  <p>
+                    {" "}
+                    <span className="noto-bold">Pet: </span>
+                    {currentData.animalId.name}
+                  </p>
+                  <p>
+                    {" "}
+                    <span className="noto-bold">Consulta dia: </span>
+                    {currentData.date} - {currentData.hour}
                   </p>
                 </div>
               </div>
@@ -67,8 +79,8 @@ function AppointmentUser() {
           </div>
         );
       })}
-      <Navbar/>
-      <BottomPink/>
+      <Navbar />
+      <BottomPink />
     </div>
   );
 }
