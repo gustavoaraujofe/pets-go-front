@@ -11,7 +11,6 @@ import AnimalCard from "../animal/AnimalCard";
 import AnimalCardVet from "../animal/AnimalCardVet";
 import AppointmentCardVet from "../../components/appointment/AppointmentCardVet";
 
-
 function Dashboard() {
   let timer;
   const params = useLocation();
@@ -100,14 +99,36 @@ function Dashboard() {
             return currentAppointment.vetId?._id === userData._id;
           });
         }
-   
+
         const appointmentDay = appointmentFilter.filter(
           (currentAppointment) => {
             return (
-              currentAppointment.date >= new Date().toLocaleDateString("pt-BR", {timeZone: "America/Sao_Paulo"})
+              currentAppointment.date >=
+              new Date().toLocaleDateString("pt-BR", {
+                timeZone: "America/Sao_Paulo",
+              })
             );
           }
         );
+
+  
+        appointmentDay.map((currentAppointment, i) => {
+          if (
+            currentAppointment.date ===
+              new Date().toLocaleDateString("pt-BR", {
+                timeZone: "America/Sao_Paulo",
+              }) &&
+            currentAppointment.hour.split(":")[0] <=
+              new Date()
+                .toLocaleTimeString("pt-BR", {
+                  timeZone: "America/Sao_Paulo",
+                })
+                .split(":")[0]
+          ) {
+           appointmentDay.splice(i, 1)
+          }
+        });
+
 
         await appointmentDay.sort((a, b) => {
           return (a.date + a.hour).localeCompare(b.date + b.hour);
@@ -121,7 +142,6 @@ function Dashboard() {
     }
     fetchAppointment();
   }, [userData.role, userData._id]);
-
 
   return (
     <>
@@ -227,7 +247,12 @@ function Dashboard() {
                 {listaFiltrada !== [] ? (
                   <div>
                     {listaFiltrada.map((currentAnimal) => {
-                      return <AnimalCardVet key={currentAnimal._id} {...currentAnimal} />;
+                      return (
+                        <AnimalCardVet
+                          key={currentAnimal._id}
+                          {...currentAnimal}
+                        />
+                      );
                     })}
                   </div>
                 ) : null}
@@ -245,7 +270,6 @@ function Dashboard() {
         )}
         <Navbar />
       </div>
-      
     </>
   );
 }
