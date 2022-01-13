@@ -16,7 +16,30 @@ function AppointmentVet() {
         const response = await api.get(`/appointment/list`);
 
         const myAppointments = response.data.filter((currentAppointment) => {
-          return currentAppointment.vetId?._id === vetId;
+          return (
+            currentAppointment.vetId?._id === vetId &&
+            currentAppointment.date >=
+              new Date().toLocaleDateString("pt-BR", {
+                timeZone: "America/Sao_Paulo",
+              })
+          );
+        });
+
+        myAppointments.map((currentAppointment, i) => {
+          if (
+            currentAppointment.date ===
+              new Date().toLocaleDateString("pt-BR", {
+                timeZone: "America/Sao_Paulo",
+              }) &&
+            currentAppointment.hour.split(":")[0] <=
+              new Date()
+                .toLocaleTimeString("pt-BR", {
+                  timeZone: "America/Sao_Paulo",
+                })
+                .split(":")[0]
+          ) {
+            myAppointments.splice(i, 1);
+          }
         });
 
         await myAppointments.sort((a, b) => {

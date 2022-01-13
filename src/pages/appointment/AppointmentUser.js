@@ -16,7 +16,30 @@ function AppointmentUser() {
         const response = await api.get(`/appointment/list`);
 
         const myAppointments = response.data.filter((currentAppointment) => {
-          return currentAppointment.userId?._id === loggedInUser.user.id;
+          return (
+            currentAppointment.userId?._id === loggedInUser.user.id &&
+            currentAppointment.date >=
+              new Date().toLocaleDateString("pt-BR", {
+                timeZone: "America/Sao_Paulo",
+              })
+          );
+        });
+
+        myAppointments.map((currentAppointment, i) => {
+          if (
+            currentAppointment.date ===
+              new Date().toLocaleDateString("pt-BR", {
+                timeZone: "America/Sao_Paulo",
+              }) &&
+            currentAppointment.hour.split(":")[0] <=
+              new Date()
+                .toLocaleTimeString("pt-BR", {
+                  timeZone: "America/Sao_Paulo",
+                })
+                .split(":")[0]
+          ) {
+            myAppointments.splice(i, 1);
+          }
         });
 
         await myAppointments.sort((a, b) => {
@@ -37,50 +60,50 @@ function AppointmentUser() {
       <div className="paw-container-right">
         <img alt="pata" className="paw-medium" src={pawImg} />
       </div>
-      
-      <div className="pb-20">
-      {appointmentData.map((currentData) => {
-        return (
-          <div className="card-container mb-4">
-            <div className="p-5 card-content">
-              <div className="media">
-                <div className="media-left">
-                  <div className="flex-shrink-0">
-                    <img
-                      className="h-20 w-20 rounded-full object-cover"
-                      src={currentData.vetId.avatarUrl}
-                      alt={currentData._id}
-                    />
-                  </div>
-                  <p>
-                    <span className="noto-bold">Veterinário: </span>{" "}
-                    {currentData.vetId.name}
-                  </p>
-                  <p>
-                    <span className="noto-bold">Especialidade: </span>
-                    {currentData.vetId.specialties[0]}
-                  </p>
-                </div>
-              </div>
 
-              <div className="media pl-0">
-                <div className="media-content">
-                  <p>
-                    {" "}
-                    <span className="noto-bold">Pet: </span>
-                    {currentData.animalId.name}
-                  </p>
-                  <p>
-                    {" "}
-                    <span className="noto-bold">Consulta dia: </span>
-                    {currentData.date} - {currentData.hour}
-                  </p>
+      <div className="pb-20">
+        {appointmentData.map((currentData) => {
+          return (
+            <div className="card-container mb-4">
+              <div className="p-5 card-content">
+                <div className="media">
+                  <div className="media-left">
+                    <div className="flex-shrink-0">
+                      <img
+                        className="h-20 w-20 rounded-full object-cover"
+                        src={currentData.vetId.avatarUrl}
+                        alt={currentData._id}
+                      />
+                    </div>
+                    <p>
+                      <span className="noto-bold">Veterinário: </span>{" "}
+                      {currentData.vetId.name}
+                    </p>
+                    <p>
+                      <span className="noto-bold">Especialidade: </span>
+                      {currentData.vetId.specialties[0]}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="media pl-0">
+                  <div className="media-content">
+                    <p>
+                      {" "}
+                      <span className="noto-bold">Pet: </span>
+                      {currentData.animalId.name}
+                    </p>
+                    <p>
+                      {" "}
+                      <span className="noto-bold">Consulta dia: </span>
+                      {currentData.date} - {currentData.hour}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
       </div>
       <Navbar />
       <BottomPink />
